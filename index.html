@@ -13,6 +13,9 @@
             --sky-bg: #eef9ff;
             --card-bg: #ffffff;
             --text-main: #2c3e50;
+            --codepen-bg: #111622;
+            --gold-primary: #FFC800;
+            --gold-sub: #C5A059;
         }
         body {
             background-color: var(--sky-bg);
@@ -23,10 +26,46 @@
             background: linear-gradient(135deg, #0077b6, #00a8ff);
             box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
         }
-        .hero-section {
-            padding: 40px 0 25px;
-            background: radial-gradient(circle at top, #e0f2fe, #eef9ff);
+        
+        /* CODEPEN HERO SECTION EXACT MATCH */
+        .hero-codepen-section {
+            background-color: var(--codepen-bg);
+            padding: 45px 0 35px;
+            color: #ffffff;
+            border-bottom: 3px solid #0077b6;
         }
+        
+        .apex-title-gold {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(180deg, #FFE066 0%, #FF8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2px;
+        }
+        
+        .apxc-sub-gold {
+            color: var(--gold-sub);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .flame-badge {
+            display: inline-block;
+            border: 2px solid var(--gold-primary);
+            color: var(--gold-primary);
+            background-color: rgba(17, 22, 34, 0.8);
+            border-radius: 30px;
+            padding: 6px 24px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            box-shadow: 0 0 12px rgba(255, 200, 0, 0.2);
+        }
+
         .card-custom {
             background: var(--card-bg);
             border: 1px solid #bae6fd;
@@ -65,57 +104,41 @@
             color: #0369a1;
         }
         
-        /* LOGO CHUAN TINH CHINH DETAIL */
-        .apex-logo-nav {
-            filter: drop-shadow(0px 0px 6px rgba(255, 165, 0, 0.6));
-            transition: transform 0.3s ease;
-        }
-        .apex-logo-nav:hover {
-            transform: scale(1.1);
-        }
+        /* LOGO HERO ANIMATION */
         .apex-logo-hero {
-            width: 165px;
-            height: 165px;
-            filter: drop-shadow(0px 8px 22px rgba(0, 0, 0, 0.25));
-            animation: floatLogo 3.5s ease-in-out infinite;
-        }
-        @keyframes floatLogo {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
+            width: 180px;
+            height: 180px;
+            filter: drop-shadow(0px 8px 25px rgba(255, 140, 0, 0.25));
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR WITH EXACT APEX LOGO -->
+    <!-- NAVBAR WITH LOGO -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
-                <!-- SVG LOGO NAVBAR -->
-                <svg class="apex-logo-nav me-2" width="38" height="38" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="100" cy="100" r="92" fill="#0C101A"/>
-                    <circle cx="100" cy="100" r="85" fill="none" stroke="#9E7D32" stroke-width="2" stroke-dasharray="6 6"/>
-                    <circle cx="100" cy="100" r="75" fill="none" stroke="#9E7D32" stroke-width="1.5" opacity="0.8"/>
+                <!-- LOGO MINI NAVBAR -->
+                <svg width="36" height="36" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                    <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
+                    <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
+                    <polygon points="28,75 50,53 72,100 50,122" fill="url(#navOuterWingL)"/>
+                    <polygon points="172,75 150,53 128,100 150,122" fill="url(#navOuterWingR)"/>
+                    <polygon points="42,87 64,65 86,112 64,134" fill="url(#navInnerWingL)"/>
+                    <polygon points="158,87 136,65 114,112 136,134" fill="url(#navInnerWingR)"/>
+                    <polygon points="91,92 109,92 115,136 85,136" fill="url(#navStem)"/>
+                    <polygon points="100,32 125,72 100,92 75,72" fill="url(#navHead)"/>
+                    <polygon points="100,35 104,108 96,108" fill="#FFFFFF" opacity="0.35"/>
+                    <circle cx="100" cy="122" r="11" fill="#FF8C00" opacity="0.45"/>
+                    <circle cx="100" cy="106" r="3.5" fill="#FFFFFF"/>
                     
-                    <polygon points="32,102 68,58 98,92 62,136" fill="url(#navOuterWing)"/>
-                    <polygon points="168,102 132,58 102,92 138,136" fill="url(#navOuterWing)"/>
-                    
-                    <polygon points="46,118 80,72 106,100 72,146" fill="url(#navInnerWing)"/>
-                    <polygon points="154,118 120,72 94,100 128,146" fill="url(#navInnerWing)"/>
-                    
-                    <polygon points="90,92 110,92 120,140 80,140" fill="url(#navArrowStem)"/>
-                    <polygon points="100,38 132,92 68,92" fill="url(#navArrowHead)"/>
-                    
-                    <polygon points="100,38 103,105 97,105" fill="#FFFFFF" opacity="0.35"/>
-                    <circle cx="100" cy="120" r="9" fill="#FF8C00" opacity="0.45"/>
-                    <circle cx="100" cy="103" r="3.5" fill="#FFFFFF"/>
-
                     <defs>
-                        <linearGradient id="navOuterWing" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#C25A04"/><stop offset="100%" stop-color="#541B00"/></linearGradient>
-                        <linearGradient id="navInnerWing" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFEA63"/><stop offset="50%" stop-color="#FF9E00"/><stop offset="100%" stop-color="#E64A00"/></linearGradient>
-                        <linearGradient id="navArrowHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFE0"/><stop offset="50%" stop-color="#FFE066"/><stop offset="100%" stop-color="#F5A623"/></linearGradient>
-                        <linearGradient id="navArrowStem" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E65100"/><stop offset="100%" stop-color="#BF360C"/></linearGradient>
+                        <linearGradient id="navHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFE0"/><stop offset="100%" stop-color="#FFA800"/></linearGradient>
+                        <linearGradient id="navStem" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF7700"/><stop offset="100%" stop-color="#D43800"/></linearGradient>
+                        <linearGradient id="navInnerWingL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFE566"/><stop offset="100%" stop-color="#FF6A00"/></linearGradient>
+                        <linearGradient id="navInnerWingR" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFE566"/><stop offset="100%" stop-color="#FF6A00"/></linearGradient>
+                        <linearGradient id="navOuterWingL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D46A00"/><stop offset="100%" stop-color="#4A1C00"/></linearGradient>
+                        <linearGradient id="navOuterWingR" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D46A00"/><stop offset="100%" stop-color="#4A1C00"/></linearGradient>
                     </defs>
                 </svg>
                 <span>APEX PHOENIX</span>
@@ -126,89 +149,95 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="hero-section text-center">
+    <!-- CODEPEN HERO SECTION (EXACT 100% MATCH TO ORIGINAL MODEL) -->
+    <section class="hero-codepen-section text-center">
         <div class="container">
-            <!-- BIG HERO LOGO PERFECT MATCH -->
+            <!-- LOGO SVG NGUYÊN BẢN CHUẨN TỪNG MM -->
             <div class="mb-3">
-                <svg class="apex-logo-hero" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Ground Dark Circle Background -->
-                    <circle cx="100" cy="100" r="92" fill="#0C101A"/>
+                <svg class="apex-logo-hero" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Viền đứt nét ngoài -->
+                    <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
                     
-                    <!-- Outer Dashed Gold Ring -->
-                    <circle cx="100" cy="100" r="85" fill="none" stroke="url(#goldRingGrad)" stroke-width="2" stroke-dasharray="6 6"/>
+                    <!-- Viền liền & Nền tròn tối -->
+                    <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
                     
-                    <!-- Inner Solid Gold Ring -->
-                    <circle cx="100" cy="100" r="75" fill="none" stroke="url(#goldRingGrad)" stroke-width="1.5" opacity="0.8"/>
-
-                    <!-- Outer Left Wing (Dark Amber Bronze) -->
-                    <polygon points="32,102 68,58 98,92 62,136" fill="url(#heroOuterWing)"/>
+                    <!-- Cánh ngoài Trái (Nâu cam hổ phách) -->
+                    <polygon points="28,75 50,53 72,100 50,122" fill="url(#outerWingGradLeft)"/>
                     
-                    <!-- Outer Right Wing -->
-                    <polygon points="168,102 132,58 102,92 138,136" fill="url(#heroOuterWing)"/>
-
-                    <!-- Inner Left Wing (Bright Golden Flame) -->
-                    <polygon points="46,118 80,72 106,100 72,146" fill="url(#heroInnerWing)" opacity="0.95"/>
+                    <!-- Cánh ngoài Phải -->
+                    <polygon points="172,75 150,53 128,100 150,122" fill="url(#outerWingGradRight)"/>
                     
-                    <!-- Inner Right Wing -->
-                    <polygon points="154,118 120,72 94,100 128,146" fill="url(#heroInnerWing)" opacity="0.95"/>
-
-                    <!-- Arrow Stem Base -->
-                    <polygon points="90,92 110,92 120,140 80,140" fill="url(#heroArrowStem)"/>
-
-                    <!-- Arrow Top Head -->
-                    <polygon points="100,38 132,92 68,92" fill="url(#heroArrowHead)"/>
+                    <!-- Cánh trong Trái (Vàng rực rỡ - Có khoảng hở tuyệt đối) -->
+                    <polygon points="42,87 64,65 86,112 64,134" fill="url(#innerWingGradLeft)"/>
                     
-                    <!-- Light Beam Upwards -->
-                    <polygon points="100,38 103,105 97,105" fill="#FFFFFF" opacity="0.35"/>
-
+                    <!-- Cánh trong Phải -->
+                    <polygon points="158,87 136,65 114,112 136,134" fill="url(#innerWingGradRight)"/>
+                    
+                    <!-- Thân tháp mũi tên (Thang cân) -->
+                    <polygon points="91,92 109,92 115,136 85,136" fill="url(#stemGrad)"/>
+                    
+                    <!-- Đầu mũi tên (Hình thoi vàng sáng) -->
+                    <polygon points="100,32 125,72 100,92 75,72" fill="url(#arrowHeadGrad)"/>
+                    
+                    <!-- Vệt sáng chiếu dọc lên đỉnh -->
+                    <polygon points="100,35 104,108 96,108" fill="#FFFFFF" opacity="0.35"/>
+                    
                     <!-- 1. BÓNG TRÒN VÀNG/CAM MỜ BÊN DƯỚI THÂN -->
-                    <circle cx="100" cy="120" r="9" fill="#FF8C00" opacity="0.45"/>
+                    <circle cx="100" cy="122" r="11" fill="#FF8C00" opacity="0.45"/>
                     
-                    <!-- 2. BÓNG TRÒN NHỎ MÀU TRẮNG TINH Ở CỔ MỮI TÊN -->
-                    <circle cx="100" cy="103" r="3.5" fill="#FFFFFF"/>
-
+                    <!-- 2. BÓNG TRÒN NHỎ MÀU TRẮNG TINH Ở CỔ MŨI TÊN -->
+                    <circle cx="100" cy="106" r="3.5" fill="#FFFFFF"/>
+                    
                     <defs>
-                        <linearGradient id="goldRingGrad" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#C29B38"/>
-                            <stop offset="100%" stop-color="#6E5014"/>
-                        </linearGradient>
-                        <linearGradient id="heroOuterWing" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#C25A04"/>
-                            <stop offset="60%" stop-color="#8A3300"/>
-                            <stop offset="100%" stop-color="#541B00"/>
-                        </linearGradient>
-                        <linearGradient id="heroInnerWing" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#FFEA63"/>
-                            <stop offset="50%" stop-color="#FF9E00"/>
-                            <stop offset="100%" stop-color="#E64A00"/>
-                        </linearGradient>
-                        <linearGradient id="heroArrowHead" x1="0" y1="0" x2="0" y2="1">
+                        <linearGradient id="arrowHeadGrad" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stop-color="#FFFFE0"/>
-                            <stop offset="45%" stop-color="#FFE066"/>
-                            <stop offset="100%" stop-color="#F5A623"/>
+                            <stop offset="50%" stop-color="#FFDC66"/>
+                            <stop offset="100%" stop-color="#FFA800"/>
                         </linearGradient>
-                        <linearGradient id="heroArrowStem" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#E65100"/>
-                            <stop offset="100%" stop-color="#BF360C"/>
+                        
+                        <linearGradient id="stemGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#FF7700"/>
+                            <stop offset="100%" stop-color="#D43800"/>
+                        </linearGradient>
+
+                        <linearGradient id="innerWingGradLeft" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#FFE566"/>
+                            <stop offset="50%" stop-color="#FFB300"/>
+                            <stop offset="100%" stop-color="#FF6A00"/>
+                        </linearGradient>
+                        
+                        <linearGradient id="innerWingGradRight" x1="1" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#FFE566"/>
+                            <stop offset="50%" stop-color="#FFB300"/>
+                            <stop offset="100%" stop-color="#FF6A00"/>
+                        </linearGradient>
+
+                        <linearGradient id="outerWingGradLeft" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#D46A00"/>
+                            <stop offset="70%" stop-color="#8C3A00"/>
+                            <stop offset="100%" stop-color="#4A1C00"/>
+                        </linearGradient>
+                        
+                        <linearGradient id="outerWingGradRight" x1="1" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#D46A00"/>
+                            <stop offset="70%" stop-color="#8C3A00"/>
+                            <stop offset="100%" stop-color="#4A1C00"/>
                         </linearGradient>
                     </defs>
                 </svg>
             </div>
             
-            <h1 class="fw-bold text-primary display-5 mb-1" style="letter-spacing: 3px;">APEX</h1>
-            <h5 class="fw-bold text-secondary mb-3" style="letter-spacing: 4px;">APXC NETWORK</h5>
-            <div class="mb-3">
-                <span class="badge border border-warning text-warning bg-dark px-3 py-2 rounded-pill font-monospace fw-bold">FLAME PHOENIX V24.14</span>
+            <!-- CHỮ NGUYÊN BẢN CHUẨN MẪU CODEPEN -->
+            <div class="apex-title-gold">APEX</div>
+            <div class="apxc-sub-gold">APXC NETWORK</div>
+            <div class="mb-2">
+                <div class="flame-badge">FLAME PHOENIX V24.14</div>
             </div>
-            <p class="lead text-secondary mx-auto" style="max-width: 650px;">
-                Next-generation decentralized protocol engineered with precision timing, transparent emission, and native trading intelligence.
-            </p>
         </div>
     </section>
 
     <!-- LIVE MONITORING DASHBOARD -->
-    <div class="container my-3">
+    <div class="container my-4">
         <div class="row g-4">
             
             <!-- CURRENT BLOCK -->
