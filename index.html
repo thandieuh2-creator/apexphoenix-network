@@ -65,61 +65,56 @@
             color: #0369a1;
         }
         
-        /* LOGO PHUONG HOANG & DONG COIN APXC */
-        .phoenix-logo-nav {
-            filter: drop-shadow(0px 0px 8px rgba(255, 140, 0, 0.8));
+        /* HIEU UNG LOGO CHUAN V24.14 */
+        .apex-logo-nav {
+            filter: drop-shadow(0px 0px 6px rgba(255, 165, 0, 0.8));
             transition: transform 0.3s ease;
         }
-        .phoenix-logo-nav:hover {
-            transform: scale(1.1);
-        }
-        .phoenix-hero-logo {
-            width: 120px;
-            height: 120px;
-            filter: drop-shadow(0px 8px 20px rgba(255, 77, 0, 0.4));
+        .apex-logo-hero {
+            width: 140px;
+            height: 140px;
+            filter: drop-shadow(0px 8px 25px rgba(255, 140, 0, 0.4));
             animation: floatLogo 3.5s ease-in-out infinite;
         }
         @keyframes floatLogo {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR WITH PHOENIX COIN LOGO -->
+    <!-- NAVBAR WITH ORIGINAL APEX LOGO -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
-                <!-- LOGO PHOENIX COIN SVG (NAVBAR) -->
-                <svg class="phoenix-logo-nav me-2" width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Canh Phuong Hoang Trái/Phải -->
-                    <path d="M10 50 C10 20, 35 15, 45 35 C30 35, 20 42, 10 50 Z" fill="url(#fireGrad)" />
-                    <path d="M90 50 C90 20, 65 15, 55 35 C70 35, 80 42, 90 50 Z" fill="url(#fireGrad)" />
-                    <path d="M5 65 C15 35, 40 30, 48 45 C30 48, 18 58, 5 65 Z" fill="url(#fireGrad2)" />
-                    <path d="M95 65 C85 35, 60 30, 52 45 C70 48, 82 58, 95 65 Z" fill="url(#fireGrad2)" />
-                    <!-- Dong Coin APXC Vang Oai -->
-                    <circle cx="50" cy="55" r="28" fill="url(#goldGrad)" stroke="#FFD700" stroke-width="2"/>
-                    <circle cx="50" cy="55" r="24" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-dasharray="4 2"/>
-                    <text x="50" y="61" font-family="'Segoe UI', sans-serif" font-weight="900" font-size="14" fill="#5B3A00" text-anchor="middle">APXC</text>
-                    <!-- Dau Phuong Hoang Vuong Len -->
-                    <path d="M50 8 C43 20, 47 28, 50 32 C53 28, 57 20, 50 8 Z" fill="#FF3300"/>
-                    <circle cx="50" cy="18" r="4" fill="#FFD700"/>
-                    
+                <!-- APEX SVG LOGO NAVBAR -->
+                <svg class="apex-logo-nav me-2" width="38" height="38" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="90" fill="#121824" stroke="#B8860B" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="82" fill="none" stroke="#DAA520" stroke-width="1.5" stroke-dasharray="6 4"/>
+                    <!-- Wings -->
+                    <polygon points="50,140 25,100 85,70 70,115" fill="url(#goldWing1)"/>
+                    <polygon points="150,140 175,100 115,70 130,115" fill="url(#goldWing1)"/>
+                    <polygon points="65,135 45,95 90,75 80,115" fill="url(#goldWing2)"/>
+                    <polygon points="135,135 155,95 110,75 120,115" fill="url(#goldWing2)"/>
+                    <!-- Center Arrow / Flame -->
+                    <polygon points="100,35 75,90 100,80 125,90" fill="url(#arrowGrad)"/>
+                    <polygon points="100,80 85,135 100,120 115,135" fill="#FF4500"/>
+                    <circle cx="100" cy="100" r="4" fill="#FFF"/>
                     <defs>
-                        <linearGradient id="fireGrad" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#FF1E00"/>
-                            <stop offset="100%" stop-color="#FF9900"/>
+                        <linearGradient id="goldWing1" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#FFD700"/>
+                            <stop offset="100%" stop-color="#FF4500"/>
                         </linearGradient>
-                        <linearGradient id="fireGrad2" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#FF5500"/>
-                            <stop offset="100%" stop-color="#FFCC00"/>
+                        <linearGradient id="goldWing2" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#FF8C00"/>
+                            <stop offset="100%" stop-color="#B8860B"/>
                         </linearGradient>
-                        <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#FFE57F"/>
-                            <stop offset="50%" stop-color="#FFC107"/>
-                            <stop offset="100%" stop-color="#FF8F00"/>
+                        <linearGradient id="arrowGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#FFFFE0"/>
+                            <stop offset="50%" stop-color="#FFD700"/>
+                            <stop offset="100%" stop-color="#FF8C00"/>
                         </linearGradient>
                     </defs>
                 </svg>
@@ -134,44 +129,50 @@
     <!-- HERO SECTION -->
     <section class="hero-section text-center">
         <div class="container">
-            <!-- LOGO PHOENIX COIN BIG HERO -->
+            <!-- APEX LOGO BIG HERO -->
             <div class="mb-3">
-                <svg class="phoenix-hero-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Canh Phuong Hoang Lua Sang Rong -->
-                    <path d="M8 50 C8 15, 35 10, 46 32 C30 32, 18 40, 8 50 Z" fill="url(#heroFire1)" />
-                    <path d="M92 50 C92 15, 65 10, 54 32 C70 32, 82 40, 92 50 Z" fill="url(#heroFire1)" />
-                    <path d="M3 68 C15 32, 40 25, 48 42 C28 46, 16 58, 3 68 Z" fill="url(#heroFire2)" />
-                    <path d="M97 68 C85 32, 60 25, 52 42 C72 46, 84 58, 97 68 Z" fill="url(#heroFire2)" />
-                    <path d="M15 82 C25 55, 42 45, 49 52 C35 58, 25 70, 15 82 Z" fill="#FF8C00" />
-                    <path d="M85 82 C75 55, 58 45, 51 52 C65 58, 75 70, 85 82 Z" fill="#FF8C00" />
-                    <!-- Dong Coin APXC -->
-                    <circle cx="50" cy="56" r="30" fill="url(#heroGold)" stroke="#FFF" stroke-width="2"/>
-                    <circle cx="50" cy="56" r="25" fill="none" stroke="#996515" stroke-width="1.5" stroke-dasharray="5 2.5"/>
-                    <text x="50" y="63" font-family="'Segoe UI', sans-serif" font-weight="900" font-size="16" fill="#4A2800" text-anchor="middle">APXC</text>
-                    <!-- Vuong Mien / Dau Phuong Hoang -->
-                    <path d="M50 5 C41 18, 46 28, 50 32 C54 28, 59 18, 50 5 Z" fill="#FF1E00"/>
-                    <circle cx="50" cy="16" r="4.5" fill="#FFEE00"/>
+                <svg class="apex-logo-hero" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Dark Inner Circle -->
+                    <circle cx="100" cy="100" r="92" fill="#0D131D" stroke="#B8860B" stroke-width="2.5"/>
+                    <circle cx="100" cy="100" r="84" fill="none" stroke="#DAA520" stroke-width="2" stroke-dasharray="7 4"/>
+                    <!-- Outer Wings -->
+                    <polygon points="45,145 20,100 85,68 70,118" fill="url(#heroGoldWing1)"/>
+                    <polygon points="155,145 180,100 115,68 130,118" fill="url(#heroGoldWing1)"/>
+                    <!-- Inner Wings -->
+                    <polygon points="62,138 42,95 90,73 80,118" fill="url(#heroGoldWing2)"/>
+                    <polygon points="138,138 158,95 110,73 120,118" fill="url(#heroGoldWing2)"/>
+                    <!-- Arrow Spear -->
+                    <polygon points="100,30 72,88 100,78 128,88" fill="url(#heroArrow)"/>
+                    <polygon points="100,78 84,138 100,122 116,138" fill="url(#heroTail)"/>
+                    <circle cx="100" cy="98" r="4.5" fill="#FFFFFF"/>
 
                     <defs>
-                        <linearGradient id="heroFire1" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#FF0000"/>
-                            <stop offset="50%" stop-color="#FF6600"/>
-                            <stop offset="100%" stop-color="#FFCC00"/>
+                        <linearGradient id="heroGoldWing1" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#FFE066"/>
+                            <stop offset="60%" stop-color="#FF8800"/>
+                            <stop offset="100%" stop-color="#D43F00"/>
                         </linearGradient>
-                        <linearGradient id="heroFire2" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#FF3300"/>
-                            <stop offset="100%" stop-color="#FFBB00"/>
+                        <linearGradient id="heroGoldWing2" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#FF9F1C"/>
+                            <stop offset="100%" stop-color="#9E2A2B"/>
                         </linearGradient>
-                        <linearGradient id="heroGold" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#FFF176"/>
-                            <stop offset="50%" stop-color="#FFC107"/>
-                            <stop offset="100%" stop-color="#FF6F00"/>
+                        <linearGradient id="heroArrow" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#FFFFCC"/>
+                            <stop offset="40%" stop-color="#FFD700"/>
+                            <stop offset="100%" stop-color="#FF7700"/>
+                        </linearGradient>
+                        <linearGradient id="heroTail" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#FF5500"/>
+                            <stop offset="100%" stop-color="#990000"/>
                         </linearGradient>
                     </defs>
                 </svg>
             </div>
             
-            <h1 class="fw-bold text-primary display-5 mb-2">APEX PHOENIX NETWORK</h1>
+            <h1 class="fw-bold text-primary display-5 mb-1">APEX PHOENIX NETWORK</h1>
+            <div class="mb-3">
+                <span class="badge border border-warning text-warning bg-dark px-3 py-2 rounded-pill font-monospace fw-bold">FLAME PHOENIX V24.14</span>
+            </div>
             <p class="lead text-secondary mx-auto" style="max-width: 650px;">
                 Next-generation decentralized protocol engineered with precision timing, transparent emission, and native trading intelligence.
             </p>
