@@ -1,0 +1,33 @@
+const NODE_API = "http://42.96.5.132:9033/";
+
+async function fetchNodeData() {
+    try {
+        const response = await fetch(NODE_API, { mode: 'cors' });
+        if (!response.ok) throw new Error("Node Response Error");
+        
+        const data = await response.json();
+
+        document.getElementById('currentBlock').innerText = "#" + data.current_block.toLocaleString();
+        document.getElementById('founderBalance').innerText = data.founder_balance_apxc;
+        document.getElementById('latestHash').innerText = data.latest_hash;
+        document.getElementById('founderAddr').innerText = data.founder_address;
+
+        if (data.ohlc) {
+            document.getElementById('apxcPrice').innerText = "$" + data.ohlc.close.toFixed(4) + " USDT";
+            document.getElementById('ohlcDetail').innerText = 
+                `O: ${data.ohlc.open} | H: ${data.ohlc.high} | L: ${data.ohlc.low} | C: ${data.ohlc.close}`;
+        }
+
+        document.getElementById('nodeStatusBadge').className = "badge bg-light text-primary fw-semibold";
+        document.getElementById('nodeStatusBadge').innerHTML = '<i class="pulse-icon me-1"></i> Seed Node Active';
+
+    } catch (error) {
+        console.warn("Node Fetch Notice:", error);
+        // Fallback hien thi khi trinh duyet chan HTTP mixed content
+        document.getElementById('nodeStatusBadge').className = "badge bg-warning text-dark fw-semibold";
+        document.getElementById('nodeStatusBadge').innerHTML = '<i class="fa-solid fa-shield-halved me-1"></i> HTTP Mixed Content Policy';
+    }
+}
+
+fetchNodeData();
+setInterval(fetchNodeData, 4000);
