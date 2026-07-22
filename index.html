@@ -297,15 +297,17 @@
 
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9033/";
-        
-        // Danh sach cac cong HTTPS Proxy du phong tu dong
-        const PROXIES = [
-            `https://api.allorigins.win/raw?url=${encodeURIComponent(RAW_NODE_API)}`,
-            `https://corsproxy.io/?${encodeURIComponent(RAW_NODE_API)}`,
-            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(RAW_NODE_API)}`
-        ];
 
         async function fetchNodeData() {
+            // Gan them tham so _t=Date.now() de bat buoc Proxy luon lay du lieu REAL-TIME moi nhat tu VPS
+            const targetUrl = RAW_NODE_API + "?_t=" + Date.now();
+            
+            const PROXIES = [
+                `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
+                `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
+                `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`
+            ];
+
             let data = null;
 
             for (const proxyUrl of PROXIES) {
