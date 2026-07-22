@@ -13,6 +13,8 @@
             --sky-bg: #eef9ff;
             --card-bg: #ffffff;
             --text-main: #2c3e50;
+            --fire-orange: #ff4d0d;
+            --fire-yellow: #ffae00;
         }
         body {
             background-color: var(--sky-bg);
@@ -20,11 +22,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .navbar-sky {
-            background: linear-gradient(135deg, #00a8ff, #0077b6);
+            background: linear-gradient(135deg, #0077b6, #00a8ff);
             box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
         }
         .hero-section {
-            padding: 50px 0 30px;
+            padding: 40px 0 25px;
             background: radial-gradient(circle at top, #e0f2fe, #eef9ff);
         }
         .card-custom {
@@ -64,14 +66,47 @@
             word-break: break-all;
             color: #0369a1;
         }
+        /* HIEU UNG LOGO PHUONG HOANG LUA */
+        .phoenix-logo-nav {
+            filter: drop-shadow(0px 0px 6px rgba(255, 174, 0, 0.9));
+            transition: transform 0.3s ease;
+        }
+        .phoenix-logo-nav:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        .phoenix-hero-icon {
+            width: 90px;
+            height: 90px;
+            filter: drop-shadow(0px 4px 15px rgba(255, 77, 13, 0.5));
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top">
+    <!-- NAVBAR WITH PHOENIX LOGO -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="#"><i class="fa-solid fa-fire-flame-curved me-2"></i>APEX PHOENIX</a>
+            <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
+                <!-- SVG PHUONG HOANG LUA NAVBAR -->
+                <svg class="phoenix-logo-nav me-2" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C11.5 4 9 6.5 7 7C5 7.5 3 6.5 2 8C1 9.5 2 12 4 13C2.5 13.5 1 15 1.5 17C2 19 4.5 20.5 7 20C6 21 5 22 6 22.5C8 23.5 11 21 12 19C13 21 16 23.5 18 22.5C19 22 18 21 17 20C19.5 20.5 22 19 22.5 17C23 15 21.5 13.5 20 13C22 12 23 9.5 22 8C21 6.5 19 7.5 17 7C15 6.5 12.5 4 12 2Z" fill="url(#phoenixGrad)"/>
+                    <path d="M12 6C11 8 9.5 9.5 8 10C9.5 11 11 12.5 12 15C13 12.5 14.5 11 16 10C14.5 9.5 13 8 12 6Z" fill="#FFF500"/>
+                    <defs>
+                        <linearGradient id="phoenixGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#FF1E00"/>
+                            <stop offset="50%" stop-color="#FF8C00"/>
+                            <stop offset="100%" stop-color="#FFD700"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>APEX PHOENIX</span>
+            </a>
             <span class="badge bg-light text-primary fw-semibold" id="nodeStatusBadge">
                 <i class="pulse-icon me-1"></i> Seed Node Active
             </span>
@@ -81,6 +116,22 @@
     <!-- HERO SECTION -->
     <section class="hero-section text-center">
         <div class="container">
+            <!-- PHUONG HOANG LUA BIG HERO -->
+            <div class="mb-3">
+                <svg class="phoenix-hero-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C11.5 4 9 6.5 7 7C5 7.5 3 6.5 2 8C1 9.5 2 12 4 13C2.5 13.5 1 15 1.5 17C2 19 4.5 20.5 7 20C6 21 5 22 6 22.5C8 23.5 11 21 12 19C13 21 16 23.5 18 22.5C19 22 18 21 17 20C19.5 20.5 22 19 22.5 17C23 15 21.5 13.5 20 13C22 12 23 9.5 22 8C21 6.5 19 7.5 17 7C15 6.5 12.5 4 12 2Z" fill="url(#phoenixGradHero)"/>
+                    <path d="M12 5C10.8 7.5 9 9 7.5 9.5C9.5 10.8 11 12.5 12 16C13 12.5 14.5 10.8 16.5 9.5C15 9 13.2 7.5 12 5Z" fill="#FFF500"/>
+                    <defs>
+                        <linearGradient id="phoenixGradHero" x1="1" y1="1" x2="23" y2="23" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#FF1E00"/>
+                            <stop offset="45%" stop-color="#FF5500"/>
+                            <stop offset="80%" stop-color="#FFB700"/>
+                            <stop offset="100%" stop-color="#FFEE00"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            
             <h1 class="fw-bold text-primary display-5 mb-2">APEX PHOENIX NETWORK</h1>
             <p class="lead text-secondary mx-auto" style="max-width: 650px;">
                 Next-generation decentralized protocol engineered with precision timing, transparent emission, and native trading intelligence.
