@@ -114,11 +114,9 @@
 </head>
 <body>
 
-    <!-- NAVBAR WITH LOGO -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
-                <!-- LOGO MINI NAVBAR -->
                 <svg width="36" height="36" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
                     <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
                     <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
@@ -149,43 +147,30 @@
         </div>
     </nav>
 
-    <!-- CODEPEN HERO SECTION (EXACT 100% MATCH TO ORIGINAL MODEL) -->
     <section class="hero-codepen-section text-center">
         <div class="container">
-            <!-- LOGO SVG NGUYÊN BẢN CHUẨN TỪNG MM -->
             <div class="mb-3">
                 <svg class="apex-logo-hero" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Viền đứt nét ngoài -->
                     <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
                     
-                    <!-- Viền liền & Nền tròn tối -->
                     <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
                     
-                    <!-- Cánh ngoài Trái (Nâu cam hổ phách) -->
                     <polygon points="28,75 50,53 72,100 50,122" fill="url(#outerWingGradLeft)"/>
                     
-                    <!-- Cánh ngoài Phải -->
                     <polygon points="172,75 150,53 128,100 150,122" fill="url(#outerWingGradRight)"/>
                     
-                    <!-- Cánh trong Trái (Vàng rực rỡ - Có khoảng hở tuyệt đối) -->
                     <polygon points="42,87 64,65 86,112 64,134" fill="url(#innerWingGradLeft)"/>
                     
-                    <!-- Cánh trong Phải -->
                     <polygon points="158,87 136,65 114,112 136,134" fill="url(#innerWingGradRight)"/>
                     
-                    <!-- Thân tháp mũi tên (Thang cân) -->
                     <polygon points="91,92 109,92 115,136 85,136" fill="url(#stemGrad)"/>
                     
-                    <!-- Đầu mũi tên (Hình thoi vàng sáng) -->
                     <polygon points="100,32 125,72 100,92 75,72" fill="url(#arrowHeadGrad)"/>
                     
-                    <!-- Vệt sáng chiếu dọc lên đỉnh -->
                     <polygon points="100,35 104,108 96,108" fill="#FFFFFF" opacity="0.35"/>
                     
-                    <!-- 1. BÓNG TRÒN VÀNG/CAM MỜ BÊN DƯỚI THÂN -->
                     <circle cx="100" cy="122" r="11" fill="#FF8C00" opacity="0.45"/>
                     
-                    <!-- 2. BÓNG TRÒN NHỎ MÀU TRẮNG TINH Ở CỔ MŨI TÊN -->
                     <circle cx="100" cy="106" r="3.5" fill="#FFFFFF"/>
                     
                     <defs>
@@ -227,7 +212,6 @@
                 </svg>
             </div>
             
-            <!-- CHỮ NGUYÊN BẢN CHUẨN MẪU CODEPEN -->
             <div class="apex-title-gold">APEX</div>
             <div class="apxc-sub-gold">APXC NETWORK</div>
             <div class="mb-2">
@@ -236,11 +220,9 @@
         </div>
     </section>
 
-    <!-- LIVE MONITORING DASHBOARD -->
     <div class="container my-4">
         <div class="row g-4">
             
-            <!-- CURRENT BLOCK -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
                     <div class="text-secondary mb-2"><i class="fa-solid fa-cube text-primary me-2"></i>Current Block</div>
@@ -249,7 +231,6 @@
                 </div>
             </div>
 
-            <!-- APXC PRICE / CANDLE OHLC -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
                     <div class="text-secondary mb-2"><i class="fa-solid fa-chart-line text-success me-2"></i>APXC Live Price</div>
@@ -258,7 +239,6 @@
                 </div>
             </div>
 
-            <!-- FOUNDER BALANCE -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
                     <div class="text-secondary mb-2"><i class="fa-solid fa-wallet text-warning me-2"></i>Founder Reserve (5%)</div>
@@ -267,7 +247,6 @@
                 </div>
             </div>
 
-            <!-- LATEST HASH & FOUNDER ADDRESS -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -286,7 +265,6 @@
         </div>
     </div>
 
-    <!-- TOKENOMICS OVERVIEW -->
     <div class="container my-4">
         <div class="card card-custom p-4">
             <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-pie-chart me-2"></i>Tokenomics Standard (84M APXC)</h5>
@@ -313,23 +291,36 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="text-center py-4 text-muted border-top">
         <small>© 2026 Apex Phoenix Network. All Protocol Rules Reserved.</small>
     </footer>
 
-        <!-- LIVE DATA FETCHING SCRIPT (HTTPS PROXY ACTIVATED) -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9033/";
-        const NODE_API = "https://corsproxy.io/?" + encodeURIComponent(RAW_NODE_API);
+        
+        // Danh sach cac cong HTTPS Proxy du phong tu dong
+        const PROXIES = [
+            `https://api.allorigins.win/raw?url=${encodeURIComponent(RAW_NODE_API)}`,
+            `https://corsproxy.io/?${encodeURIComponent(RAW_NODE_API)}`,
+            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(RAW_NODE_API)}`
+        ];
 
         async function fetchNodeData() {
-            try {
-                const response = await fetch(NODE_API);
-                if (!response.ok) throw new Error("Node Response Error");
-                
-                const data = await response.json();
+            let data = null;
 
+            for (const proxyUrl of PROXIES) {
+                try {
+                    const response = await fetch(proxyUrl, { cache: 'no-store' });
+                    if (response.ok) {
+                        data = await response.json();
+                        break;
+                    }
+                } catch (e) {
+                    console.warn("Proxy attempt failed, switching to next...", proxyUrl);
+                }
+            }
+
+            if (data && data.current_block !== undefined) {
                 document.getElementById('currentBlock').innerText = "#" + data.current_block.toLocaleString();
                 document.getElementById('founderBalance').innerText = data.founder_balance_apxc;
                 document.getElementById('latestHash').innerText = data.latest_hash;
@@ -343,9 +334,7 @@
 
                 document.getElementById('nodeStatusBadge').className = "badge bg-light text-primary fw-semibold";
                 document.getElementById('nodeStatusBadge').innerHTML = '<i class="pulse-icon me-1"></i> Seed Node Active';
-
-            } catch (error) {
-                console.warn("Node Fetch Notice:", error);
+            } else {
                 document.getElementById('nodeStatusBadge').className = "badge bg-warning text-dark fw-semibold";
                 document.getElementById('nodeStatusBadge').innerHTML = '<i class="fa-solid fa-triangle-exclamation me-1"></i> Connecting Node...';
             }
