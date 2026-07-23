@@ -6,6 +6,8 @@
     <title>Apex Phoenix Network | APXC Protocol</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- TRADINGVIEW LIGHTWEIGHT CHARTS LIBRARY -->
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <style>
         :root {
             --sky-primary: #00a8ff;
@@ -74,7 +76,7 @@
             transition: transform 0.3s ease;
         }
         .card-custom:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
         .stat-val {
             font-size: 1.8rem;
@@ -104,19 +106,29 @@
             color: #0369a1;
         }
         
-        /* LOGO HERO ANIMATION */
         .apex-logo-hero {
             width: 180px;
             height: 180px;
             filter: drop-shadow(0px 8px 25px rgba(255, 140, 0, 0.25));
         }
+
+        /* KHUNG BIỂU ĐỒ NẾN TRADINGVIEW */
+        #chartContainer {
+            height: 320px;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ffffff;
+        }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR WITH LOGO -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
+                <!-- LOGO MINI NAVBAR -->
                 <svg width="36" height="36" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
                     <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
                     <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
@@ -147,30 +159,21 @@
         </div>
     </nav>
 
+    <!-- CODEPEN HERO SECTION -->
     <section class="hero-codepen-section text-center">
         <div class="container">
             <div class="mb-3">
                 <svg class="apex-logo-hero" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
-                    
                     <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
-                    
                     <polygon points="28,75 50,53 72,100 50,122" fill="url(#outerWingGradLeft)"/>
-                    
                     <polygon points="172,75 150,53 128,100 150,122" fill="url(#outerWingGradRight)"/>
-                    
                     <polygon points="42,87 64,65 86,112 64,134" fill="url(#innerWingGradLeft)"/>
-                    
                     <polygon points="158,87 136,65 114,112 136,134" fill="url(#innerWingGradRight)"/>
-                    
                     <polygon points="91,92 109,92 115,136 85,136" fill="url(#stemGrad)"/>
-                    
                     <polygon points="100,32 125,72 100,92 75,72" fill="url(#arrowHeadGrad)"/>
-                    
                     <polygon points="100,35 104,108 96,108" fill="#FFFFFF" opacity="0.35"/>
-                    
                     <circle cx="100" cy="122" r="11" fill="#FF8C00" opacity="0.45"/>
-                    
                     <circle cx="100" cy="106" r="3.5" fill="#FFFFFF"/>
                     
                     <defs>
@@ -179,30 +182,25 @@
                             <stop offset="50%" stop-color="#FFDC66"/>
                             <stop offset="100%" stop-color="#FFA800"/>
                         </linearGradient>
-                        
                         <linearGradient id="stemGrad" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stop-color="#FF7700"/>
                             <stop offset="100%" stop-color="#D43800"/>
                         </linearGradient>
-
                         <linearGradient id="innerWingGradLeft" x1="0" y1="0" x2="1" y2="1">
                             <stop offset="0%" stop-color="#FFE566"/>
                             <stop offset="50%" stop-color="#FFB300"/>
                             <stop offset="100%" stop-color="#FF6A00"/>
                         </linearGradient>
-                        
                         <linearGradient id="innerWingGradRight" x1="1" y1="0" x2="0" y2="1">
                             <stop offset="0%" stop-color="#FFE566"/>
                             <stop offset="50%" stop-color="#FFB300"/>
                             <stop offset="100%" stop-color="#FF6A00"/>
                         </linearGradient>
-
                         <linearGradient id="outerWingGradLeft" x1="0" y1="0" x2="1" y2="1">
                             <stop offset="0%" stop-color="#D46A00"/>
                             <stop offset="70%" stop-color="#8C3A00"/>
                             <stop offset="100%" stop-color="#4A1C00"/>
                         </linearGradient>
-                        
                         <linearGradient id="outerWingGradRight" x1="1" y1="0" x2="0" y2="1">
                             <stop offset="0%" stop-color="#D46A00"/>
                             <stop offset="70%" stop-color="#8C3A00"/>
@@ -220,9 +218,11 @@
         </div>
     </section>
 
+    <!-- LIVE MONITORING DASHBOARD -->
     <div class="container my-4">
         <div class="row g-4">
             
+            <!-- CURRENT BLOCK -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
                     <div class="text-secondary mb-2"><i class="fa-solid fa-cube text-primary me-2"></i>Current Block</div>
@@ -231,6 +231,7 @@
                 </div>
             </div>
 
+            <!-- APXC PRICE / CANDLE OHLC -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
                     <div class="text-secondary mb-2"><i class="fa-solid fa-chart-line text-success me-2"></i>APXC Live Price</div>
@@ -239,6 +240,7 @@
                 </div>
             </div>
 
+            <!-- FOUNDER BALANCE -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
                     <div class="text-secondary mb-2"><i class="fa-solid fa-wallet text-warning me-2"></i>Founder Reserve (5%)</div>
@@ -247,6 +249,18 @@
                 </div>
             </div>
 
+            <!-- BƯỚC 1: BIỂU ĐỒ NẾN TRADINGVIEW REALTIME -->
+            <div class="col-12">
+                <div class="card card-custom p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="fw-bold text-primary fs-5"><i class="fa-solid fa-chart-candlestick me-2"></i>APXC / USDT Live Chart</span>
+                        <span class="badge bg-dark text-warning border border-warning px-3 py-2 rounded-pill font-monospace">M1 Realtime</span>
+                    </div>
+                    <div id="chartContainer"></div>
+                </div>
+            </div>
+
+            <!-- LATEST HASH & FOUNDER ADDRESS -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -265,6 +279,7 @@
         </div>
     </div>
 
+    <!-- TOKENOMICS OVERVIEW -->
     <div class="container my-4">
         <div class="card card-custom p-4">
             <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-pie-chart me-2"></i>Tokenomics Standard (84M APXC)</h5>
@@ -291,20 +306,69 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer class="text-center py-4 text-muted border-top">
         <small>© 2026 Apex Phoenix Network. All Protocol Rules Reserved.</small>
     </footer>
 
+    <!-- LIVE DATA FETCHING & TRADINGVIEW CHART SCRIPT -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9033/";
+        let consecutiveErrors = 0;
+        let chart = null;
+        let candleSeries = null;
+
+        // KHOI TAO BIEU DO TRADINGVIEW LIGHTWEIGHT
+        function initTradingChart() {
+            const container = document.getElementById('chartContainer');
+            if (!container || chart) return;
+
+            chart = LightweightCharts.createChart(container, {
+                height: 320,
+                layout: {
+                    backgroundColor: '#ffffff',
+                    textColor: '#334155',
+                },
+                grid: {
+                    vertLines: { color: '#f1f5f9' },
+                    horzLines: { color: '#f1f5f9' },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    borderColor: '#bae6fd',
+                },
+                timeScale: {
+                    borderColor: '#bae6fd',
+                    timeVisible: true,
+                    secondsVisible: false,
+                },
+            });
+
+            candleSeries = chart.addCandlestickSeries({
+                upColor: '#10b981',
+                downColor: '#ef4444',
+                borderUpColor: '#10b981',
+                borderDownColor: '#ef4444',
+                wickUpColor: '#10b981',
+                wickDownColor: '#ef4444',
+            });
+
+            window.addEventListener('resize', () => {
+                if (chart && container) {
+                    chart.applyOptions({ width: container.clientWidth });
+                }
+            });
+            chart.applyOptions({ width: container.clientWidth });
+        }
 
         async function fetchNodeData() {
-            // Gan them tham so _t=Date.now() de bat buoc Proxy luon lay du lieu REAL-TIME moi nhat tu VPS
             const targetUrl = RAW_NODE_API + "?_t=" + Date.now();
             
             const PROXIES = [
-                `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
                 `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
+                `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
                 `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`
             ];
 
@@ -312,17 +376,32 @@
 
             for (const proxyUrl of PROXIES) {
                 try {
-                    const response = await fetch(proxyUrl, { cache: 'no-store' });
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 3500);
+                    
+                    const response = await fetch(proxyUrl, { 
+                        cache: 'no-store',
+                        signal: controller.signal 
+                    });
+                    
+                    clearTimeout(timeoutId);
+
                     if (response.ok) {
-                        data = await response.json();
-                        break;
+                        const resText = await response.text();
+                        data = JSON.parse(resText);
+                        
+                        if (data && data.contents) {
+                            data = typeof data.contents === 'string' ? JSON.parse(data.contents) : data.contents;
+                        }
+                        
+                        if (data && data.current_block !== undefined) break;
                     }
-                } catch (e) {
-                    console.warn("Proxy attempt failed, switching to next...", proxyUrl);
-                }
+                } catch (e) {}
             }
 
             if (data && data.current_block !== undefined) {
+                consecutiveErrors = 0;
+                
                 document.getElementById('currentBlock').innerText = "#" + data.current_block.toLocaleString();
                 document.getElementById('founderBalance').innerText = data.founder_balance_apxc;
                 document.getElementById('latestHash').innerText = data.latest_hash;
@@ -332,13 +411,29 @@
                     document.getElementById('apxcPrice').innerText = "$" + data.ohlc.close.toFixed(4) + " USDT";
                     document.getElementById('ohlcDetail').innerText = 
                         `O: ${data.ohlc.open} | H: ${data.ohlc.high} | L: ${data.ohlc.low} | C: ${data.ohlc.close}`;
+
+                    // UPDATE BIEU DO NEN TRADINGVIEW
+                    if (!chart) initTradingChart();
+                    if (candleSeries) {
+                        const nowSeconds = Math.floor(Date.now() / 60000) * 60;
+                        candleSeries.update({
+                            time: nowSeconds,
+                            open: data.ohlc.open,
+                            high: data.ohlc.high,
+                            low: data.ohlc.low,
+                            close: data.ohlc.close
+                        });
+                    }
                 }
 
                 document.getElementById('nodeStatusBadge').className = "badge bg-light text-primary fw-semibold";
                 document.getElementById('nodeStatusBadge').innerHTML = '<i class="pulse-icon me-1"></i> Seed Node Active';
             } else {
-                document.getElementById('nodeStatusBadge').className = "badge bg-warning text-dark fw-semibold";
-                document.getElementById('nodeStatusBadge').innerHTML = '<i class="fa-solid fa-triangle-exclamation me-1"></i> Connecting Node...';
+                consecutiveErrors++;
+                if (consecutiveErrors >= 3) {
+                    document.getElementById('nodeStatusBadge').className = "badge bg-warning text-dark fw-semibold";
+                    document.getElementById('nodeStatusBadge').innerHTML = '<i class="fa-solid fa-triangle-exclamation me-1"></i> Connecting Node...';
+                }
             }
         }
 
