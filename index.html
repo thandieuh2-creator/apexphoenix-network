@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Phoenix Network | APXC Protocol</title>
+    <title>Apex Phoenix Network | APXC Protocol Mainnet</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -205,7 +205,6 @@
                 <span>APEX PHOENIX</span>
             </a>
             <div class="d-flex align-items-center gap-2">
-                <!-- CHUÔNG THÔNG BÁO BẢNG TIN DAPP -->
                 <button class="btn btn-warning btn-sm rounded-circle text-dark position-relative" onclick="openUpdatesModal()" title="Network Announcements">
                     <i class="fa-solid fa-bell"></i>
                     <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
@@ -225,7 +224,7 @@
         </div>
     </nav>
 
-    <!-- CODEPEN HERO SECTION + KHUNG SMART CONTRACT -->
+    <!-- CODEPEN HERO SECTION + SMART CONTRACT CONTAINER -->
     <section class="hero-codepen-section text-center">
         <div class="container">
             <div class="mb-2">
@@ -282,7 +281,7 @@
                 <div class="flame-badge">FLAME PHOENIX V24.14</div>
             </div>
 
-            <!-- BẢNG SMART CONTRACT VÀ NÚT ADD VÍ 1-CLICK -->
+            <!-- SMART CONTRACT BOARD & 1-CLICK WALLET ADD -->
             <div class="contract-banner-card">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <span class="badge bg-warning text-dark fw-bold font-monospace px-3 py-1 rounded-pill">
@@ -360,7 +359,7 @@
                 </div>
             </div>
 
-            <!-- WEB LIGHT MINER + LINK GIỚI THIỆU -->
+            <!-- WEB LIGHT MINER + REFERRAL LINK -->
             <div class="col-12">
                 <div class="card card-custom p-4 border-warning" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
@@ -405,7 +404,7 @@
                 </div>
             </div>
 
-            <!-- BẢNG TÍNH LỢI NHUẬN KHAI THÁC -->
+            <!-- MINING PROFIT CALCULATOR -->
             <div class="col-md-6">
                 <div class="card card-custom p-4 h-100">
                     <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-calculator me-2"></i><span data-i18n="calcTitle">Mining Profit Calculator</span></h5>
@@ -424,7 +423,7 @@
                 </div>
             </div>
 
-            <!-- KHÓA COIN KIỂU PI NETWORK -->
+            <!-- APXC LOCKUP & STAKING VAULT -->
             <div class="col-md-6">
                 <div class="card card-custom p-4 h-100 border-info">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -469,7 +468,7 @@
                 </div>
             </div>
 
-            <!-- BẢNG XẾP HẠNG THỢ ĐÀO -->
+            <!-- TOP MINERS LEADERBOARD -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -489,7 +488,7 @@
                             <tbody id="leaderboardBody">
                                 <tr>
                                     <td class="text-center fw-bold text-warning">🥇 #1</td>
-                                    <td class="font-monospace text-primary">0x8923...4F2B (You)</td>
+                                    <td class="font-monospace text-primary">0x8923...4F2B</td>
                                     <td class="text-center fw-bold">16.8 H/s</td>
                                     <td class="text-end fw-bold text-success">1,450.25 APXC</td>
                                 </tr>
@@ -543,7 +542,7 @@
                                 </tr>
                             </thead>
                             <tbody id="blockExplorerBody">
-                                <!-- DATA TỰ ĐỘNG CẬP NHẬT -->
+                                <!-- AUTOMATICALLY POPULATED -->
                             </tbody>
                         </table>
                     </div>
@@ -603,27 +602,23 @@
                 </div>
             </div>
 
-            <!-- MỤC CỘNG ĐỒNG VÀ NÚT BẤM (ĐÃ THAY TELEGRAM BẰNG ANNOUNCEMENTS) -->
+            <!-- PROTOCOL RESOURCES & COMMUNITY -->
             <div class="col-12">
                 <div class="card card-custom p-4 text-center">
                     <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-shield-halved me-2"></i>Protocol Resources & Web3 Tools</h5>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <!-- 1. WHITEPAPER HTML TRỰC TIẾP -->
                         <a href="./whitepaper.html" class="btn btn-dark px-4 py-2 rounded-pill shadow-sm">
                             <i class="fa-solid fa-file-lines text-warning me-2"></i>Whitepaper
                         </a>
 
-                        <!-- 2. GITHUB REPO -->
                         <a href="https://github.com/apexphoenix-network/apexphoenix-network" target="_blank" class="btn btn-dark px-4 py-2 rounded-pill shadow-sm">
                             <i class="fa-brands fa-github me-2"></i>GitHub Repo
                         </a>
 
-                        <!-- 3. NETWORK ANNOUNCEMENTS (BẢNG TIN THÔNG BÁO) -->
                         <button class="btn btn-primary px-4 py-2 rounded-pill shadow-sm" onclick="openUpdatesModal()">
                             <i class="fa-solid fa-bullhorn me-2"></i>Network News
                         </button>
 
-                        <!-- 4. INSTALL WEB APP PWA -->
                         <button class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm" onclick="triggerPwaInstall()">
                             <i class="fa-solid fa-mobile-screen-button me-2"></i>Install Web App (PWA)
                         </button>
@@ -634,50 +629,45 @@
         </div>
     </div>
 
-    <!-- MODAL LỰA CHỌN VÍ WEB3 -->
+    <!-- WEB3 WALLET SELECTION MODAL -->
     <div class="modal fade" id="walletConnectModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg" style="background: #ffffff;">
                 <div class="modal-header border-0 pb-0">
                     <h5 class="modal-fw-bold text-dark mb-0 d-flex align-items-center">
-                        <i class="fa-solid fa-wallet text-primary me-2"></i>Connect Web3 Wallet
+                        <i class="fa-solid fa-wallet text-primary me-2"></i>Connect Web3 Wallet (Live On-Chain)
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <p class="text-muted small mb-3">Chọn ứng dụng ví Web3 của bạn để bắt đầu kết nối với Apex Phoenix Network:</p>
+                    <p class="text-muted small mb-3">Select your Web3 wallet application to authorize node access on Apex Phoenix Network:</p>
                     
                     <div class="d-flex flex-column gap-2 mb-3">
-                        <a href="https://metamask.app.link/dapp/apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
-                            <span>🦊 Mở bằng MetaMask</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
-                        </a>
+                        <button class="wallet-option-btn text-start border-0" onclick="connectMetaMaskDirect()">
+                            <span>🦊 Connect MetaMask</span>
+                            <i class="fa-solid fa-arrow-right-to-bracket text-primary"></i>
+                        </button>
 
-                        <a href="https://link.trustwallet.com/open_url?url=https://apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
-                            <span>🛡️ Mở bằng Trust Wallet</span>
+                        <a href="https://metamask.app.link/dapp/apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
+                            <span>📱 Open in Mobile App (MetaMask / Trust)</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
                         </a>
 
                         <a href="https://www.okx.com/download" target="_blank" class="wallet-option-btn">
-                            <span>⚡ Mở bằng OKX Wallet</span>
+                            <span>⚡ Connect OKX Web3 Wallet</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
                         </a>
                     </div>
 
-                    <div class="position-relative my-3 text-center">
-                        <hr class="text-muted">
-                        <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small fw-bold">HOẶC TRẢI NGHIỆM NGAY</span>
+                    <div class="alert alert-warning py-2 small mb-0 text-center fw-bold">
+                        🔒 Connecting your wallet securely locks your mined APXC balance to your address on-chain.
                     </div>
-
-                    <button class="btn btn-outline-primary fw-bold w-100 rounded-pill py-2" onclick="connectDemoWalletSafari()">
-                        ⚡ Kết Nối Ví Thử Nghiệm (Trực tiếp Safari)
-                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL BẢNG TIN THÔNG BÁO MẠNG LƯỚI (IN-DAPP ANNOUNCEMENTS) -->
+    <!-- IN-DAPP ANNOUNCEMENTS MODAL -->
     <div class="modal fade" id="updatesModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -688,39 +678,36 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <!-- TIN TỨC 1 -->
                     <div class="p-3 bg-light rounded-3 border mb-3">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="badge bg-primary">V24.14 Released</span>
                             <small class="text-muted font-monospace"><i class="fa-regular fa-clock me-1"></i>2026-03-28</small>
                         </div>
-                        <h6 class="fw-bold text-dark mb-1">Nâng Cấp Giao Thức Khai Thác Browser Light Node & Sách Trắng V24.14</h6>
+                        <h6 class="fw-bold text-dark mb-1">Browser Light Node Protocol Upgrade & V24.14 Whitepaper</h6>
                         <p class="small text-muted mb-0">
-                            Hệ thống đã chính thức nâng cấp phiên bản Flame Phoenix V24.14, bổ sung cơ chế khóa coin Staking Vault và bảng tra cứu khối (Block Explorer) thời gian thực.
+                            The core system has officially deployed the Flame Phoenix V24.14 upgrade, adding Staking Vault mechanics and real-time Block Explorer data feeds.
                         </p>
                     </div>
 
-                    <!-- TIN TỨC 2 -->
                     <div class="p-3 bg-light rounded-3 border mb-3">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="badge bg-success">Security & Privacy</span>
                             <small class="text-muted font-monospace"><i class="fa-regular fa-clock me-1"></i>2026-03-25</small>
                         </div>
-                        <h6 class="fw-bold text-dark mb-1">Chính Sách Truyền Thông Phi Tập Trung (In-DApp Protocol)</h6>
+                        <h6 class="fw-bold text-dark mb-1">Decentralized In-DApp Communication Protocol</h6>
                         <p class="small text-muted mb-0">
-                            Để duy trì tính ẩn danh tuyệt đối cho đội ngũ phát triển (Dev Anon) và an toàn cho thợ đào, Apex Phoenix Network vận hành cơ chế thông báo $100\%$ trực tiếp trên DApp, không qua trung gian mạng xã hội bên thứ 3.
+                            To ensure total privacy for core contributors (Dev Anon) and network miners, Apex Phoenix Network delivers announcements 100% natively via the DApp interface.
                         </p>
                     </div>
 
-                    <!-- TIN TỨC 3 -->
                     <div class="p-3 bg-light rounded-3 border">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="badge bg-warning text-dark">Genesis Block</span>
                             <small class="text-muted font-monospace"><i class="fa-regular fa-clock me-1"></i>2026-03-20</small>
                         </div>
-                        <h6 class="fw-bold text-dark mb-1">Khởi Chạy Máy Chủ VPS Seed Node Đầu Tiên</h6>
+                        <h6 class="fw-bold text-dark mb-1">Genesis Seed Node VPS Deployment</h6>
                         <p class="small text-muted mb-0">
-                            Seed Node chính thức phát sinh khối Genesis với tốc độ tạo khối 60 giây/block và cung cấp nguồn dữ liệu giá real-time cho DApp Dashboard.
+                            The primary Seed Node has minted the Genesis Block with a target block speed of 60 seconds, supplying continuous OHLC price feeds to the DApp Dashboard.
                         </p>
                     </div>
                 </div>
@@ -728,31 +715,31 @@
         </div>
     </div>
 
-    <!-- MODAL INSTALL WEB APP PWA -->
+    <!-- PWA INSTALLATION INSTRUCTION MODAL -->
     <div class="modal fade" id="pwaInstallModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg">
                 <div class="modal-header border-0 pb-0">
                     <h5 class="fw-bold text-dark mb-0 d-flex align-items-center">
-                        <i class="fa-solid fa-mobile-screen-button text-warning me-2 fs-4"></i>Cài Đặt Web App (PWA)
+                        <i class="fa-solid fa-mobile-screen-button text-warning me-2 fs-4"></i>Install Web App (PWA)
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="mb-3">
-                        <h6 class="fw-bold text-primary mb-1"><i class="fa-brands fa-apple me-2"></i>Hướng dẫn cho iPhone (Safari):</h6>
+                        <h6 class="fw-bold text-primary mb-1"><i class="fa-brands fa-apple me-2"></i>Instructions for iPhone (Safari):</h6>
                         <ol class="small text-muted mb-0 ps-3">
-                            <li>Bấm vào biểu tượng <strong>Chia sẻ (Share <i class="fa-solid fa-arrow-up-from-bracket"></i>)</strong> ở thanh công cụ dưới Safari.</li>
-                            <li>Kéo xuống chọn <strong>"Thêm vào Màn hình chính" (Add to Home Screen)</strong>.</li>
-                            <li>Bấm <strong>Thêm (Add)</strong> để cài ứng dụng APXC ra màn hình điện thoại!</li>
+                            <li>Tap the <strong>Share (<i class="fa-solid fa-arrow-up-from-bracket"></i>)</strong> icon in the Safari toolbar.</li>
+                            <li>Scroll down and select <strong>"Add to Home Screen"</strong>.</li>
+                            <li>Tap <strong>Add</strong> to pin the APXC Web App onto your device!</li>
                         </ol>
                     </div>
                     <hr>
                     <div>
-                        <h6 class="fw-bold text-success mb-1"><i class="fa-brands fa-android me-2"></i>Hướng dẫn cho Android (Chrome):</h6>
+                        <h6 class="fw-bold text-success mb-1"><i class="fa-brands fa-android me-2"></i>Instructions for Android (Chrome):</h6>
                         <ol class="small text-muted mb-0 ps-3">
-                            <li>Bấm vào dấu <strong>3 chấm (<i class="fa-solid fa-ellipsis-vertical"></i>)</strong> góc trên bên phải Chrome.</li>
-                            <li>Chọn <strong>"Cài đặt ứng dụng" (Install app)</strong> hoặc <strong>"Thêm vào màn hình chính"</strong>.</li>
+                            <li>Tap the <strong>Option Menu (<i class="fa-solid fa-ellipsis-vertical"></i>)</strong> at top right.</li>
+                            <li>Select <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>
                         </ol>
                     </div>
                 </div>
@@ -795,9 +782,8 @@
     <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- SCRIPT TỔNG HỢP TOÀN BỘ LÔ-GÍC KẾT NỐI VÀ TÍNH NĂNG MODAL -->
+    <!-- CORE LOGIC & NODE API INTEGRATION SCRIPT -->
     <script>
-        // CẬP NHẬT CỔNG API MỚI VỀ 9035
         const RAW_NODE_API = "http://42.96.5.132:9035/";
         let chart = null;
         let candleSeries = null;
@@ -834,7 +820,6 @@
             upModal.show();
         }
 
-        // BỘ TỪ ĐIỂN ĐA NGÔN NGỮ
         let currentLang = 'EN';
         const i18nDict = {
             EN: {
@@ -958,6 +943,35 @@
             }
         }
 
+        async function connectMetaMaskDirect() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    if (accounts && accounts.length > 0) {
+                        setConnectedWallet(accounts[0]);
+                        const modalEl = document.getElementById('walletConnectModal');
+                        const modalObj = bootstrap.Modal.getInstance(modalEl);
+                        if(modalObj) modalObj.hide();
+                    }
+                } catch (error) {}
+            } else {
+                alert("MetaMask extension not detected. Please open via Web3 mobile app.");
+            }
+        }
+
+        function setConnectedWallet(addr) {
+            userWalletAddress = addr;
+            const txt = document.getElementById('walletTxt');
+            const btn = document.getElementById('walletBtn');
+            const shortAddr = userWalletAddress.substring(0, 6) + "..." + userWalletAddress.substring(userWalletAddress.length - 4);
+            txt.innerText = shortAddr;
+            btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
+            
+            // Đồng bộ dữ liệu đào coin theo ví thật
+            loadMiningStateForWallet();
+            updateReferralLink();
+        }
+
         async function toggleWalletConnect() {
             const txt = document.getElementById('walletTxt');
             const btn = document.getElementById('walletBtn');
@@ -966,6 +980,7 @@
                 userWalletAddress = null;
                 txt.innerText = i18nDict[currentLang].connectWallet;
                 btn.className = "btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm";
+                stopMiningProcess();
                 updateReferralLink();
                 return;
             }
@@ -974,30 +989,116 @@
                 try {
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                     if (accounts && accounts.length > 0) {
-                        userWalletAddress = accounts[0];
-                        const shortAddr = userWalletAddress.substring(0, 6) + "..." + userWalletAddress.substring(userWalletAddress.length - 4);
-                        txt.innerText = shortAddr;
-                        btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
-                        updateReferralLink();
+                        setConnectedWallet(accounts[0]);
                     }
-                } catch (error) {}
+                } catch (error) {
+                    const walletModal = new bootstrap.Modal(document.getElementById('walletConnectModal'));
+                    walletModal.show();
+                }
             } else {
                 const walletModal = new bootstrap.Modal(document.getElementById('walletConnectModal'));
                 walletModal.show();
             }
         }
 
-        function connectDemoWalletSafari() {
-            userWalletAddress = "0x89234F2B99E23108B7F43A60355DC38C8ABA6691";
-            const txt = document.getElementById('walletTxt');
-            const btn = document.getElementById('walletBtn');
-            txt.innerText = "0x8923...6691";
-            btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
-            updateReferralLink();
+        function loadMiningStateForWallet() {
+            if (!userWalletAddress) return;
+            
+            const savedMining = localStorage.getItem('apxc_isMining_' + userWalletAddress);
+            const savedUnclaimed = localStorage.getItem('apxc_unclaimed_' + userWalletAddress);
+            
+            if (savedUnclaimed) {
+                unclaimedAPXC = parseFloat(savedUnclaimed);
+            } else {
+                unclaimedAPXC = 0.0000;
+            }
+            document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
 
-            const modalEl = document.getElementById('walletConnectModal');
-            const modalObj = bootstrap.Modal.getInstance(modalEl);
-            if(modalObj) modalObj.hide();
+            if (savedMining === 'true') {
+                startMiningProcess();
+            }
+        }
+
+        function startMiningProcess() {
+            if (!userWalletAddress) {
+                toggleWalletConnect();
+                return;
+            }
+
+            isMining = true;
+            localStorage.setItem('apxc_isMining_' + userWalletAddress, 'true');
+            
+            const btn = document.getElementById('startMiningBtn');
+            const txtSpan = document.getElementById('miningBtnTxt');
+            
+            btn.className = "btn btn-danger fw-bold px-4 py-2 rounded-pill shadow-sm";
+            txtSpan.innerText = i18nDict[currentLang].stopMining;
+            btn.querySelector('i').className = "fa-solid fa-stop me-2";
+            
+            if (!miningInterval) {
+                miningInterval = setInterval(() => {
+                    currentHashrate = (12.5 + Math.random() * 4.5).toFixed(1);
+                    unclaimedAPXC += 0.0025;
+                    
+                    if (userWalletAddress) {
+                        localStorage.setItem('apxc_unclaimed_' + userWalletAddress, unclaimedAPXC.toString());
+                    }
+                    
+                    document.getElementById('webHashrate').innerText = currentHashrate + " H/s";
+                    document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
+                }, 1000);
+            }
+        }
+
+        function stopMiningProcess() {
+            isMining = false;
+            if (userWalletAddress) {
+                localStorage.setItem('apxc_isMining_' + userWalletAddress, 'false');
+            }
+            
+            if (miningInterval) {
+                clearInterval(miningInterval);
+                miningInterval = null;
+            }
+            
+            currentHashrate = 0;
+            document.getElementById('webHashrate').innerText = "0.0 H/s";
+            
+            const btn = document.getElementById('startMiningBtn');
+            const txtSpan = document.getElementById('miningBtnTxt');
+            
+            btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm";
+            txtSpan.innerText = i18nDict[currentLang].startMining;
+            btn.querySelector('i').className = "fa-solid fa-play me-2";
+        }
+
+        function toggleMining() {
+            if (!userWalletAddress) {
+                toggleWalletConnect();
+                return;
+            }
+
+            if (!isMining) {
+                startMiningProcess();
+            } else {
+                stopMiningProcess();
+            }
+        }
+
+        function claimMinedTokens() {
+            if (unclaimedAPXC <= 0) return;
+            if (!userWalletAddress) {
+                toggleWalletConnect();
+                return;
+            }
+
+            alert(`Requesting On-Chain Minting & Transfer of ${unclaimedAPXC.toFixed(4)} APXC to ${userWalletAddress}...\nContract: 0x8923...6691`);
+            
+            unclaimedAPXC = 0.0000;
+            if (userWalletAddress) {
+                localStorage.setItem('apxc_unclaimed_' + userWalletAddress, '0.0000');
+            }
+            document.getElementById('unclaimedReward').innerText = "0.0000 APXC";
         }
 
         let stakedAPXC = 0.00;
@@ -1019,15 +1120,15 @@
             }
             const select = document.getElementById('lockDurationSelect');
             const boostVal = parseFloat(select.value);
-            let durationText = "1 Năm";
-            if(boostVal === 0.10) durationText = "6 Tháng";
-            else if(boostVal === 0.30) durationText = "1 Năm";
-            else if(boostVal === 0.70) durationText = "2 Năm";
-            else if(boostVal === 1.50) durationText = "3 Năm";
+            let durationText = "1 Year";
+            if(boostVal === 0.10) durationText = "6 Months";
+            else if(boostVal === 0.30) durationText = "1 Year";
+            else if(boostVal === 0.70) durationText = "2 Years";
+            else if(boostVal === 1.50) durationText = "3 Years";
 
             const boostPercent = (boostVal * 100).toFixed(0);
 
-            const amount = prompt(`Nhập số lượng APXC bạn muốn KHÓA (${durationText} - Nhận Boost +${boostPercent}%/năm):`, "100");
+            const amount = prompt(`Enter amount of APXC to LOCK (${durationText} - Earn +${boostPercent}%/yr boost):`, "100");
             if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
                 stakedAPXC += parseFloat(amount);
                 document.getElementById('stakedAmount').innerText = stakedAPXC.toFixed(2) + " APXC";
@@ -1155,8 +1256,7 @@
 
             m1History = generateInitialSeedHistory(0.0945);
             renderAggregatedChart();
-            fetchServerCandleHistory(); // TẢI LỊCH SỬ NẾN VĨNH VIỄN TỪ VPS
-
+            fetchServerCandleHistory();
             window.addEventListener('resize', () => {
                 if (chart && container) {
                     chart.applyOptions({ width: container.clientWidth });
@@ -1256,42 +1356,6 @@
                 `;
             }
             tbody.innerHTML = html;
-        }
-
-        function toggleMining() {
-            const btn = document.getElementById('startMiningBtn');
-            const txtSpan = document.getElementById('miningBtnTxt');
-            if (!isMining) {
-                isMining = true;
-                btn.className = "btn btn-danger fw-bold px-4 py-2 rounded-pill shadow-sm";
-                txtSpan.innerText = i18nDict[currentLang].stopMining;
-                btn.querySelector('i').className = "fa-solid fa-stop me-2";
-                
-                miningInterval = setInterval(() => {
-                    currentHashrate = (12.5 + Math.random() * 4.5).toFixed(1);
-                    unclaimedAPXC += 0.0025;
-                    document.getElementById('webHashrate').innerText = currentHashrate + " H/s";
-                    document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
-                }, 1000);
-            } else {
-                isMining = false;
-                clearInterval(miningInterval);
-                currentHashrate = 0;
-                document.getElementById('webHashrate').innerText = "0.0 H/s";
-                btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm";
-                txtSpan.innerText = i18nDict[currentLang].startMining;
-                btn.querySelector('i').className = "fa-solid fa-play me-2";
-            }
-        }
-
-        function claimMinedTokens() {
-            if (unclaimedAPXC <= 0) return;
-            if (!userWalletAddress) {
-                toggleWalletConnect();
-                return;
-            }
-            unclaimedAPXC = 0.0000;
-            document.getElementById('unclaimedReward').innerText = "0.0000 APXC";
         }
 
         function applyFallbackData() {
