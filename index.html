@@ -112,7 +112,6 @@
             filter: drop-shadow(0px 8px 25px rgba(255, 140, 0, 0.25));
         }
 
-        /* KHUNG CHART MT5 FIX MOBILE */
         #chartContainer {
             height: 380px;
             width: 100%;
@@ -291,7 +290,6 @@
                         </div>
                     </div>
 
-                    <!-- CONTAINER DRAW CHART -->
                     <div id="chartContainer"></div>
                 </div>
             </div>
@@ -347,7 +345,7 @@
         <small>© 2026 Apex Phoenix Network. All Protocol Rules Reserved.</small>
     </footer>
 
-    <!-- SCRIPT TỐI ƯU MOBILE & KHỞI TẠO NẾN LẬP TỨC -->
+    <!-- SCRIPT FETCH DỮ LIỆU TỐI ƯU 5G TIMEOUT 6s -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9033/";
         let consecutiveErrors = 0;
@@ -360,7 +358,7 @@
         function generateInitialSeedHistory(currentPrice) {
             const seedCount = 60;
             const nowSeconds = Math.floor(Date.now() / 60000) * 60;
-            let price = currentPrice || 0.0940;
+            let price = currentPrice || 0.0937;
             const history = [];
 
             for (let i = seedCount; i >= 1; i--) {
@@ -377,7 +375,6 @@
             return history;
         }
 
-        // KHỞI TẠO BẢNG NẾN NGAY LẬP TỨC (KHÔNG CHỜ API)
         function initTradingChart() {
             const container = document.getElementById('chartContainer');
             if (!container || chart) return;
@@ -423,8 +420,7 @@
                 },
             });
 
-            // NAP NẾN MẪU NGAY KHI MỞ TRANG DÙ CHƯA CÓ KẾT NỐI
-            m1History = generateInitialSeedHistory(0.0940);
+            m1History = generateInitialSeedHistory(0.0937);
             renderAggregatedChart();
 
             window.addEventListener('resize', () => {
@@ -490,9 +486,11 @@
         async function fetchNodeData() {
             const targetUrl = RAW_NODE_API + "?_t=" + Date.now();
             
+            // DANH SÁCH PROXY MỚI TỐI ƯU 5G MOBILE
             const PROXIES = [
-                `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
                 `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
+                `https://jsonp.afeld.me/?url=${encodeURIComponent(targetUrl)}`,
+                `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
                 `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`
             ];
 
@@ -501,7 +499,8 @@
             for (const proxyUrl of PROXIES) {
                 try {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 3500);
+                    // TANG TIMEOUT LEN 6000ms (6 GIÂY) CHO MẠNG 5G
+                    const timeoutId = setTimeout(() => controller.abort(), 6000);
                     
                     const response = await fetch(proxyUrl, { 
                         cache: 'no-store',
@@ -561,14 +560,14 @@
                 document.getElementById('nodeStatusBadge').innerHTML = '<i class="pulse-icon me-1"></i> Seed Node Active';
             } else {
                 consecutiveErrors++;
-                if (consecutiveErrors >= 3) {
+                // NÂNG LÊN 5 LẦN LỖI MỚI CHUYỂN BÁO VÀNG
+                if (consecutiveErrors >= 5) {
                     document.getElementById('nodeStatusBadge').className = "badge bg-warning text-dark fw-semibold";
                     document.getElementById('nodeStatusBadge').innerHTML = '<i class="fa-solid fa-triangle-exclamation me-1"></i> Connecting Node...';
                 }
             }
         }
 
-        // TỰ ĐỘNG CHẠY VẼ NẾN NGAY KHI VỪA TẢI TRANG
         document.addEventListener('DOMContentLoaded', () => {
             initTradingChart();
             fetchNodeData();
