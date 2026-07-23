@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="notranslate" translate="no">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex Phoenix Network | APXC Protocol</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -29,7 +30,6 @@
             box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
         }
         
-        /* CODEPEN HERO SECTION EXACT MATCH */
         .hero-codepen-section {
             background-color: var(--codepen-bg);
             padding: 45px 0 35px;
@@ -112,16 +112,16 @@
             filter: drop-shadow(0px 8px 25px rgba(255, 140, 0, 0.25));
         }
 
-        /* KHUNG BIỂU ĐỒ NẾN BLACK STYLE MT5 */
+        /* KHUNG CHART MT5 FIX MOBILE */
         #chartContainer {
             height: 380px;
             width: 100%;
+            min-height: 380px;
             border-radius: 8px;
             overflow: hidden;
             background: #000000;
         }
 
-        /* TIMEFRAME SELECTOR BUTTONS */
         .tf-btn {
             background-color: #1e293b;
             color: #94a3b8;
@@ -149,7 +149,6 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
-                <!-- LOGO MINI NAVBAR -->
                 <svg width="36" height="36" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
                     <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
                     <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
@@ -270,16 +269,12 @@
                 </div>
             </div>
 
-            <!-- BIỂU ĐỒ NẾN MT5 CHUẨN ĐỒNG HỒ ĐẾM NGƯỢC THEO KHUNG GIỜ -->
+            <!-- CHART NẾN NỀN ĐEN MT5 -->
             <div class="col-12">
                 <div class="card card-custom p-3 p-md-4" style="background-color: #0c101a; border-color: #1e293b;">
-                    
-                    <!-- HEADER BAR BIỂU ĐỒ -->
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
                         <div class="d-flex align-items-center gap-2">
                             <span class="fw-bold text-warning fs-5 me-2"><i class="fa-solid fa-chart-candlestick me-2"></i>APXC / USDT</span>
-                            
-                            <!-- BỘ NÚT CHỌN KHUNG THỜI GIAN -->
                             <div class="btn-group btn-group-sm" role="group">
                                 <button type="button" class="tf-btn active" onclick="setChartTimeframe(60, this)">M1</button>
                                 <button type="button" class="tf-btn" onclick="setChartTimeframe(300, this)">M5</button>
@@ -289,7 +284,6 @@
                             </div>
                         </div>
 
-                        <!-- ĐỒNG HỒ ĐẾM NGƯỢC NẾN ĐÓNG CỬA KIỂU MT5 -->
                         <div>
                             <span class="badge bg-dark text-warning border border-warning px-3 py-2 rounded-pill font-monospace" style="font-size: 0.9rem;">
                                 <i class="fa-regular fa-clock me-1"></i><span id="candleCountdown">00:00</span>
@@ -297,7 +291,7 @@
                         </div>
                     </div>
 
-                    <!-- KHUNG VẼ BIỂU ĐỒ -->
+                    <!-- CONTAINER DRAW CHART -->
                     <div id="chartContainer"></div>
                 </div>
             </div>
@@ -353,21 +347,20 @@
         <small>© 2026 Apex Phoenix Network. All Protocol Rules Reserved.</small>
     </footer>
 
-    <!-- LIVE DATA FETCHING & MT5 COUNTDOWN CHART SCRIPT -->
+    <!-- SCRIPT TỐI ƯU MOBILE & KHỞI TẠO NẾN LẬP TỨC -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9033/";
         let consecutiveErrors = 0;
         let chart = null;
         let candleSeries = null;
         
-        let currentTimeframeSec = 60; // Mặc định M1 (60s)
-        let m1History = []; // Lịch sử nến M1
+        let currentTimeframeSec = 60;
+        let m1History = [];
 
-        // 1. TỰ SINH NẾN LỊCH SỬ XUNG QUANH VÙNG GIÁ THỰC CỦA NODE
         function generateInitialSeedHistory(currentPrice) {
             const seedCount = 60;
             const nowSeconds = Math.floor(Date.now() / 60000) * 60;
-            let price = currentPrice || 0.0810;
+            let price = currentPrice || 0.0940;
             const history = [];
 
             for (let i = seedCount; i >= 1; i--) {
@@ -384,12 +377,15 @@
             return history;
         }
 
-        // 2. KHỞI TẠO BIỂU ĐỒ TRADINGVIEW PHONG CÁCH NỀN ĐEN MT5
+        // KHỞI TẠO BẢNG NẾN NGAY LẬP TỨC (KHÔNG CHỜ API)
         function initTradingChart() {
             const container = document.getElementById('chartContainer');
             if (!container || chart) return;
 
+            const containerWidth = container.clientWidth || (window.innerWidth - 40);
+
             chart = LightweightCharts.createChart(container, {
+                width: containerWidth,
                 height: 380,
                 layout: {
                     background: { type: 'solid', color: '#000000' },
@@ -427,15 +423,17 @@
                 },
             });
 
+            // NAP NẾN MẪU NGAY KHI MỞ TRANG DÙ CHƯA CÓ KẾT NỐI
+            m1History = generateInitialSeedHistory(0.0940);
+            renderAggregatedChart();
+
             window.addEventListener('resize', () => {
                 if (chart && container) {
                     chart.applyOptions({ width: container.clientWidth });
                 }
             });
-            chart.applyOptions({ width: container.clientWidth });
         }
 
-        // 3. THUẬT TOÁN GOM NẾN THỜI GIAN THỰC CHO M1, M5, M15, M30, H1
         function renderAggregatedChart() {
             if (!candleSeries || m1History.length === 0) return;
 
@@ -464,7 +462,6 @@
             candleSeries.setData(aggregatedData);
         }
 
-        // 4. CHUYỂN ĐỔI KHUNG GIỜ M1 - H1 KHI BẤM NÚT
         function setChartTimeframe(seconds, btnElement) {
             currentTimeframeSec = seconds;
             
@@ -475,13 +472,10 @@
             updateCountdown();
         }
 
-        // 5. ĐỒNG HỒ ĐẾM NGƯỢC NẾN CHUẨN FORMAT MT5 (M1: 00:59 -> 00:00, M5: 04:59 -> 00:00...)
         function updateCountdown() {
             const nowSec = Math.floor(Date.now() / 1000);
-            
-            // Tinh so giay con lai trong cay nen hien tai
             let remainSec = currentTimeframeSec - (nowSec % currentTimeframeSec);
-            if (remainSec === currentTimeframeSec) remainSec = 0; // Khi vua sang cay nen moi
+            if (remainSec === currentTimeframeSec) remainSec = 0;
 
             const minutes = Math.floor(remainSec / 60).toString().padStart(2, '0');
             const seconds = (remainSec % 60).toString().padStart(2, '0');
@@ -491,9 +485,8 @@
                 countdownEl.innerText = `${minutes}:${seconds}`;
             }
         }
-        setInterval(updateCountdown, 1000); // Dem nguoc tung giay
+        setInterval(updateCountdown, 1000);
 
-        // 6. CALL API SEED NODE REALTIME
         async function fetchNodeData() {
             const targetUrl = RAW_NODE_API + "?_t=" + Date.now();
             
@@ -543,12 +536,6 @@
                     document.getElementById('ohlcDetail').innerText = 
                         `O: ${data.ohlc.open} | H: ${data.ohlc.high} | L: ${data.ohlc.low} | C: ${data.ohlc.close}`;
 
-                    if (!chart) initTradingChart();
-
-                    if (m1History.length === 0) {
-                        m1History = generateInitialSeedHistory(data.ohlc.close);
-                    }
-
                     const nowM1Seconds = Math.floor(Date.now() / 60000) * 60;
                     const existingIdx = m1History.findIndex(c => c.time === nowM1Seconds);
 
@@ -581,8 +568,12 @@
             }
         }
 
-        fetchNodeData();
-        setInterval(fetchNodeData, 4000);
+        // TỰ ĐỘNG CHẠY VẼ NẾN NGAY KHI VỪA TẢI TRANG
+        document.addEventListener('DOMContentLoaded', () => {
+            initTradingChart();
+            fetchNodeData();
+            setInterval(fetchNodeData, 4000);
+        });
     </script>
 </body>
 </html>
