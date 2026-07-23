@@ -176,7 +176,7 @@
 </head>
 <body>
 
-    <!-- NAVBAR WITH LOGO & LANGUAGE SWITCHER -->
+    <!-- NAVBAR WITH LOGO, NOTIFICATION BELL & LANGUAGE SWITCHER -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
@@ -205,6 +205,12 @@
                 <span>APEX PHOENIX</span>
             </a>
             <div class="d-flex align-items-center gap-2">
+                <!-- CHUÔNG THÔNG BÁO BẢNG TIN DAPP -->
+                <button class="btn btn-warning btn-sm rounded-circle text-dark position-relative" onclick="openUpdatesModal()" title="Network Announcements">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                </button>
+
                 <button class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3" id="langBtn" onclick="toggleLanguage()">
                     🌐 <span id="langTxt">EN</span>
                 </button>
@@ -597,10 +603,10 @@
                 </div>
             </div>
 
-            <!-- MỤC CỘNG ĐỒNG VÀ NÚT BẤM (ĐÃ TRỎ CHUẨN SANG whitepaper.html) -->
+            <!-- MỤC CỘNG ĐỒNG VÀ NÚT BẤM (ĐÃ THAY TELEGRAM BẰNG ANNOUNCEMENTS) -->
             <div class="col-12">
                 <div class="card card-custom p-4 text-center">
-                    <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-users me-2"></i>Join Community & Web3 Tools</h5>
+                    <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-shield-halved me-2"></i>Protocol Resources & Web3 Tools</h5>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
                         <!-- 1. WHITEPAPER HTML TRỰC TIẾP -->
                         <a href="./whitepaper.html" class="btn btn-dark px-4 py-2 rounded-pill shadow-sm">
@@ -612,9 +618,9 @@
                             <i class="fa-brands fa-github me-2"></i>GitHub Repo
                         </a>
 
-                        <!-- 3. TELEGRAM GROUP -->
-                        <button class="btn btn-primary px-4 py-2 rounded-pill shadow-sm" onclick="openTelegramModal()">
-                            <i class="fa-brands fa-telegram me-2"></i>Telegram Group
+                        <!-- 3. NETWORK ANNOUNCEMENTS (BẢNG TIN THÔNG BÁO) -->
+                        <button class="btn btn-primary px-4 py-2 rounded-pill shadow-sm" onclick="openUpdatesModal()">
+                            <i class="fa-solid fa-bullhorn me-2"></i>Network News
                         </button>
 
                         <!-- 4. INSTALL WEB APP PWA -->
@@ -671,24 +677,52 @@
         </div>
     </div>
 
-    <!-- MODAL TELEGRAM COMMUNITY -->
-    <div class="modal fade" id="telegramModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+    <!-- MODAL BẢNG TIN THÔNG BÁO MẠNG LƯỚI (IN-DAPP ANNOUNCEMENTS) -->
+    <div class="modal fade" id="updatesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content rounded-4 border-0 shadow-lg">
                 <div class="modal-header border-0 pb-0">
                     <h5 class="fw-bold text-primary mb-0 d-flex align-items-center">
-                        <i class="fa-brands fa-telegram text-primary me-2 fs-4"></i>Apex Phoenix Telegram
+                        <i class="fa-solid fa-bullhorn text-warning me-2 fs-4"></i>Apex Phoenix Network News & Updates
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body p-4 text-center">
-                    <p class="text-muted mb-3">Tham gia Cộng đồng Telegram Apex Phoenix Network để cập nhật tin tức Airdrop & nâng cấp Node mới nhất:</p>
-                    <a href="https://t.me/apexphoenix_network" target="_blank" class="btn btn-primary fw-bold w-100 rounded-pill py-2 mb-2">
-                        <i class="fa-brands fa-telegram me-2"></i> Mở Kênh Telegram @apexphoenix_network
-                    </a>
-                    <button class="btn btn-outline-secondary btn-sm w-100 rounded-pill" onclick="navigator.clipboard.writeText('https://t.me/apexphoenix_network'); alert('Đã sao chép Link Telegram!')">
-                        <i class="fa-solid fa-copy me-1"></i> Sao chép Link Kênh
-                    </button>
+                <div class="modal-body p-4">
+                    <!-- TIN TỨC 1 -->
+                    <div class="p-3 bg-light rounded-3 border mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="badge bg-primary">V24.14 Released</span>
+                            <small class="text-muted font-monospace"><i class="fa-regular fa-clock me-1"></i>2026-03-28</small>
+                        </div>
+                        <h6 class="fw-bold text-dark mb-1">Nâng Cấp Giao Thức Khai Thác Browser Light Node & Sách Trắng V24.14</h6>
+                        <p class="small text-muted mb-0">
+                            Hệ thống đã chính thức nâng cấp phiên bản Flame Phoenix V24.14, bổ sung cơ chế khóa coin Staking Vault và bảng tra cứu khối (Block Explorer) thời gian thực.
+                        </p>
+                    </div>
+
+                    <!-- TIN TỨC 2 -->
+                    <div class="p-3 bg-light rounded-3 border mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="badge bg-success">Security & Privacy</span>
+                            <small class="text-muted font-monospace"><i class="fa-regular fa-clock me-1"></i>2026-03-25</small>
+                        </div>
+                        <h6 class="fw-bold text-dark mb-1">Chính Sách Truyền Thông Phi Tập Trung (In-DApp Protocol)</h6>
+                        <p class="small text-muted mb-0">
+                            Để duy trì tính ẩn danh tuyệt đối cho đội ngũ phát triển (Dev Anon) và an toàn cho thợ đào, Apex Phoenix Network vận hành cơ chế thông báo $100\%$ trực tiếp trên DApp, không qua trung gian mạng xã hội bên thứ 3.
+                        </p>
+                    </div>
+
+                    <!-- TIN TỨC 3 -->
+                    <div class="p-3 bg-light rounded-3 border">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="badge bg-warning text-dark">Genesis Block</span>
+                            <small class="text-muted font-monospace"><i class="fa-regular fa-clock me-1"></i>2026-03-20</small>
+                        </div>
+                        <h6 class="fw-bold text-dark mb-1">Khởi Chạy Máy Chủ VPS Seed Node Đầu Tiên</h6>
+                        <p class="small text-muted mb-0">
+                            Seed Node chính thức phát sinh khối Genesis với tốc độ tạo khối 60 giây/block và cung cấp nguồn dữ liệu giá real-time cho DApp Dashboard.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -794,9 +828,9 @@
             }
         }
 
-        function openTelegramModal() {
-            const tgModal = new bootstrap.Modal(document.getElementById('telegramModal'));
-            tgModal.show();
+        function openUpdatesModal() {
+            const upModal = new bootstrap.Modal(document.getElementById('updatesModal'));
+            upModal.show();
         }
 
         // BỘ TỪ ĐIỂN ĐA NGÔN NGỮ
