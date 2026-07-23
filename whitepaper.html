@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitepaper | Apex Phoenix Network (APXC Protocol)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b1329;
+            --card-bg: #111622;
+            --gold-primary: #FFC800;
+            --sky-blue: #00a8ff;
+            --text-muted: #94a3b8;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+        }
+        .whitepaper-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 168, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 30px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+        h1, h2, h3 {
+            color: var(--gold-primary);
+            font-weight: 800;
+        }
+        h2 {
+            font-size: 1.4rem;
+            border-left: 4px solid var(--sky-blue);
+            padding-left: 12px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .table-custom {
+            color: #f8fafc;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .table-custom th {
+            background-color: rgba(0, 168, 255, 0.2);
+            color: var(--gold-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container py-4">
+        <!-- NÚT QUAY LẠI TRANG CHỦ -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="./index.html" class="btn btn-outline-info rounded-pill fw-bold btn-sm">
+                <i class="fa-solid fa-arrow-left me-1"></i> Quay lại DApp Dashboard
+            </a>
+            <span class="badge bg-warning text-dark fw-bold">APXC PROTOCOL V24.14</span>
+        </div>
+
+        <div class="whitepaper-card">
+            <!-- HERO TITLE -->
+            <div class="text-center border-bottom pb-4 mb-4">
+                <h1 class="display-6 fw-bold mb-2">APEX PHOENIX NETWORK</h1>
+                <h5 class="text-info fw-bold mb-3">SÁCH TRẮNG GIAO THỨC APXC PROTOCOL</h5>
+                <span class="badge bg-primary px-3 py-2 rounded-pill">PHIÊN BẢN CHÍNH THỨC - QUÝ I/2026</span>
+            </div>
+
+            <!-- 1. TỔNG QUAN -->
+            <h2>1. Tổng Quan & Tầm Nhìn Dự Án</h2>
+            <p>
+                <strong>Apex Phoenix Network (APXC Protocol)</strong> là nền tảng hệ sinh thái Web3 Crypto & Khai thác phi tập trung kết hợp giao thức Node nhẹ (Light Node Protocol). Dự án được thiết kế nhằm tối ưu hóa trải nghiệm tham gia mạng lưới blockchain cho cộng đồng người dùng phổ thông toàn cầu, loại bỏ hoàn toàn các rào cản kỹ thuật phức tạp và chi phí gas giao dịch ban đầu.
+            </p>
+            <p>
+                Với hạ tầng hạt nhân vận hành trên máy chủ VPS Seed Node kết hợp giao thức khai thác trình duyệt (Browser Mining Protocol) và mô hình khóa coin thông minh (Lockup Boost Engine), APXC Protocol đảm bảo tính minh bạch, chống lạm phát và thiết lập nền tảng vững chắc hướng tới quá trình chuyển đổi Mainnet chính thức trong năm 2026.
+            </p>
+
+            <div class="row text-center g-3 my-3">
+                <div class="col-md-4">
+                    <div class="highlight-box">
+                        <div class="fs-4 fw-bold text-info">84.000.000</div>
+                        <small class="text-muted fw-bold">TỔNG CUNG TỐI ĐA (APXC)</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="highlight-box">
+                        <div class="fs-4 fw-bold text-info">60 Giây</div>
+                        <small class="text-muted fw-bold">THỜI GIAN KHỐI (1 BLOCK)</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="highlight-box">
+                        <div class="fs-4 fw-bold text-info">BEP-20</div>
+                        <small class="text-muted fw-bold">CHUẨN SMART CONTRACT</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. TOKENOMICS -->
+            <h2>2. Tokenomics & Phân Bổ Tài Sản (84M APXC)</h2>
+            <p>
+                Hệ thống APXC tuân thủ nguyên tắc Tokenomics cố định tuyệt đối không lạm phát (Hard-Capped Supply) với tổng cung duy nhất <strong>84.000.000 APXC</strong>. Cấu trúc phân bổ được hoạch định minh bạch như sau:
+            </p>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-custom align-middle">
+                    <thead>
+                        <tr>
+                            <th>Hạng Mục Phân Bổ</th>
+                            <th>Tỷ Lệ (%)</th>
+                            <th>Số Lượng Token</th>
+                            <th>Mục Đích Sử Dụng & Cơ Chế Khóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold text-info">Miner Pool (Light Nodes)</td>
+                            <td class="fw-bold">85%</td>
+                            <td>71.400.000 APXC</td>
+                            <td>Dành riêng cho cộng đồng khai thác Web Miner & Node staking đường dài.</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-warning">Development Fund</td>
+                            <td class="fw-bold">10%</td>
+                            <td>8.400.000 APXC</td>
+                            <td>Quỹ phát triển công nghệ, kiểm toán Smart Contract & Tiếp thị mở rộng.</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-success">Founder Reserve</td>
+                            <td class="fw-bold">5%</td>
+                            <td>4.200.000 APXC</td>
+                            <td>Quỹ dự trữ đội ngũ sáng lập, mở khóa tuyến tính 5 năm kể từ Mainnet.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 3. KHÓA COIN -->
+            <h2>3. Giao Thức Khai Thác & Khóa Coin Tích Lũy (Lockup Boost)</h2>
+            <p>
+                APXC Protocol ứng dụng cơ chế <strong>Browser Light Mining Protocol</strong> cho phép người dùng khai thác token trực tiếp trên trình duyệt điện thoại hoặc máy tính mà không tiêu tốn tài nguyên phần cứng hay pin thiết bị.
+            </p>
+
+            <h5 class="text-warning fw-bold mt-3">3.1. Cơ Chế Giới Thiệu (Referral Program)</h5>
+            <p>
+                Mỗi địa chỉ ví Web3 kết nối hệ thống được cấp duy nhất một đường link định danh. Khi người dùng mới truy cập qua link giới thiệu, cả hai bên đều được cộng trực tiếp <strong>+10% Tốc độ khai thác (Hashrate Boost)</strong>.
+            </p>
+
+            <h5 class="text-warning fw-bold mt-3">3.2. Bảng Tỷ Lệ Khóa Coin Bền Vững (Pi Network Standard)</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-custom align-middle">
+                    <thead>
+                        <tr>
+                            <th>Thời Gian Khóa</th>
+                            <th>Tỷ Lệ Boost Tốc Độ Đào</th>
+                            <th>Lãi Suất Tiết Kiệm (APY)</th>
+                            <th>Đánh Giá Mức Độ Cam Kết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>6 Tháng</strong></td>
+                            <td class="text-success fw-bold">+10% Boost Rate</td>
+                            <td>10% / Năm</td>
+                            <td>Khóa ngắn hạn (Lướt sóng)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 Năm (Default)</strong></td>
+                            <td class="text-success fw-bold">+30% Boost Rate</td>
+                            <td>30% / Năm</td>
+                            <td>Khóa tiêu chuẩn mạng lưới</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2 Năm</strong></td>
+                            <td class="text-success fw-bold">+70% Boost Rate</td>
+                            <td>70% / Năm</td>
+                            <td>Cam kết trung hạn đến Mainnet</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3 Năm</strong></td>
+                            <td class="text-success fw-bold">+150% Boost Rate</td>
+                            <td>150% / Năm</td>
+                            <td>Cổ đông chiến lược (Super Diamond)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 4. ROADMAP -->
+            <h2>4. Lộ Trình Phát Triển Năm 2026 (Roadmap 2026)</h2>
+            <div class="highlight-box">
+                <ul class="mb-0">
+                    <li class="mb-2"><strong>Quý I/2026 - Genesis Seed Node:</strong> Khởi chạy máy chủ VPS Seed Node, vận hành cơ sở dữ liệu SQLite, niêm yết Bảng tra cứu khối (Block Explorer) & Live Trading Chart.</li>
+                    <li class="mb-2"><strong>Quý II/2026 - Light Node & Mobile PWA:</strong> Hoàn thiện ứng dụng Web App PWA trên iOS/Android, tích hợp ví Web3 (MetaMask/Trust Wallet) và cơ chế Lockup Staking Vault.</li>
+                    <li class="mb-2"><strong>Quý III/2026 - Testnet to Mainnet Migration:</strong> Deploy Smart Contract chuẩn BEP-20 lên mạng BNB Smart Chain, hoàn tất kiểm toán an ninh (Smart Audit) và mở cổng rút token về ví.</li>
+                    <li><strong>Quý IV/2026 - CEX Listing & DEX Liquidity:</strong> Tạo bể thanh toán thanh khoản Liquidity Pool trên Pancakeswap/DEX, làm việc với đối tác Market Maker để niêm yết các sàn CEX hàng đầu.</li>
+                </ul>
+            </div>
+
+            <!-- 5. SMART CONTRACT -->
+            <h2>5. Hợp Đồng Thông Minh & Bảo Mật</h2>
+            <p>Địa chỉ Smart Contract BEP-20 chính thức của Apex Phoenix Network:</p>
+            <div class="p-3 bg-dark text-warning font-monospace text-center rounded-3 fs-6 mb-3 border border-warning">
+                0x89234F2B99E23108B7F43A60355DC38C8ABA6691
+            </div>
+            <p class="small text-muted mb-0">
+                Toàn bộ mã nguồn hợp đồng được xây dựng tuân thủ tiêu chuẩn mã mở ERC-20 / BEP-20 chuẩn mực, cam kết không chứa các hàm nguy hiểm (Mint vô hạn, Blacklist tự ý, Pausable trap), đảm bảo an toàn tuyệt đối cho tài sản của cộng đồng miner.
+            </p>
+
+            <div class="text-center pt-4 mt-4 border-top text-muted small">
+                © 2026 Apex Phoenix Network. Bản quyền giao thức APXC Protocol V24.14 đã được đăng ký.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
