@@ -33,7 +33,7 @@
         
         .hero-codepen-section {
             background-color: var(--codepen-bg);
-            padding: 45px 0 35px;
+            padding: 35px 0 30px;
             color: #ffffff;
             border-bottom: 3px solid #0077b6;
         }
@@ -53,7 +53,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             letter-spacing: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .flame-badge {
@@ -67,6 +67,17 @@
             font-size: 0.95rem;
             letter-spacing: 2px;
             box-shadow: 0 0 12px rgba(255, 200, 0, 0.2);
+        }
+
+        .contract-banner-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            padding: 16px 20px;
+            max-width: 650px;
+            margin: 20px auto 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .card-custom {
@@ -108,8 +119,8 @@
         }
         
         .apex-logo-hero {
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             filter: drop-shadow(0px 8px 25px rgba(255, 140, 0, 0.25));
         }
 
@@ -140,6 +151,26 @@
             background-color: #FFD700;
             color: #000000;
             border-color: #FFD700;
+        }
+
+        .wallet-option-btn {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+        .wallet-option-btn:hover {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
         }
     </style>
 </head>
@@ -188,10 +219,10 @@
         </div>
     </nav>
 
-    <!-- CODEPEN HERO SECTION -->
+    <!-- CODEPEN HERO SECTION + KHUNG SMART CONTRACT CONTRACT BANNER -->
     <section class="hero-codepen-section text-center">
         <div class="container">
-            <div class="mb-3">
+            <div class="mb-2">
                 <svg class="apex-logo-hero" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
                     <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
@@ -241,8 +272,27 @@
             
             <div class="apex-title-gold">APEX</div>
             <div class="apxc-sub-gold">APXC NETWORK</div>
-            <div class="mb-2">
+            <div>
                 <div class="flame-badge">FLAME PHOENIX V24.14</div>
+            </div>
+
+            <!-- NÂNG CẤP MỚI: BẢNG SMART CONTRACT VÀ NÚT ADD VÍ 1-CLICK -->
+            <div class="contract-banner-card">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="badge bg-warning text-dark fw-bold font-monospace px-3 py-1 rounded-pill">
+                        <i class="fa-solid fa-file-contract me-1"></i> Smart Contract (BEP-20)
+                    </span>
+                    <span class="text-warning small fw-bold">84,000,000 APXC</span>
+                </div>
+                <div class="input-group input-group-sm mb-2">
+                    <input type="text" class="form-control font-monospace text-warning border-warning bg-dark fw-bold text-center" id="contractAddrInput" readonly value="0x89234F2B99E23108B7F43A60355DC38C8ABA6691">
+                    <button class="btn btn-warning text-dark fw-bold px-3" onclick="copyTokenContractAddress()">
+                        <i class="fa-solid fa-copy me-1"></i> Copy
+                    </button>
+                </div>
+                <button class="btn btn-outline-warning btn-sm w-100 rounded-pill fw-bold" onclick="addApxcTokenToWallet()">
+                    <i class="fa-solid fa-plus-circle me-1"></i> <span data-i18n="addTokenBtn">+ Add APXC Token to Wallet</span>
+                </button>
             </div>
         </div>
     </section>
@@ -368,7 +418,7 @@
                 </div>
             </div>
 
-            <!-- KHÓA COIN KIỂU PI NETWORK - BẢNG TỶ LỆ BỀN VỮNG MỚI (+10% ĐẾN +150%) -->
+            <!-- KHÓA COIN KIỂU PI NETWORK -->
             <div class="col-md-6">
                 <div class="card card-custom p-4 h-100 border-info">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -571,6 +621,49 @@
         </div>
     </div>
 
+    <!-- MODAL LỰA CHỌN VÍ WEB3 SANG XIN CHUYÊN NGHIỆP -->
+    <div class="modal fade" id="walletConnectModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow-lg" style="background: #ffffff;">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-fw-bold text-dark mb-0 d-flex align-items-center">
+                        <i class="fa-solid fa-wallet text-primary me-2"></i>Connect Web3 Wallet
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-3">Chọn ứng dụng ví Web3 của bạn để bắt đầu kết nối với Apex Phoenix Network:</p>
+                    
+                    <div class="d-flex flex-column gap-2 mb-3">
+                        <a href="https://metamask.app.link/dapp/thandieuh2-creator.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
+                            <span>🦊 Mở bằng MetaMask</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
+                        </a>
+
+                        <a href="https://link.trustwallet.com/open_url?url=https://thandieuh2-creator.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
+                            <span>🛡️ Mở bằng Trust Wallet</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
+                        </a>
+
+                        <a href="https://www.okx.com/download" target="_blank" class="wallet-option-btn">
+                            <span>⚡ Mở bằng OKX Wallet</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
+                        </a>
+                    </div>
+
+                    <div class="position-relative my-3 text-center">
+                        <hr class="text-muted">
+                        <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small fw-bold">HOẶC TRẢI NGHIỆM NGAY</span>
+                    </div>
+
+                    <button class="btn btn-outline-primary fw-bold w-100 rounded-pill py-2" onclick="connectDemoWalletSafari()">
+                        ⚡ Kết Nối Ví Thử Nghiệm (Trực tiếp Safari)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- TOKENOMICS OVERVIEW -->
     <div class="container my-4">
         <div class="card card-custom p-4">
@@ -603,7 +696,10 @@
         <small>© 2026 Apex Phoenix Network. All Protocol Rules Reserved.</small>
     </footer>
 
-    <!-- SCRIPT TỔNG HỢP TOÀN BỘ LÔ-GÍC KẾT NỐI VÀ KHÓA COIN TỶ LỆ BỀN VỮNG MỚI -->
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SCRIPT TỔNG HỢP TOÀN BỘ LÔ-GÍC KẾT NỐI VÀ TÍNH NĂNG SMART CONTRACT -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9033/";
         let chart = null;
@@ -618,7 +714,7 @@
         let unclaimedAPXC = 0.0000;
         let userWalletAddress = null;
 
-        // BỘ TỪ ĐIỂN ĐA NGÔN NGỮ (CẬP NHẬT TỶ LỆ KHÓA BỀN VỮNG)
+        // BỘ TỪ ĐIỂN ĐA NGÔN NGỮ
         let currentLang = 'EN';
         const i18nDict = {
             EN: {
@@ -655,7 +751,8 @@
                 lockNote: "Longer lockup duration = Higher mining boost reward!",
                 leaderboardTitle: "Top Miners Leaderboard",
                 rankBadge: "24h Network Ranking",
-                blockExplorerTitle: "Recent Block Explorer"
+                blockExplorerTitle: "Recent Block Explorer",
+                addTokenBtn: "+ Add APXC Token to Wallet"
             },
             VI: {
                 connectWallet: "Kết Nối Ví",
@@ -691,7 +788,8 @@
                 lockNote: "Khóa thời gian càng lâu = Phần thưởng tốc độ đào càng cao!",
                 leaderboardTitle: "Bảng Xếp Hạng Thợ Đào Top 5",
                 rankBadge: "Xếp Hạng Mạng Lưới 24h",
-                blockExplorerTitle: "Trình Tra Cứu Khối Gần Nhất"
+                blockExplorerTitle: "Trình Tra Cứu Khối Gần Nhất",
+                addTokenBtn: "+ Thêm Đồng APXC Vào Ví Web3"
             }
         };
 
@@ -708,7 +806,83 @@
             updateLockupBoostDisplay();
         }
 
-        // LÔ-GÍC KHÓA COIN KIỂU PI NETWORK - TỶ LỆ CÂN BẰNG MỚI
+        // CHỨC NĂNG COPY SMART CONTRACT & IMPORT VÍ 1-CLICK
+        function copyTokenContractAddress() {
+            const input = document.getElementById('contractAddrInput');
+            input.select();
+            document.execCommand('copy');
+        }
+
+        async function addApxcTokenToWallet() {
+            const tokenAddress = '0x89234F2B99E23108B7F43A60355DC38C8ABA6691';
+            const tokenSymbol = 'APXC';
+            const tokenDecimals = 18;
+            const tokenImage = 'https://cdn-icons-png.flaticon.com/512/1216/1216727.png';
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    await window.ethereum.request({
+                        method: 'wallet_watchAsset',
+                        params: {
+                            type: 'ERC20',
+                            options: {
+                                address: tokenAddress,
+                                symbol: tokenSymbol,
+                                decimals: tokenDecimals,
+                                image: tokenImage,
+                            },
+                        },
+                    });
+                } catch (error) {}
+            } else {
+                toggleWalletConnect();
+            }
+        }
+
+        // LÔ-GÍC KẾT NỐI VÍ
+        async function toggleWalletConnect() {
+            const txt = document.getElementById('walletTxt');
+            const btn = document.getElementById('walletBtn');
+            
+            if (userWalletAddress) {
+                userWalletAddress = null;
+                txt.innerText = i18nDict[currentLang].connectWallet;
+                btn.className = "btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm";
+                updateReferralLink();
+                return;
+            }
+
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    if (accounts && accounts.length > 0) {
+                        userWalletAddress = accounts[0];
+                        const shortAddr = userWalletAddress.substring(0, 6) + "..." + userWalletAddress.substring(userWalletAddress.length - 4);
+                        txt.innerText = shortAddr;
+                        btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
+                        updateReferralLink();
+                    }
+                } catch (error) {}
+            } else {
+                const walletModal = new bootstrap.Modal(document.getElementById('walletConnectModal'));
+                walletModal.show();
+            }
+        }
+
+        function connectDemoWalletSafari() {
+            userWalletAddress = "0x89234F2B99E23108B7F43A60355DC38C8ABA6691";
+            const txt = document.getElementById('walletTxt');
+            const btn = document.getElementById('walletBtn');
+            txt.innerText = "0x8923...6691";
+            btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
+            updateReferralLink();
+
+            const modalEl = document.getElementById('walletConnectModal');
+            const modalObj = bootstrap.Modal.getInstance(modalEl);
+            if(modalObj) modalObj.hide();
+        }
+
+        // KHÓA COIN STAKING
         let stakedAPXC = 0.00;
         let earnedYieldVal = 0.0000;
         let currentLockBoost = 0.30;
@@ -723,7 +897,7 @@
 
         function stakeTokens() {
             if (!userWalletAddress) {
-                alert("Vui lòng bấm nút 'Connect Wallet' để kết nối ví trước khi Khóa APXC!");
+                toggleWalletConnect();
                 return;
             }
             const select = document.getElementById('lockDurationSelect');
@@ -747,16 +921,11 @@
                         document.getElementById('earnedYield').innerText = earnedYieldVal.toFixed(4) + " APXC";
                     }, 1000);
                 }
-                alert(`Đã khóa thành công ${amount} APXC trong thời hạn ${durationText}! Tốc độ nhận thưởng được Boost +${boostPercent}%.`);
             }
         }
 
         function claimYield() {
-            if (earnedYieldVal <= 0) {
-                alert("Bạn chưa có tiền lãi tích lũy!");
-                return;
-            }
-            alert(`Đã rút thành công ${earnedYieldVal.toFixed(4)} APXC tiền lãi về ví!`);
+            if (earnedYieldVal <= 0) return;
             earnedYieldVal = 0.0000;
             document.getElementById('earnedYield').innerText = "0.0000 APXC";
         }
@@ -772,7 +941,6 @@
             const input = document.getElementById('refLinkInput');
             input.select();
             document.execCommand('copy');
-            alert("Đã sao chép Link giới thiệu! Gửi cho bạn bè để nhận thêm +10% Tốc độ đào APXC!");
         }
 
         function checkReferralQuery() {
@@ -802,52 +970,6 @@
 
             document.getElementById('calcApxcVal').innerText = `${estApxc} APXC`;
             document.getElementById('calcUsdtVal').innerText = `≈ $${estUsdt} USDT`;
-        }
-
-        // KẾT NỐI VÍ WEB3 THẬT
-        async function toggleWalletConnect() {
-            const txt = document.getElementById('walletTxt');
-            const btn = document.getElementById('walletBtn');
-            
-            if (userWalletAddress) {
-                userWalletAddress = null;
-                txt.innerText = i18nDict[currentLang].connectWallet;
-                btn.className = "btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm";
-                updateReferralLink();
-                alert("Đã ngắt kết nối ví!");
-                return;
-            }
-
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    
-                    if (accounts && accounts.length > 0) {
-                        userWalletAddress = accounts[0];
-                        const shortAddr = userWalletAddress.substring(0, 6) + "..." + userWalletAddress.substring(userWalletAddress.length - 4);
-                        txt.innerText = shortAddr;
-                        btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
-                        
-                        updateReferralLink();
-
-                        window.ethereum.on('accountsChanged', (newAccounts) => {
-                            if (newAccounts.length === 0) {
-                                userWalletAddress = null;
-                                txt.innerText = i18nDict[currentLang].connectWallet;
-                                btn.className = "btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm";
-                            } else {
-                                userWalletAddress = newAccounts[0];
-                                txt.innerText = userWalletAddress.substring(0, 6) + "..." + userWalletAddress.substring(userWalletAddress.length - 4);
-                            }
-                            updateReferralLink();
-                        });
-                    }
-                } catch (error) {
-                    alert("Bạn đã hủy yêu cầu kết nối ví!");
-                }
-            } else {
-                alert("Không tìm thấy ví Web3 trên trình duyệt!\n\n💡 Mẹo: Mở trang web này trong trình duyệt DApp của ứng dụng MetaMask hoặc Trust Wallet để kết nối ví nhé!");
-            }
         }
 
         function generateInitialSeedHistory(currentPrice) {
@@ -1033,15 +1155,11 @@
         }
 
         function claimMinedTokens() {
-            if (unclaimedAPXC <= 0) {
-                alert("Bạn chưa có APXC để rút!");
-                return;
-            }
+            if (unclaimedAPXC <= 0) return;
             if (!userWalletAddress) {
-                alert("Vui lòng bấm nút 'Connect Wallet' ở góc trên để kết nối ví trước khi Claim!");
+                toggleWalletConnect();
                 return;
             }
-            alert(`Đã Claim thành công ${unclaimedAPXC.toFixed(4)} APXC về ví ${userWalletAddress.substring(0,6)}...${userWalletAddress.substring(userWalletAddress.length-4)}!`);
             unclaimedAPXC = 0.0000;
             document.getElementById('unclaimedReward').innerText = "0.0000 APXC";
         }
