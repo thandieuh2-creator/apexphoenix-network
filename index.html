@@ -797,7 +797,8 @@
 
     <!-- SCRIPT TỔNG HỢP TOÀN BỘ LÔ-GÍC KẾT NỐI VÀ TÍNH NĂNG MODAL -->
     <script>
-        const RAW_NODE_API = "http://42.96.5.132:9033/";
+        // CẬP NHẬT CỔNG API MỚI VỀ 9035
+        const RAW_NODE_API = "http://42.96.5.132:9035/";
         let chart = null;
         let candleSeries = null;
         
@@ -1154,12 +1155,27 @@
 
             m1History = generateInitialSeedHistory(0.0945);
             renderAggregatedChart();
+            fetchServerCandleHistory(); // TẢI LỊCH SỬ NẾN VĨNH VIỄN TỪ VPS
 
             window.addEventListener('resize', () => {
                 if (chart && container) {
                     chart.applyOptions({ width: container.clientWidth });
                 }
             });
+        }
+
+        async function fetchServerCandleHistory() {
+            try {
+                const historyUrl = RAW_NODE_API + "history?limit=1000&_t=" + Date.now();
+                const response = await fetch(historyUrl, { cache: 'no-store' });
+                if (response.ok) {
+                    const serverHistory = await response.json();
+                    if (Array.isArray(serverHistory) && serverHistory.length > 0) {
+                        m1History = serverHistory;
+                        renderAggregatedChart();
+                    }
+                }
+            } catch (e) {}
         }
 
         function renderAggregatedChart() {
@@ -1311,7 +1327,7 @@
                 m1History[existingIdx] = newM1Candle;
             } else {
                 m1History.push(newM1Candle);
-                if (m1History.length > 500) m1History.shift();
+                if (m1History.length > 1000) m1History.shift();
             }
 
             renderAggregatedChart();
@@ -1381,7 +1397,7 @@
                         m1History[existingIdx] = newM1Candle;
                     } else {
                         m1History.push(newM1Candle);
-                        if (m1History.length > 500) m1History.shift();
+                        if (m1History.length > 1000) m1History.shift();
                     }
 
                     renderAggregatedChart();
