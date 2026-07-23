@@ -629,38 +629,59 @@
         </div>
     </div>
 
-    <!-- WEB3 WALLET SELECTION MODAL -->
+    <!-- WEB3 WALLET SELECTION MODAL (MULTI-WALLET UNIVERSAL DEEP LINKS) -->
     <div class="modal fade" id="walletConnectModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg" style="background: #ffffff;">
                 <div class="modal-header border-0 pb-0">
                     <h5 class="modal-fw-bold text-dark mb-0 d-flex align-items-center">
-                        <i class="fa-solid fa-wallet text-primary me-2"></i>Connect Web3 Wallet (Live On-Chain)
+                        <i class="fa-solid fa-wallet text-primary me-2"></i>Select Web3 Wallet (Live On-Chain)
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <p class="text-muted small mb-3">Select your Web3 wallet application to authorize node access on Apex Phoenix Network:</p>
+                    <p class="text-muted small mb-3">Choose your preferred Web3 wallet application to authorize node access:</p>
                     
                     <div class="d-flex flex-column gap-2 mb-3">
+                        <!-- 1. METAMASK EXTENSION / BROWSER -->
                         <button class="wallet-option-btn text-start border-0" onclick="connectMetaMaskDirect()">
-                            <span>🦊 Connect MetaMask</span>
-                            <i class="fa-solid fa-arrow-right-to-bracket text-primary"></i>
+                            <span class="d-flex align-items-center"><i class="fa-solid fa-fox text-warning me-2 fs-5"></i> MetaMask Browser / Extension</span>
+                            <i class="fa-solid fa-bolt text-primary"></i>
                         </button>
 
+                        <!-- 2. METAMASK MOBILE APP -->
                         <a href="https://metamask.app.link/dapp/apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
-                            <span>📱 Open in Mobile App (MetaMask / Trust)</span>
+                            <span class="d-flex align-items-center">🦊 Open in MetaMask App</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
                         </a>
 
-                        <a href="https://www.okx.com/download" target="_blank" class="wallet-option-btn">
-                            <span>⚡ Connect OKX Web3 Wallet</span>
+                        <!-- 3. TRUST WALLET APP -->
+                        <a href="https://link.trustwallet.com/open_url?url=https://apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
+                            <span class="d-flex align-items-center">🛡️ Open in Trust Wallet App</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
                         </a>
+
+                        <!-- 4. OKX WEB3 WALLET -->
+                        <a href="https://www.okx.com/download?deeplink=okx://wallet/dapp/details?dappUrl=https://apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
+                            <span class="d-flex align-items-center">⚡ Open in OKX Web3 Wallet</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
+                        </a>
+
+                        <!-- 5. COINBASE WALLET -->
+                        <a href="https://go.cb-w.com/dapp?cb_url=https://apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
+                            <span class="d-flex align-items-center">🔵 Open in Coinbase Wallet App</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
+                        </a>
+
+                        <!-- 6. OTHER INJECTED WALLETS -->
+                        <button class="wallet-option-btn text-start border-0" onclick="connectInjectedGenericWallet()">
+                            <span class="d-flex align-items-center">🌐 Injected Provider (Brave / Phantom)</span>
+                            <i class="fa-solid fa-plug text-success"></i>
+                        </button>
                     </div>
 
-                    <div class="alert alert-warning py-2 small mb-0 text-center fw-bold">
-                        🔒 Connecting your wallet securely locks your mined APXC balance to your address on-chain.
+                    <div class="alert alert-warning py-2 small mb-0 text-center fw-bold" style="font-size: 0.78rem;">
+                        🔒 Mined APXC balance will be automatically locked & bound to your connected wallet address on-chain.
                     </div>
                 </div>
             </div>
@@ -949,14 +970,32 @@
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                     if (accounts && accounts.length > 0) {
                         setConnectedWallet(accounts[0]);
-                        const modalEl = document.getElementById('walletConnectModal');
-                        const modalObj = bootstrap.Modal.getInstance(modalEl);
-                        if(modalObj) modalObj.hide();
+                        closeWalletModal();
                     }
                 } catch (error) {}
             } else {
-                alert("MetaMask extension not detected. Please open via Web3 mobile app.");
+                alert("MetaMask extension not detected. Please open using a Web3 Wallet DApp Browser.");
             }
+        }
+
+        async function connectInjectedGenericWallet() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    if (accounts && accounts.length > 0) {
+                        setConnectedWallet(accounts[0]);
+                        closeWalletModal();
+                    }
+                } catch (error) {}
+            } else {
+                alert("No Injected Web3 provider found. Please open directly inside Trust Wallet, OKX, or MetaMask DApp Browser.");
+            }
+        }
+
+        function closeWalletModal() {
+            const modalEl = document.getElementById('walletConnectModal');
+            const modalObj = bootstrap.Modal.getInstance(modalEl);
+            if(modalObj) modalObj.hide();
         }
 
         function setConnectedWallet(addr) {
@@ -967,7 +1006,6 @@
             txt.innerText = shortAddr;
             btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
             
-            // Đồng bộ dữ liệu đào coin theo ví thật
             loadMiningStateForWallet();
             updateReferralLink();
         }
