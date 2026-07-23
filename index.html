@@ -597,21 +597,28 @@
                 </div>
             </div>
 
-            <!-- CỘNG ĐỒNG -->
+            <!-- MỤC CỘNG ĐỒNG VÀ NÚT BẤM (ĐÃ HOÀN THIỆN ĐẦY ĐỦ LINK VÀ MODAL) -->
             <div class="col-12">
                 <div class="card card-custom p-4 text-center">
                     <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-users me-2"></i>Join Community & Web3 Tools</h5>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <!-- 1. WHITEPAPER PDF -->
                         <a href="./Apex_Phoenix_APXC_Whitepaper_V24.14.pdf" target="_blank" class="btn btn-dark px-4 py-2 rounded-pill shadow-sm">
                             <i class="fa-solid fa-file-pdf text-danger me-2"></i>Whitepaper PDF
                         </a>
+
+                        <!-- 2. GITHUB REPO -->
                         <a href="https://github.com/apexphoenix-network/apexphoenix-network" target="_blank" class="btn btn-dark px-4 py-2 rounded-pill shadow-sm">
                             <i class="fa-brands fa-github me-2"></i>GitHub Repo
                         </a>
-                        <button class="btn btn-primary px-4 py-2 rounded-pill shadow-sm" onclick="alert('Đang kết nối đến Kênh Telegram APXC Network...')">
+
+                        <!-- 3. TELEGRAM GROUP (MỞ MODAL SANG XIN) -->
+                        <button class="btn btn-primary px-4 py-2 rounded-pill shadow-sm" onclick="openTelegramModal()">
                             <i class="fa-brands fa-telegram me-2"></i>Telegram Group
                         </button>
-                        <button class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm" onclick="alert('Mẹo: Trên Safari iPhone, bấm nút Chia sẻ -> Chọn Thêm vào Màn hình chính để cài Web App!')">
+
+                        <!-- 4. INSTALL WEB APP PWA (MỞ MODAL HƯỚNG DẪN CÀI APP) -->
+                        <button class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm" onclick="triggerPwaInstall()">
                             <i class="fa-solid fa-mobile-screen-button me-2"></i>Install Web App (PWA)
                         </button>
                     </div>
@@ -621,7 +628,7 @@
         </div>
     </div>
 
-    <!-- MODAL LỰA CHỌN VÍ WEB3 CHUẨN DEEP LINK THEO TÊN MỚI -->
+    <!-- MODAL LỰA CHỌN VÍ WEB3 -->
     <div class="modal fade" id="walletConnectModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg" style="background: #ffffff;">
@@ -635,19 +642,16 @@
                     <p class="text-muted small mb-3">Chọn ứng dụng ví Web3 của bạn để bắt đầu kết nối với Apex Phoenix Network:</p>
                     
                     <div class="d-flex flex-column gap-2 mb-3">
-                        <!-- METAMASK DEEP LINK CẬP NHẬT TÊN MỚI -->
                         <a href="https://metamask.app.link/dapp/apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
                             <span>🦊 Mở bằng MetaMask</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
                         </a>
 
-                        <!-- TRUST WALLET DEEP LINK CẬP NHẬT TÊN MỚI -->
                         <a href="https://link.trustwallet.com/open_url?url=https://apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
                             <span>🛡️ Mở bằng Trust Wallet</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
                         </a>
 
-                        <!-- OKX WALLET DEEP LINK -->
                         <a href="https://www.okx.com/download" target="_blank" class="wallet-option-btn">
                             <span>⚡ Mở bằng OKX Wallet</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
@@ -662,6 +666,61 @@
                     <button class="btn btn-outline-primary fw-bold w-100 rounded-pill py-2" onclick="connectDemoWalletSafari()">
                         ⚡ Kết Nối Ví Thử Nghiệm (Trực tiếp Safari)
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: TELEGRAM COMMUNITY -->
+    <div class="modal fade" id="telegramModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow-lg">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="fw-bold text-primary mb-0 d-flex align-items-center">
+                        <i class="fa-brands fa-telegram text-primary me-2 fs-4"></i>Apex Phoenix Telegram
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 text-center">
+                    <p class="text-muted mb-3">Tham gia Cộng đồng Telegram Apex Phoenix Network để cập nhật tin tức Airdrop & nâng cấp Node mới nhất:</p>
+                    <a href="https://t.me/apexphoenix_network" target="_blank" class="btn btn-primary fw-bold w-100 rounded-pill py-2 mb-2">
+                        <i class="fa-brands fa-telegram me-2"></i> Mở Kênh Telegram @apexphoenix_network
+                    </a>
+                    <button class="btn btn-outline-secondary btn-sm w-100 rounded-pill" onclick="navigator.clipboard.writeText('https://t.me/apexphoenix_network'); alert('Đã sao chép Link Telegram!')">
+                        <i class="fa-solid fa-copy me-1"></i> Sao chép Link Kênh
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: INSTALL WEB APP (PWA INSTRUCTIONS) -->
+    <div class="modal fade" id="pwaInstallModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow-lg">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="fw-bold text-dark mb-0 d-flex align-items-center">
+                        <i class="fa-solid fa-mobile-screen-button text-warning me-2 fs-4"></i>Cài Đặt Web App (PWA)
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-primary mb-1"><i class="fa-brands fa-apple me-2"></i>Hướng dẫn cho iPhone (Safari):</h6>
+                        <ol class="small text-muted mb-0 ps-3">
+                            <li>Bấm vào biểu tượng <strong>Chia sẻ (Share <i class="fa-solid fa-arrow-up-from-bracket"></i>)</strong> ở thanh công cụ dưới Safari.</li>
+                            <li>Kéo xuống chọn <strong>"Thêm vào Màn hình chính" (Add to Home Screen)</strong>.</li>
+                            <li>Bấm <strong>Thêm (Add)</strong> để cài ứng dụng APXC ra màn hình điện thoại!</li>
+                        </ol>
+                    </div>
+                    <hr>
+                    <div>
+                        <h6 class="fw-bold text-success mb-1"><i class="fa-brands fa-android me-2"></i>Hướng dẫn cho Android (Chrome):</h6>
+                        <ol class="small text-muted mb-0 ps-3">
+                            <li>Bấm vào dấu <strong>3 chấm (<i class="fa-solid fa-ellipsis-vertical"></i>)</strong> góc trên bên phải Chrome.</li>
+                            <li>Chọn <strong>"Cài đặt ứng dụng" (Install app)</strong> hoặc <strong>"Thêm vào màn hình chính"</strong>.</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
@@ -702,7 +761,7 @@
     <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- SCRIPT TỔNG HỢP TOÀN BỘ LÔ-GÍC KẾT NỐI VÀ TÍNH NĂNG SMART CONTRACT -->
+    <!-- SCRIPT TỔNG HỢP TOÀN BỘ LÔ-GÍC KẾT NỐI VÀ TÍNH NĂNG MODAL -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9033/";
         let chart = null;
@@ -716,6 +775,30 @@
         let currentHashrate = 0;
         let unclaimedAPXC = 0.0000;
         let userWalletAddress = null;
+        let deferredPrompt = null;
+
+        // BẮT SỰ KIỆN PWA TRÊN ANDROID/CHROME
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function triggerPwaInstall() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt = null;
+                });
+            } else {
+                const pwaModal = new bootstrap.Modal(document.getElementById('pwaInstallModal'));
+                pwaModal.show();
+            }
+        }
+
+        function openTelegramModal() {
+            const tgModal = new bootstrap.Modal(document.getElementById('telegramModal'));
+            tgModal.show();
+        }
 
         // BỘ TỪ ĐIỂN ĐA NGÔN NGỮ
         let currentLang = 'EN';
@@ -933,7 +1016,7 @@
             document.getElementById('earnedYield').innerText = "0.0000 APXC";
         }
 
-        // REFERRAL LINK GENERATOR CẬP NHẬT TÊN MỚI
+        // REFERRAL LINK GENERATOR
         function updateReferralLink() {
             const input = document.getElementById('refLinkInput');
             const addr = userWalletAddress ? userWalletAddress : "CONNECT_WALLET";
