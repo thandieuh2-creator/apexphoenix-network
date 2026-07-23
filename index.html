@@ -172,9 +172,14 @@
                 </svg>
                 <span>APEX PHOENIX</span>
             </a>
-            <span class="badge bg-light text-primary fw-semibold" id="nodeStatusBadge">
-                <i class="pulse-icon me-1"></i> Seed Node Active
-            </span>
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm" id="walletBtn" onclick="toggleWalletConnect()">
+                    <i class="fa-solid fa-wallet me-1"></i> <span id="walletTxt">Connect Wallet</span>
+                </button>
+                <span class="badge bg-light text-primary fw-semibold d-none d-md-inline-block" id="nodeStatusBadge">
+                    <i class="pulse-icon me-1"></i> Seed Node Active
+                </span>
+            </div>
         </div>
     </nav>
 
@@ -268,7 +273,7 @@
                 </div>
             </div>
 
-            <!-- CHART NẾN NỀN ĐEN MT5 -->
+            <!-- BƯỚC 1: CHART NẾN MT5 NỀN ĐEN -->
             <div class="col-12">
                 <div class="card card-custom p-3 p-md-4" style="background-color: #0c101a; border-color: #1e293b;">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
@@ -294,6 +299,65 @@
                 </div>
             </div>
 
+            <!-- BƯỚC 3: TRÌNH ĐÀO WEB (WEB LIGHT MINER & CLAIM) -->
+            <div class="col-12">
+                <div class="card card-custom p-4 border-warning" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                        <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-microchip text-warning me-2"></i>APXC Web Light Miner Node</h5>
+                        <span class="badge bg-warning text-dark font-monospace px-3 py-2 rounded-pill">Browser Mining Protocol</span>
+                    </div>
+                    <div class="row g-3 text-center align-items-center">
+                        <div class="col-md-3">
+                            <div class="p-3 bg-white rounded-3 border">
+                                <small class="text-muted d-block">Node Hashrate</small>
+                                <span class="fw-bold text-primary fs-4" id="webHashrate">0.0 H/s</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3 bg-white rounded-3 border">
+                                <small class="text-muted d-block">Unclaimed APXC</small>
+                                <span class="fw-bold text-success fs-4" id="unclaimedReward">0.0000 APXC</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex flex-wrap justify-content-center gap-2">
+                            <button class="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm" id="startMiningBtn" onclick="toggleMining()">
+                                <i class="fa-solid fa-play me-2"></i> Start Web Mining
+                            </button>
+                            <button class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm" onclick="claimMinedTokens()">
+                                <i class="fa-solid fa-hand-holding-dollar me-2"></i> Claim APXC
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BƯỚC 2: TRÌNH TRA CỨU 10 KHỐI GẦN NHẤT (BLOCK EXPLORER TABLE) -->
+            <div class="col-12">
+                <div class="card card-custom p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-cubes me-2"></i>Recent Block Explorer</h5>
+                        <span class="badge bg-info-subtle text-info px-3 py-2 rounded-pill">1 Block / 60s</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0" style="font-size: 0.88rem;">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Block</th>
+                                    <th>Block Hash</th>
+                                    <th>Miner Node</th>
+                                    <th class="text-center">Tx</th>
+                                    <th class="text-end">Reward</th>
+                                    <th class="text-end">Age</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blockExplorerBody">
+                                <!-- DATA TỰ ĐỘNG SINH & CẬP NHẬT -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <!-- LATEST HASH & FOUNDER ADDRESS -->
             <div class="col-12">
                 <div class="card card-custom p-4">
@@ -306,6 +370,64 @@
                     <div class="d-flex justify-content-between align-items-center pt-2 border-top">
                         <small class="text-muted"><i class="fa-solid fa-key me-1"></i> Founder Address:</small>
                         <small class="font-monospace text-primary fw-semibold text-truncate ms-2" style="max-width: 400px;" id="founderAddr">APX355DC38C8ABA6691A1C4020510982B01B87F43A6</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BƯỚC 4: LỘ TRÌNH PHÁT TRIỂN (ROADMAP 2026) -->
+            <div class="col-12">
+                <div class="card card-custom p-4">
+                    <h5 class="fw-bold text-primary mb-4"><i class="fa-solid fa-route me-2"></i>Apex Phoenix Network Roadmap 2026</h5>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="p-3 border-start border-4 border-primary bg-light rounded-3 h-100">
+                                <span class="badge bg-primary mb-2">Q1 2026</span>
+                                <h6 class="fw-bold mb-1 text-dark">Genesis Seed Node</h6>
+                                <small class="text-muted">VPS Mining Engine, Tokenomics Allocation & Live Dashboard Explorer.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3 border-start border-4 border-info bg-light rounded-3 h-100">
+                                <span class="badge bg-info text-dark mb-2">Q2 2026</span>
+                                <h6 class="fw-bold mb-1 text-dark">EA Phoenix V24.14</h6>
+                                <small class="text-muted">MQL5 Bot Trading Integration, Light Node Mining & Mobile Web App.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3 border-start border-4 border-warning bg-light rounded-3 h-100">
+                                <span class="badge bg-warning text-dark mb-2">Q3 2026</span>
+                                <h6 class="fw-bold mb-1 text-dark">Testnet to Mainnet</h6>
+                                <small class="text-muted">DEX Liquidity Pool Setup, Public Node Staking & Smart Audit.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-3 border-start border-4 border-success bg-light rounded-3 h-100">
+                                <span class="badge bg-success mb-2">Q4 2026</span>
+                                <h6 class="fw-bold mb-1 text-dark">CEX Listing & Ecosystem</h6>
+                                <small class="text-muted">Market Maker Partnering, Exchange Listings & Yield Farming.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BƯỚC 5: CỘNG ĐỒNG & TẢI BOT EA PHOENIX V24.14 -->
+            <div class="col-12">
+                <div class="card card-custom p-4 text-center">
+                    <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-users me-2"></i>Join Community & Developer Tools</h5>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <button class="btn btn-dark px-4 py-2 rounded-pill shadow-sm" onclick="alert('Whitepaper APXC V24.14 PDF đang được chuẩn bị!')">
+                            <i class="fa-solid fa-file-pdf text-danger me-2"></i>Whitepaper PDF
+                        </button>
+                        <a href="https://github.com/thandieuh2-creator/apexphoenix-network" target="_blank" class="btn btn-dark px-4 py-2 rounded-pill shadow-sm">
+                            <i class="fa-brands fa-github me-2"></i>GitHub Repo
+                        </a>
+                        <button class="btn btn-primary px-4 py-2 rounded-pill shadow-sm" onclick="alert('Đang kết nối đến Kênh Telegram APXC Network...')">
+                            <i class="fa-brands fa-telegram me-2"></i>Telegram Group
+                        </button>
+                        <button class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm" onclick="alert('Đang tải file EA Flame Phoenix V24.14 cho MetaTrader...')">
+                            <i class="fa-solid fa-robot me-2"></i>Download Phoenix V24.14 EA
+                        </button>
                     </div>
                 </div>
             </div>
@@ -345,7 +467,7 @@
         <small>© 2026 Apex Phoenix Network. All Protocol Rules Reserved.</small>
     </footer>
 
-    <!-- SCRIPT FETCH DỮ LIỆU TỐI ƯU 5G TIMEOUT 6s -->
+    <!-- LIVE DATA FETCHING & COMPLETE APXC PROTOCOL ENGINE -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9033/";
         let consecutiveErrors = 0;
@@ -354,6 +476,13 @@
         
         let currentTimeframeSec = 60;
         let m1History = [];
+        
+        // WEB MINING ENGINE STATE
+        let isMining = false;
+        let miningInterval = null;
+        let currentHashrate = 0;
+        let unclaimedAPXC = 0.0000;
+        let isWalletConnected = false;
 
         function generateInitialSeedHistory(currentPrice) {
             const seedCount = 60;
@@ -483,10 +612,82 @@
         }
         setInterval(updateCountdown, 1000);
 
+        // BƯỚC 2: RENDER CẬP NHẬT 10 KHỐI GẦN NHẤT
+        function renderRecentBlocks(currentBlock, latestHash) {
+            const tbody = document.getElementById('blockExplorerBody');
+            if (!tbody || !currentBlock) return;
+
+            let html = '';
+            for (let i = 0; i < 10; i++) {
+                const blockNum = currentBlock - i;
+                const blockHash = (i === 0 && latestHash) ? latestHash : (Math.random().toString(16).substring(2, 10) + "..." + Math.random().toString(16).substring(2, 10)).toUpperCase();
+                const nodeAddr = i % 2 === 0 ? "APX...87F4" : "APX...3C1B";
+                const txCount = Math.floor(Math.random() * 8) + 1;
+                const reward = "12.5 APXC";
+                const age = (i * 60) === 0 ? "Just now" : `${i * 60}s ago`;
+
+                html += `
+                    <tr>
+                        <td class="fw-bold text-primary">#${blockNum}</td>
+                        <td class="font-monospace text-muted">${blockHash}</td>
+                        <td><span class="badge bg-light text-dark font-monospace">${nodeAddr}</span></td>
+                        <td class="text-center fw-semibold">${txCount}</td>
+                        <td class="text-end fw-bold text-success">${reward}</td>
+                        <td class="text-end text-muted small">${age}</td>
+                    </tr>
+                `;
+            }
+            tbody.innerHTML = html;
+        }
+
+        // BƯỚC 3: WEB MINING SIMULATION ENGINE
+        function toggleMining() {
+            const btn = document.getElementById('startMiningBtn');
+            if (!isMining) {
+                isMining = true;
+                btn.className = "btn btn-danger fw-bold px-4 py-2 rounded-pill shadow-sm";
+                btn.innerHTML = '<i class="fa-solid fa-stop me-2"></i> Stop Web Mining';
+                
+                miningInterval = setInterval(() => {
+                    currentHashrate = (12.5 + Math.random() * 4.5).toFixed(1);
+                    unclaimedAPXC += 0.0025;
+                    document.getElementById('webHashrate').innerText = currentHashrate + " H/s";
+                    document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
+                }, 1000);
+            } else {
+                isMining = false;
+                clearInterval(miningInterval);
+                currentHashrate = 0;
+                document.getElementById('webHashrate').innerText = "0.0 H/s";
+                btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm";
+                btn.innerHTML = '<i class="fa-solid fa-play me-2"></i> Start Web Mining';
+            }
+        }
+
+        function claimMinedTokens() {
+            if (unclaimedAPXC <= 0) {
+                alert("Bạn chưa có APXC để rút!");
+                return;
+            }
+            alert(`Đã Claim thành công ${unclaimedAPXC.toFixed(4)} APXC về ví!`);
+            unclaimedAPXC = 0.0000;
+            document.getElementById('unclaimedReward').innerText = "0.0000 APXC";
+        }
+
+        function toggleWalletConnect() {
+            const txt = document.getElementById('walletTxt');
+            if (!isWalletConnected) {
+                isWalletConnected = true;
+                txt.innerText = "0x71C...4f2B";
+            } else {
+                isWalletConnected = false;
+                txt.innerText = "Connect Wallet";
+            }
+        }
+
         async function fetchNodeData() {
             const targetUrl = RAW_NODE_API + "?_t=" + Date.now();
             
-            // DANH SÁCH PROXY MỚI TỐI ƯU 5G MOBILE
             const PROXIES = [
                 `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
                 `https://jsonp.afeld.me/?url=${encodeURIComponent(targetUrl)}`,
@@ -499,7 +700,6 @@
             for (const proxyUrl of PROXIES) {
                 try {
                     const controller = new AbortController();
-                    // TANG TIMEOUT LEN 6000ms (6 GIÂY) CHO MẠNG 5G
                     const timeoutId = setTimeout(() => controller.abort(), 6000);
                     
                     const response = await fetch(proxyUrl, { 
@@ -529,6 +729,9 @@
                 document.getElementById('founderBalance').innerText = data.founder_balance_apxc;
                 document.getElementById('latestHash').innerText = data.latest_hash;
                 document.getElementById('founderAddr').innerText = data.founder_address;
+
+                // RENDER BLOCK EXPLORER TABLE
+                renderRecentBlocks(data.current_block, data.latest_hash);
 
                 if (data.ohlc) {
                     document.getElementById('apxcPrice').innerText = "$" + data.ohlc.close.toFixed(4) + " USDT";
@@ -560,7 +763,6 @@
                 document.getElementById('nodeStatusBadge').innerHTML = '<i class="pulse-icon me-1"></i> Seed Node Active';
             } else {
                 consecutiveErrors++;
-                // NÂNG LÊN 5 LẦN LỖI MỚI CHUYỂN BÁO VÀNG
                 if (consecutiveErrors >= 5) {
                     document.getElementById('nodeStatusBadge').className = "badge bg-warning text-dark fw-semibold";
                     document.getElementById('nodeStatusBadge').innerHTML = '<i class="fa-solid fa-triangle-exclamation me-1"></i> Connecting Node...';
