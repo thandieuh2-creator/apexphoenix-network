@@ -597,14 +597,14 @@
                 </div>
             </div>
 
-            <!-- MỤC CỘNG ĐỒNG VÀ NÚT BẤM (ĐÃ HOÀN THIỆN ĐẦY ĐỦ LINK VÀ MODAL) -->
+            <!-- MỤC CỘNG ĐỒNG VÀ NÚT BẤM (ĐÃ TRỎ CHUẨN SANG whitepaper.html) -->
             <div class="col-12">
                 <div class="card card-custom p-4 text-center">
                     <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-users me-2"></i>Join Community & Web3 Tools</h5>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <!-- 1. WHITEPAPER PDF -->
-                        <a href="./Apex_Phoenix_APXC_Whitepaper_V24.14.pdf" target="_blank" class="btn btn-dark px-4 py-2 rounded-pill shadow-sm">
-                            <i class="fa-solid fa-file-pdf text-danger me-2"></i>Whitepaper PDF
+                        <!-- 1. WHITEPAPER HTML TRỰC TIẾP -->
+                        <a href="./whitepaper.html" class="btn btn-dark px-4 py-2 rounded-pill shadow-sm">
+                            <i class="fa-solid fa-file-lines text-warning me-2"></i>Whitepaper
                         </a>
 
                         <!-- 2. GITHUB REPO -->
@@ -612,12 +612,12 @@
                             <i class="fa-brands fa-github me-2"></i>GitHub Repo
                         </a>
 
-                        <!-- 3. TELEGRAM GROUP (MỞ MODAL SANG XIN) -->
+                        <!-- 3. TELEGRAM GROUP -->
                         <button class="btn btn-primary px-4 py-2 rounded-pill shadow-sm" onclick="openTelegramModal()">
                             <i class="fa-brands fa-telegram me-2"></i>Telegram Group
                         </button>
 
-                        <!-- 4. INSTALL WEB APP PWA (MỞ MODAL HƯỚNG DẪN CÀI APP) -->
+                        <!-- 4. INSTALL WEB APP PWA -->
                         <button class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm" onclick="triggerPwaInstall()">
                             <i class="fa-solid fa-mobile-screen-button me-2"></i>Install Web App (PWA)
                         </button>
@@ -671,7 +671,7 @@
         </div>
     </div>
 
-    <!-- MODAL 3: TELEGRAM COMMUNITY -->
+    <!-- MODAL TELEGRAM COMMUNITY -->
     <div class="modal fade" id="telegramModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -694,7 +694,7 @@
         </div>
     </div>
 
-    <!-- MODAL 4: INSTALL WEB APP (PWA INSTRUCTIONS) -->
+    <!-- MODAL INSTALL WEB APP PWA -->
     <div class="modal fade" id="pwaInstallModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -777,7 +777,6 @@
         let userWalletAddress = null;
         let deferredPrompt = null;
 
-        // BẮT SỰ KIỆN PWA TRÊN ANDROID/CHROME
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
@@ -892,7 +891,6 @@
             updateLockupBoostDisplay();
         }
 
-        // CHỨC NĂNG COPY SMART CONTRACT & IMPORT VÍ 1-CLICK
         function copyTokenContractAddress() {
             const input = document.getElementById('contractAddrInput');
             input.select();
@@ -925,7 +923,6 @@
             }
         }
 
-        // LÔ-GÍC KẾT NỐI VÍ
         async function toggleWalletConnect() {
             const txt = document.getElementById('walletTxt');
             const btn = document.getElementById('walletBtn');
@@ -968,7 +965,6 @@
             if(modalObj) modalObj.hide();
         }
 
-        // KHÓA COIN STAKING
         let stakedAPXC = 0.00;
         let earnedYieldVal = 0.0000;
         let currentLockBoost = 0.30;
@@ -1016,7 +1012,6 @@
             document.getElementById('earnedYield').innerText = "0.0000 APXC";
         }
 
-        // REFERRAL LINK GENERATOR
         function updateReferralLink() {
             const input = document.getElementById('refLinkInput');
             const addr = userWalletAddress ? userWalletAddress : "CONNECT_WALLET";
@@ -1041,7 +1036,6 @@
             }
         }
 
-        // MINING CALCULATOR
         function updateCalculator() {
             const hours = parseInt(document.getElementById('calcRange').value);
             let durationText = hours + " Hours";
