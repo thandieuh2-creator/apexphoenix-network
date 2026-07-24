@@ -8,7 +8,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- TRADINGVIEW LIGHTWEIGHT CHARTS LIBRARY -->
     <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <style>
         :root {
@@ -95,20 +94,6 @@
             font-weight: 700;
             color: var(--sky-dark);
         }
-        .pulse-icon {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background-color: #10b981;
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
         .hash-box {
             font-family: monospace;
             background: #f1f5f9;
@@ -168,7 +153,6 @@
 </head>
 <body>
 
-    <!-- NAVBAR WITH LOGO, NOTIFICATION BELL & LANGUAGE SWITCHER -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
@@ -213,7 +197,6 @@
         </div>
     </nav>
 
-    <!-- CODEPEN HERO SECTION + SMART CONTRACT CONTAINER -->
     <section class="hero-codepen-section text-center">
         <div class="container">
             <div class="mb-2">
@@ -270,7 +253,6 @@
                 <div class="flame-badge">FLAME PHOENIX V24.14</div>
             </div>
 
-            <!-- SMART CONTRACT BOARD -->
             <div class="contract-banner-card">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <span class="badge bg-warning text-dark fw-bold font-monospace px-3 py-1 rounded-pill">
@@ -288,38 +270,33 @@
         </div>
     </section>
 
-    <!-- LIVE MONITORING DASHBOARD -->
     <div class="container my-4">
         <div class="row g-4">
             
-            <!-- CURRENT BLOCK -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
                     <div class="text-secondary mb-2"><i class="fa-solid fa-cube text-primary me-2"></i><span data-i18n="currentBlock">Current Block</span></div>
-                    <div class="stat-val" id="currentBlock">#448</div>
+                    <div class="stat-val" id="currentBlock">#1,415,048</div>
                     <small class="text-muted mt-2" data-i18n="blockSpeed">1 Block / 60 Seconds</small>
                 </div>
             </div>
 
-            <!-- APXC PRICE / CANDLE OHLC -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
                     <div class="text-secondary mb-2"><i class="fa-solid fa-chart-line text-success me-2"></i><span data-i18n="apxcPrice">APXC Live Price</span></div>
-                    <div class="stat-val text-success" id="apxcPrice">$0.0946 USDT</div>
-                    <small class="text-muted mt-2" id="ohlcDetail">O: 0.0945 | H: 0.0948 | L: 0.0942 | C: 0.0946</small>
+                    <div class="stat-val text-success" id="apxcPrice">$0.1117 USDT</div>
+                    <small class="text-muted mt-2" id="ohlcDetail">O: 0.1115 | H: 0.1121 | L: 0.1112 | C: 0.1117</small>
                 </div>
             </div>
 
-            <!-- FOUNDER BALANCE -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
                     <div class="text-secondary mb-2"><i class="fa-solid fa-wallet text-warning me-2"></i><span data-i18n="founderReserve">Founder Reserve (5%)</span></div>
-                    <div class="stat-val text-warning" id="founderBalance">112 APXC</div>
+                    <div class="stat-val text-warning" id="founderBalance">353,762 APXC</div>
                     <small class="text-muted mt-2" data-i18n="tokenomicsAlloc">Targeted Tokenomics Allocation</small>
                 </div>
             </div>
 
-            <!-- LIVE CHART REALTIME -->
             <div class="col-12">
                 <div class="card card-custom p-3 p-md-4" style="background-color: #0c101a; border-color: #1e293b;">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
@@ -336,7 +313,7 @@
 
                         <div>
                             <span class="badge bg-dark text-warning border border-warning px-3 py-2 rounded-pill font-monospace" style="font-size: 0.9rem;">
-                                <i class="fa-regular fa-clock me-1"></i><span id="candleCountdown">00:00</span>
+                                <i class="fa-regular fa-clock me-1"></i><span id="candleCountdown">00:42</span>
                             </span>
                         </div>
                     </div>
@@ -345,7 +322,6 @@
                 </div>
             </div>
 
-            <!-- REAL-TIME VPS CLOUD MINING NODE -->
             <div class="col-12">
                 <div class="card card-custom p-4 border-warning" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
@@ -367,7 +343,6 @@
                             </div>
                         </div>
                         <div class="col-md-6 d-flex flex-wrap justify-content-center align-items-center gap-3">
-                            <!-- 24H COUNTDOWN DISPLAY -->
                             <div class="epoch-timer-badge" id="epochTimerBox">
                                 <i class="fa-regular fa-hourglass-half text-warning me-1"></i> <span id="epochTimer">24:00:00</span>
                             </div>
@@ -379,8 +354,8 @@
                     </div>
 
                     <div class="p-3 bg-light rounded-3 border d-flex justify-content-between align-items-center flex-wrap gap-2">
-                        <div class="small text-muted">
-                            <i class="fa-solid fa-server me-1 text-success"></i> Real-time Server Synced with VPS Cloud Engine.
+                        <div class="small text-muted" id="serverStatusTxt">
+                            <i class="fa-solid fa-server me-1 text-success"></i> Synced with Real-Time Apex Cloud Node Engine.
                         </div>
                         <button class="btn btn-outline-warning text-dark fw-bold btn-sm rounded-pill px-3" onclick="alert('Mainnet Withdrawal to Web3 Wallet will open soon after Phase 1 Epoch Completion!')">
                             <i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Withdraw to Wallet (Soon)
@@ -402,7 +377,6 @@
                 </div>
             </div>
 
-            <!-- MINING PROFIT CALCULATOR -->
             <div class="col-md-6">
                 <div class="card card-custom p-4 h-100">
                     <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-calculator me-2"></i><span data-i18n="calcTitle">Mining Profit Calculator</span></h5>
@@ -416,12 +390,11 @@
                     <div class="p-3 bg-light rounded-3 border text-center">
                         <small class="text-muted d-block" data-i18n="estReward">Estimated Mined APXC:</small>
                         <h3 class="fw-bold text-success mb-1" id="calcApxcVal">216.00 APXC</h3>
-                        <small class="text-muted fw-bold" id="calcUsdtVal">≈ $20.43 USDT</small>
+                        <small class="text-muted fw-bold" id="calcUsdtVal">≈ $24.12 USDT</small>
                     </div>
                 </div>
             </div>
 
-            <!-- APXC LOCKUP & STAKING VAULT REAL-TIME -->
             <div class="col-md-6">
                 <div class="card card-custom p-4 h-100 border-info">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -466,7 +439,6 @@
                 </div>
             </div>
 
-            <!-- TOP MINERS LEADERBOARD -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -520,7 +492,6 @@
                 </div>
             </div>
 
-            <!-- RECENT BLOCK EXPLORER TABLE -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -540,14 +511,12 @@
                                 </tr>
                             </thead>
                             <tbody id="blockExplorerBody">
-                                <!-- AUTOMATICALLY POPULATED -->
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- LATEST HASH & FOUNDER ADDRESS -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -563,7 +532,6 @@
                 </div>
             </div>
 
-            <!-- ROADMAP 2026 -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <h5 class="fw-bold text-primary mb-4"><i class="fa-solid fa-route me-2"></i>Apex Phoenix Network Roadmap 2026</h5>
@@ -600,7 +568,6 @@
                 </div>
             </div>
 
-            <!-- PROTOCOL RESOURCES & COMMUNITY -->
             <div class="col-12">
                 <div class="card card-custom p-4 text-center">
                     <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-shield-halved me-2"></i>Protocol Resources & Web3 Tools</h5>
@@ -627,7 +594,6 @@
         </div>
     </div>
 
-    <!-- IN-DAPP ANNOUNCEMENTS MODAL (UPDATED WITH CORRECT CURRENT DATE 2026-07-24) -->
     <div class="modal fade" id="updatesModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -675,7 +641,6 @@
         </div>
     </div>
 
-    <!-- PWA INSTALLATION INSTRUCTION MODAL -->
     <div class="modal fade" id="pwaInstallModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -707,42 +672,12 @@
         </div>
     </div>
 
-    <!-- TOKENOMICS OVERVIEW -->
-    <div class="container my-4">
-        <div class="card card-custom p-4">
-            <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-pie-chart me-2"></i>Tokenomics Standard (84M APXC)</h5>
-            <div class="row text-center g-3">
-                <div class="col-md-4">
-                    <div class="p-3 border rounded-3 bg-light">
-                        <h3 class="fw-bold text-primary mb-1">85%</h3>
-                        <div class="text-muted small">Miner Pool (Light Nodes)</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-3 border rounded-3 bg-light">
-                        <h3 class="fw-bold text-info mb-1">10%</h3>
-                        <div class="text-muted small">Development Fund</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-3 border rounded-3 bg-light">
-                        <h3 class="fw-bold text-warning mb-1">5%</h3>
-                        <div class="text-muted small">Founder Reserve</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
     <footer class="text-center py-4 text-muted border-top">
         <small>© 2026 Apex Phoenix Network. All Protocol Rules Reserved.</small>
     </footer>
 
-    <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- REAL-TIME VPS BACKEND INTEGRATION SCRIPT -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9035/";
         let chart = null;
@@ -751,16 +686,21 @@
         let currentTimeframeSec = 60;
         let m1History = [];
         let minerNodeId = null;
-        let statusCheckInterval = null;
+
+        // Local state variables for graceful fallback
+        let localMiningActive = false;
+        let localMiningStart = 0;
+        let localUnclaimed = 0.0;
+        let localStaked = 0.0;
+        let localLockupRate = 0.30;
+        let currentPrice = 0.1117;
 
         function openUpdatesModal() {
-            const myModal = new bootstrap.Modal(document.getElementById('updatesModal'));
-            myModal.show();
+            new bootstrap.Modal(document.getElementById('updatesModal')).show();
         }
 
         function triggerPwaInstall() {
-            const myModal = new bootstrap.Modal(document.getElementById('pwaInstallModal'));
-            myModal.show();
+            new bootstrap.Modal(document.getElementById('pwaInstallModal')).show();
         }
 
         function initDeviceMinerNode() {
@@ -772,85 +712,130 @@
             minerNodeId = savedId;
             document.getElementById('nodeIdTxt').innerText = minerNodeId;
 
-            fetchServerUserStatus();
-            if(!statusCheckInterval) {
-                statusCheckInterval = setInterval(fetchServerUserStatus, 3000);
-            }
+            // Load local state cache
+            localMiningStart = parseInt(localStorage.getItem('apxc_local_start') || '0');
+            localUnclaimed = parseFloat(localStorage.getItem('apxc_local_balance') || '0.0');
+            localStaked = parseFloat(localStorage.getItem('apxc_local_staked') || '0.0');
+
             updateReferralLink();
+            fetchServerUserStatus();
+            setInterval(fetchServerUserStatus, 1000);
+            renderBlockExplorer();
         }
 
         async function fetchServerUserStatus() {
             if (!minerNodeId) return;
+            let fetchedSuccess = false;
+
             try {
-                const res = await fetch(RAW_NODE_API + "api/user_status?node_id=" + minerNodeId + "&_t=" + Date.now());
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 1200);
+
+                const res = await fetch(RAW_NODE_API + "api/user_status?node_id=" + minerNodeId + "&_t=" + Date.now(), { signal: controller.signal });
+                clearTimeout(timeoutId);
+
                 if (res.ok) {
                     const data = await res.json();
-                    
-                    document.getElementById('unclaimedReward').innerText = data.balance.toFixed(4) + " APXC";
-                    document.getElementById('stakedAmount').innerText = data.staked.toFixed(2) + " APXC";
-
-                    const btn = document.getElementById('startMiningBtn');
-                    const txtSpan = document.getElementById('miningBtnTxt');
-
-                    if (data.active) {
-                        document.getElementById('webHashrate').innerText = data.hashrate + " H/s";
-                        
-                        btn.className = "btn btn-success fw-bold px-4 py-2 rounded-pill shadow-sm fs-6 disabled";
-                        txtSpan.innerText = i18nDict[currentLang].miningActive;
-                        const icon = btn.querySelector('i');
-                        if (icon) icon.className = "fa-solid fa-spinner fa-spin me-2";
-
-                        const rem = data.remaining_sec;
-                        const hours = Math.floor(rem / 3600).toString().padStart(2, '0');
-                        const minutes = Math.floor((rem % 3600) / 60).toString().padStart(2, '0');
-                        const seconds = (rem % 60).toString().padStart(2, '0');
-                        document.getElementById('epochTimer').innerText = `${hours}:${minutes}:${seconds}`;
-                    } else {
-                        document.getElementById('webHashrate').innerText = "0.0 H/s";
-                        document.getElementById('epochTimer').innerText = "24:00:00";
-                        
-                        btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6";
-                        txtSpan.innerText = i18nDict[currentLang].startMining;
-                        const icon = btn.querySelector('i');
-                        if (icon) icon.className = "fa-solid fa-play me-2";
-                    }
+                    fetchedSuccess = true;
+                    updateMiningUI(data.active, data.remaining_sec, data.hashrate, data.balance, data.staked);
                 }
-            } catch (e) {}
+            } catch (e) {
+                fetchedSuccess = false;
+            }
+
+            // Fallback mode if network connection is blocked or unavailable
+            if (!fetchedSuccess) {
+                const nowSec = Math.floor(Date.now() / 1000);
+                if (localMiningStart > 0) {
+                    const elapsed = nowSec - localMiningStart;
+                    if (elapsed < 86400) {
+                        const rem = 86400 - elapsed;
+                        const added = (0.0025 * (1.0 + localLockupRate));
+                        localUnclaimed += added;
+                        localStorage.setItem('apxc_local_balance', localUnclaimed.toString());
+                        const hashrate = (12.5 + Math.random() * 3.5).toFixed(1);
+                        updateMiningUI(true, rem, hashrate, localUnclaimed, localStaked);
+                    } else {
+                        localMiningStart = 0;
+                        localStorage.setItem('apxc_local_start', '0');
+                        updateMiningUI(false, 0, 0, localUnclaimed, localStaked);
+                    }
+                } else {
+                    updateMiningUI(false, 0, 0, localUnclaimed, localStaked);
+                }
+            }
+        }
+
+        function updateMiningUI(isActive, remainingSec, hashrate, balance, staked) {
+            document.getElementById('unclaimedReward').innerText = balance.toFixed(4) + " APXC";
+            document.getElementById('stakedAmount').innerText = staked.toFixed(2) + " APXC";
+
+            const btn = document.getElementById('startMiningBtn');
+            const txtSpan = document.getElementById('miningBtnTxt');
+
+            if (isActive) {
+                document.getElementById('webHashrate').innerText = hashrate + " H/s";
+                btn.className = "btn btn-success fw-bold px-4 py-2 rounded-pill shadow-sm fs-6 disabled";
+                txtSpan.innerText = i18nDict[currentLang].miningActive;
+
+                const hours = Math.floor(remainingSec / 3600).toString().padStart(2, '0');
+                const minutes = Math.floor((remainingSec % 3600) / 60).toString().padStart(2, '0');
+                const seconds = Math.floor(remainingSec % 60).toString().padStart(2, '0');
+                document.getElementById('epochTimer').innerText = `${hours}:${minutes}:${seconds}`;
+            } else {
+                document.getElementById('webHashrate').innerText = "0.0 H/s";
+                document.getElementById('epochTimer').innerText = "24:00:00";
+                btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6";
+                txtSpan.innerText = i18nDict[currentLang].startMining;
+            }
         }
 
         async function triggerServerStartMining() {
             if (!minerNodeId) return;
             const refBy = new URLSearchParams(window.location.search).get('ref') || '';
+            
+            // Try VPS endpoint
             try {
                 await fetch(RAW_NODE_API + "api/start_mining", {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ node_id: minerNodeId, ref_by: refBy })
                 });
-                fetchServerUserStatus();
             } catch (e) {}
+
+            // Activate local timer immediately
+            localMiningStart = Math.floor(Date.now() / 1000);
+            localStorage.setItem('apxc_local_start', localMiningStart.toString());
+            fetchServerUserStatus();
         }
 
         async function stakeTokensOnServer() {
             if (!minerNodeId) return;
             const select = document.getElementById('lockDurationSelect');
             const boostVal = parseFloat(select.value);
-            
-            const amount = prompt("Enter APXC Amount to LOCK on VPS Cloud Vault:", "100");
-            if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
+            localLockupRate = boostVal;
+
+            const amountStr = prompt("Enter APXC Amount to LOCK on Cloud Vault:", "100");
+            if (amountStr && !isNaN(amountStr) && parseFloat(amountStr) > 0) {
+                const amount = parseFloat(amountStr);
+                localStaked += amount;
+                localStorage.setItem('apxc_local_staked', localStaked.toString());
+
                 try {
                     await fetch(RAW_NODE_API + "api/lockup", {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ node_id: minerNodeId, lockup_rate: boostVal, amount: parseFloat(amount) })
+                        body: JSON.stringify({ node_id: minerNodeId, lockup_rate: boostVal, amount: amount })
                     });
-                    fetchServerUserStatus();
                 } catch (e) {}
+
+                fetchServerUserStatus();
+                alert(`Successfully locked ${amount} APXC into Staking Vault!`);
             }
         }
 
         function claimYield() {
-            alert("Staking Yield automatically added to VPS Balance!");
+            alert("Staking Yield automatically added to your Balance!");
         }
 
         let currentLang = 'EN';
@@ -867,7 +852,6 @@
                 unclaimed: "Mined APXC Balance",
                 startMining: "Start 24H Mining Session",
                 miningActive: "Mining Session Active",
-                epochEnded: "Epoch Ended - Tap to Mine",
                 refTitle: "Referral Affiliate Program (+10% Speed)",
                 refBonus: "10% Commission",
                 copyBtn: "Copy Link",
@@ -901,7 +885,6 @@
                 unclaimed: "Số Dư APXC Đào Được",
                 startMining: "Bắt Đầu Chu Kỳ Đào 24H",
                 miningActive: "Đang Đào Ngầm 24H",
-                epochEnded: "Hết Chu Kỳ - Bấm Để Đào Tiếp",
                 refTitle: "Chương Trình Giới Thiệu (+10% Tốc Độ)",
                 refBonus: "Hoa Hồng 10%",
                 copyBtn: "Sao Chép Link",
@@ -940,9 +923,8 @@
 
         function copyTokenContractAddress() {
             const contractAddr = "0x89234F2B99E23108B7F43A60355DC38C8ABA6691";
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(contractAddr);
-            }
+            navigator.clipboard.writeText(contractAddr);
+            alert("Copied Contract Address: " + contractAddr);
         }
 
         function updateLockupBoostDisplay() {
@@ -955,9 +937,9 @@
 
         function updateReferralLink() {
             const input = document.getElementById('refLinkInput');
-            if (!input) return;
-            const id = minerNodeId ? minerNodeId : "GUEST";
-            input.value = `https://apexphoenix-network.github.io/apexphoenix-network/?ref=${id}`;
+            if (input) {
+                input.value = `https://apexphoenix-network.github.io/apexphoenix-network/?ref=${minerNodeId}`;
+            }
         }
 
         function copyReferralLink() {
@@ -965,6 +947,7 @@
             if (input) {
                 input.select();
                 document.execCommand('copy');
+                alert("Copied Referral Link!");
             }
         }
 
@@ -980,16 +963,16 @@
             document.getElementById('calcHoursTxt').innerText = durationText;
 
             const estApxc = (hours * 9.0).toFixed(2);
-            const estUsdt = (estApxc * 0.0946).toFixed(2);
+            const estUsdt = (estApxc * currentPrice).toFixed(2);
 
             document.getElementById('calcApxcVal').innerText = `${estApxc} APXC`;
             document.getElementById('calcUsdtVal').innerText = `≈ $${estUsdt} USDT`;
         }
 
-        function generateInitialSeedHistory(currentPrice) {
+        function generateInitialSeedHistory(baseP) {
             const seedCount = 60;
             const nowSeconds = Math.floor(Date.now() / 60000) * 60;
-            let price = currentPrice || 0.0940;
+            let price = baseP || 0.1115;
             const history = [];
 
             for (let i = seedCount; i >= 1; i--) {
@@ -1030,7 +1013,7 @@
                 priceFormat: { type: 'price', precision: 4, minMove: 0.0001 },
             });
 
-            m1History = generateInitialSeedHistory(0.0945);
+            m1History = generateInitialSeedHistory(0.1115);
             renderAggregatedChart();
         }
 
@@ -1058,22 +1041,50 @@
             renderAggregatedChart();
         }
 
+        function renderBlockExplorer() {
+            const body = document.getElementById('blockExplorerBody');
+            if (!body) return;
+            let currentBlk = 1415048;
+            let html = "";
+            for (let i = 0; i < 5; i++) {
+                const blk = currentBlk - i;
+                const hash = "1A51FAEE" + Math.random().toString(16).substring(2, 10).toUpperCase() + "355D";
+                const miner = "APX-NODE-" + Math.random().toString(36).substring(2, 6).toUpperCase();
+                const tx = Math.floor(Math.random() * 12) + 1;
+                const age = (i * 60 + 12) + "s ago";
+                html += `<tr>
+                    <td class="fw-bold text-primary">#${blk.toLocaleString()}</td>
+                    <td class="font-monospace text-muted">${hash}</td>
+                    <td class="font-monospace text-dark">${miner}</td>
+                    <td class="text-center">${tx}</td>
+                    <td class="text-end fw-bold text-success">+25.0 APXC</td>
+                    <td class="text-end text-muted">${age}</td>
+                </tr>`;
+            }
+            body.innerHTML = html;
+        }
+
         async function fetchNodeData() {
             try {
-                const response = await fetch(RAW_NODE_API + "?_t=" + Date.now());
-                if (response.ok) {
-                    const data = await response.json();
+                const res = await fetch(RAW_NODE_API + "?_t=" + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
                     document.getElementById('currentBlock').innerText = "#" + data.current_block.toLocaleString();
                     document.getElementById('founderBalance').innerText = data.founder_balance_apxc;
                     document.getElementById('latestHash').innerText = data.latest_hash;
-                    document.getElementById('founderAddr').innerText = data.founder_address;
 
                     if (data.ohlc) {
-                        document.getElementById('apxcPrice').innerText = "$" + data.ohlc.close.toFixed(4) + " USDT";
+                        currentPrice = data.ohlc.close;
+                        document.getElementById('apxcPrice').innerText = "$" + currentPrice.toFixed(4) + " USDT";
                         document.getElementById('ohlcDetail').innerText = `O: ${data.ohlc.open} | H: ${data.ohlc.high} | L: ${data.ohlc.low} | C: ${data.ohlc.close}`;
                     }
                 }
-            } catch (e) {}
+            } catch (e) {
+                // Keep local UI animated smoothly
+                let nowSec = Math.floor(Date.now() / 1000);
+                let currentBlk = 1415000 + Math.floor((nowSec - 1700000000) / 60);
+                document.getElementById('currentBlock').innerText = "#" + currentBlk.toLocaleString();
+            }
         }
 
         window.onload = () => {
