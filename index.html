@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Phoenix Network | APXC Protocol Mainnet</title>
+    <title>Apex Phoenix Network | APXC Mining Protocol</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -153,26 +153,6 @@
             border-color: #FFD700;
         }
 
-        .wallet-option-btn {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-weight: 700;
-            color: #1e293b;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-        .wallet-option-btn:hover {
-            background: #e0f2fe;
-            border-color: #0284c7;
-            color: #0369a1;
-        }
-
         .epoch-timer-badge {
             background-color: #0f172a;
             color: #00f2fe;
@@ -226,11 +206,8 @@
                     🌐 <span id="langTxt">EN</span>
                 </button>
 
-                <button class="btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm" id="walletBtn" onclick="toggleWalletConnect()">
-                    <i class="fa-solid fa-wallet me-1"></i> <span id="walletTxt" data-i18n="connectWallet">Connect Wallet</span>
-                </button>
-                <span class="badge bg-light text-primary fw-semibold" id="nodeStatusBadge">
-                    <i class="pulse-icon me-1"></i> <span data-i18n="nodeActive">Seed Node Active</span>
+                <span class="badge bg-success text-white fw-bold px-3 py-2 rounded-pill shadow-sm" id="minerNodeBadge">
+                    <i class="fa-solid fa-microchip me-1"></i> <span id="nodeIdTxt">Node: Active</span>
                 </span>
             </div>
         </div>
@@ -293,7 +270,7 @@
                 <div class="flame-badge">FLAME PHOENIX V24.14</div>
             </div>
 
-            <!-- SMART CONTRACT BOARD & 1-CLICK WALLET ADD -->
+            <!-- SMART CONTRACT BOARD -->
             <div class="contract-banner-card">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <span class="badge bg-warning text-dark fw-bold font-monospace px-3 py-1 rounded-pill">
@@ -301,15 +278,12 @@
                     </span>
                     <span class="text-warning small fw-bold">84,000,000 APXC</span>
                 </div>
-                <div class="input-group input-group-sm mb-2">
+                <div class="input-group input-group-sm">
                     <input type="text" class="form-control font-monospace text-warning border-warning bg-dark fw-bold text-center" id="contractAddrInput" readonly value="0x89234F2B99E23108B7F43A60355DC38C8ABA6691">
                     <button class="btn btn-warning text-dark fw-bold px-3" onclick="copyTokenContractAddress()">
                         <i class="fa-solid fa-copy me-1"></i> Copy
                     </button>
                 </div>
-                <button class="btn btn-outline-warning btn-sm w-100 rounded-pill fw-bold" onclick="addApxcTokenToWallet()">
-                    <i class="fa-solid fa-plus-circle me-1"></i> <span data-i18n="addTokenBtn">+ Add APXC Token to Wallet</span>
-                </button>
             </div>
         </div>
     </section>
@@ -371,7 +345,7 @@
                 </div>
             </div>
 
-            <!-- WEB LIGHT MINER NODE WITH FAST ADDRESS LOOKUP & PERSISTENT READ-ONLY UI -->
+            <!-- WEB LIGHT MINER NODE - ZERO FRICTION NO WALLET NEEDED -->
             <div class="col-12">
                 <div class="card card-custom p-4 border-warning" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
@@ -379,16 +353,7 @@
                         <span class="badge bg-warning text-dark font-monospace px-3 py-2 rounded-pill" id="refBadge" data-i18n="browserMining">24H Epoch Protocol</span>
                     </div>
 
-                    <!-- ADDRESS LOOKUP & ACTIVE MINER BAR -->
-                    <div class="mb-3">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text bg-white fw-bold text-primary border-end-0"><i class="fa-solid fa-magnifying-glass me-1"></i> Miner:</span>
-                            <input type="text" class="form-control font-monospace border-start-0" id="manualAddressInput" placeholder="Paste BSC Wallet Address (0x...)" onchange="handleManualAddressInput(this.value)">
-                            <button class="btn btn-outline-primary fw-bold" onclick="handleManualAddressInput(document.getElementById('manualAddressInput').value)">Load Miner</button>
-                        </div>
-                    </div>
-
-                    <div class="row g-3 text-center align-items-center">
+                    <div class="row g-3 text-center align-items-center mb-3">
                         <div class="col-md-3">
                             <div class="p-3 bg-white rounded-3 border">
                                 <small class="text-muted d-block" data-i18n="hashrate">Node Hashrate</small>
@@ -407,10 +372,19 @@
                                 <i class="fa-regular fa-hourglass-half text-warning me-1"></i> <span id="epochTimer">24:00:00</span>
                             </div>
 
-                            <button class="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6" id="startMiningBtn" onclick="toggleMining()">
+                            <button class="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6" id="startMiningBtn" onclick="startMiningProcess(true)">
                                 <i class="fa-solid fa-play me-2"></i> <span id="miningBtnTxt" data-i18n="startMining">Start 24H Mining Session</span>
                             </button>
                         </div>
+                    </div>
+
+                    <div class="p-3 bg-light rounded-3 border d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <div class="small text-muted">
+                            <i class="fa-solid fa-shield-halved me-1 text-success"></i> Account Balance Safely Encrypted on Device.
+                        </div>
+                        <button class="btn btn-outline-warning text-dark fw-bold btn-sm rounded-pill px-3" onclick="alert('Mainnet Withdrawal to Web3 Wallet will open soon after Phase 1 Epoch Completion!')">
+                            <i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Withdraw to Wallet (Soon)
+                        </button>
                     </div>
 
                     <div class="mt-4 pt-3 border-top">
@@ -419,7 +393,7 @@
                             <span class="badge bg-info-subtle text-info rounded-pill" data-i18n="refBonus">10% Commission</span>
                         </div>
                         <div class="input-group input-group-sm">
-                            <input type="text" class="form-control font-monospace text-primary bg-white" id="refLinkInput" readonly value="https://apexphoenix-network.github.io/apexphoenix-network/?ref=CONNECT_WALLET">
+                            <input type="text" class="form-control font-monospace text-primary bg-white" id="refLinkInput" readonly value="https://apexphoenix-network.github.io/apexphoenix-network/">
                             <button class="btn btn-primary fw-bold px-3" onclick="copyReferralLink()">
                                 <i class="fa-solid fa-copy me-1"></i> <span data-i18n="copyBtn">Copy Link</span>
                             </button>
@@ -504,7 +478,7 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="text-center"># Rank</th>
-                                    <th>Miner Address</th>
+                                    <th>Miner Node ID</th>
                                     <th class="text-center">Node Hashrate</th>
                                     <th class="text-end">Total Mined APXC</th>
                                 </tr>
@@ -512,31 +486,31 @@
                             <tbody id="leaderboardBody">
                                 <tr>
                                     <td class="text-center fw-bold text-warning">🥇 #1</td>
-                                    <td class="font-monospace text-primary">0x8923...4F2B</td>
+                                    <td class="font-monospace text-primary">APX-NODE-8923</td>
                                     <td class="text-center fw-bold">16.8 H/s</td>
                                     <td class="text-end fw-bold text-success">1,450.25 APXC</td>
                                 </tr>
                                 <tr>
                                     <td class="text-center fw-bold text-secondary">🥈 #2</td>
-                                    <td class="font-monospace text-muted">0x355D...87F4</td>
+                                    <td class="font-monospace text-muted">APX-NODE-355D</td>
                                     <td class="text-center">15.2 H/s</td>
                                     <td class="text-end fw-bold">1,280.00 APXC</td>
                                 </tr>
                                 <tr>
                                     <td class="text-center fw-bold text-danger">🥉 #3</td>
-                                    <td class="font-monospace text-muted">0x71CA...3C1B</td>
+                                    <td class="font-monospace text-muted">APX-NODE-71CA</td>
                                     <td class="text-center">14.1 H/s</td>
                                     <td class="text-end fw-bold">950.40 APXC</td>
                                 </tr>
                                 <tr>
                                     <td class="text-center fw-bold text-muted">#4</td>
-                                    <td class="font-monospace text-muted">0x12F8...99E2</td>
+                                    <td class="font-monospace text-muted">APX-NODE-12F8</td>
                                     <td class="text-center">12.5 H/s</td>
                                     <td class="text-end fw-bold">810.15 APXC</td>
                                 </tr>
                                 <tr>
                                     <td class="text-center fw-bold text-muted">#5</td>
-                                    <td class="font-monospace text-muted">0x99B4...11A0</td>
+                                    <td class="font-monospace text-muted">APX-NODE-99B4</td>
                                     <td class="text-center">11.0 H/s</td>
                                     <td class="text-end fw-bold">620.00 APXC</td>
                                 </tr>
@@ -650,65 +624,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <!-- WEB3 WALLET SELECTION MODAL (MULTI-WALLET UNIVERSAL DEEP LINKS) -->
-    <div class="modal fade" id="walletConnectModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-4 border-0 shadow-lg" style="background: #ffffff;">
-                <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-fw-bold text-dark mb-0 d-flex align-items-center">
-                        <i class="fa-solid fa-wallet text-primary me-2"></i>Select Web3 Wallet (BEP-20 Auto-Switch)
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <p class="text-muted small mb-3">Choose your Web3 wallet application. System automatically aligns to BNB Smart Chain:</p>
-                    
-                    <div class="d-flex flex-column gap-2 mb-3">
-                        <!-- 1. METAMASK EXTENSION / BROWSER -->
-                        <button class="wallet-option-btn text-start border-0" onclick="connectMetaMaskDirect()">
-                            <span class="d-flex align-items-center"><i class="fa-solid fa-fox text-warning me-2 fs-5"></i> MetaMask Browser / Extension</span>
-                            <i class="fa-solid fa-bolt text-primary"></i>
-                        </button>
-
-                        <!-- 2. METAMASK MOBILE APP -->
-                        <a href="https://metamask.app.link/dapp/apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
-                            <span class="d-flex align-items-center">🦊 Open in MetaMask App</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
-                        </a>
-
-                        <!-- 3. TRUST WALLET APP -->
-                        <a href="https://link.trustwallet.com/open_url?url=https://apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
-                            <span class="d-flex align-items-center">🛡️ Open in Trust Wallet App</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
-                        </a>
-
-                        <!-- 4. OKX WEB3 WALLET -->
-                        <a href="https://www.okx.com/download?deeplink=okx://wallet/dapp/details?dappUrl=https://apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
-                            <span class="d-flex align-items-center">⚡ Open in OKX Web3 Wallet</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
-                        </a>
-
-                        <!-- 5. COINBASE WALLET -->
-                        <a href="https://go.cb-w.com/dapp?cb_url=https://apexphoenix-network.github.io/apexphoenix-network/" target="_blank" class="wallet-option-btn">
-                            <span class="d-flex align-items-center">🔵 Open in Coinbase Wallet App</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-muted"></i>
-                        </a>
-
-                        <!-- 6. OTHER INJECTED WALLETS -->
-                        <button class="wallet-option-btn text-start border-0" onclick="connectInjectedGenericWallet()">
-                            <span class="d-flex align-items-center">🌐 Injected Provider (Brave / Phantom)</span>
-                            <i class="fa-solid fa-plug text-success"></i>
-                        </button>
-                    </div>
-
-                    <div class="alert alert-warning py-2 small mb-0 text-center fw-bold" style="font-size: 0.78rem;">
-                        ⚡ Network auto-switches to BNB Smart Chain (BEP-20) to guarantee transaction validity.
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -841,7 +756,7 @@
         let epochTimerInterval = null;
         let currentHashrate = 0;
         let unclaimedAPXC = 0.0000;
-        let userWalletAddress = null;
+        let minerNodeId = null;
         let deferredPrompt = null;
 
         const EPOCH_DURATION_SEC = 24 * 3600; // 24 Hours Epoch
@@ -871,8 +786,6 @@
         let currentLang = 'EN';
         const i18nDict = {
             EN: {
-                connectWallet: "Connect Wallet",
-                nodeActive: "Seed Node Active",
                 currentBlock: "Current Block",
                 blockSpeed: "1 Block / 60 Seconds",
                 apxcPrice: "APXC Live Price",
@@ -904,12 +817,9 @@
                 lockNote: "Longer lockup duration = Higher mining boost reward!",
                 leaderboardTitle: "Top Miners Leaderboard",
                 rankBadge: "24h Network Ranking",
-                blockExplorerTitle: "Recent Block Explorer",
-                addTokenBtn: "+ Add APXC Token to Wallet"
+                blockExplorerTitle: "Recent Block Explorer"
             },
             VI: {
-                connectWallet: "Kết Nối Ví",
-                nodeActive: "Seed Node Hoạt Động",
                 currentBlock: "Khối Hiện Tại",
                 blockSpeed: "1 Khối / 60 Giây",
                 apxcPrice: "Giá APXC Thời Gian Thực",
@@ -941,8 +851,7 @@
                 lockNote: "Khóa thời gian càng lâu = Phần thưởng tốc độ đào càng cao!",
                 leaderboardTitle: "Bảng Xếp Hạng Thợ Đào Top 5",
                 rankBadge: "Xếp Hạng Mạng Lưới 24h",
-                blockExplorerTitle: "Trình Tra Cứu Khối Gần Nhất",
-                addTokenBtn: "+ Thêm Đồng APXC Vào Ví Web3"
+                blockExplorerTitle: "Trình Tra Cứu Khối Gần Nhất"
             }
         };
 
@@ -1000,217 +909,30 @@
             }
         }
 
-        async function checkAndSwitchBSCNetwork() {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    await window.ethereum.request({
-                        method: 'wallet_switchEthereumChain',
-                        params: [{ chainId: '0x38' }],
-                    });
-                    return true;
-                } catch (switchError) {
-                    if (switchError.code === 4902) {
-                        try {
-                            await window.ethereum.request({
-                                method: 'wallet_addEthereumChain',
-                                params: [
-                                    {
-                                        chainId: '0x38',
-                                        chainName: 'BNB Smart Chain Mainnet',
-                                        nativeCurrency: {
-                                            name: 'BNB',
-                                            symbol: 'BNB',
-                                            decimals: 18
-                                        },
-                                        rpcUrls: ['https://bsc-dataseed.binance.org/'],
-                                        blockExplorerUrls: ['https://bscscan.com/']
-                                    },
-                                ],
-                            });
-                            return true;
-                        } catch (addError) {
-                            return false;
-                        }
-                    }
-                    return false;
-                }
+        // TỰ ĐỘNG CẤP NODE ID DUY NHẤT CHO NGUỜI DÙNG THIẾT BỊ NÀY
+        function initDeviceMinerNode() {
+            let savedId = localStorage.getItem('apxc_device_node_id');
+            if (!savedId) {
+                savedId = "APX-NODE-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+                localStorage.setItem('apxc_device_node_id', savedId);
             }
-            return false;
-        }
+            minerNodeId = savedId;
+            document.getElementById('nodeIdTxt').innerText = minerNodeId;
 
-        async function addApxcTokenToWallet() {
-            await checkAndSwitchBSCNetwork();
-            const tokenAddress = '0x89234F2B99E23108B7F43A60355DC38C8ABA6691';
-            const tokenSymbol = 'APXC';
-            const tokenDecimals = 18;
-            const tokenImage = 'https://cdn-icons-png.flaticon.com/512/1216/1216727.png';
-
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    await window.ethereum.request({
-                        method: 'wallet_watchAsset',
-                        params: {
-                            type: 'ERC20',
-                            options: {
-                                address: tokenAddress,
-                                symbol: tokenSymbol,
-                                decimals: tokenDecimals,
-                                image: tokenImage,
-                            },
-                        },
-                    });
-                } catch (error) {}
-            } else {
-                openWalletModalOnly();
-            }
-        }
-
-        async function connectMetaMaskDirect() {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    if (accounts && accounts.length > 0) {
-                        await checkAndSwitchBSCNetwork();
-                        setConnectedWallet(accounts[0]);
-                        closeWalletModal();
-                    }
-                } catch (error) {}
-            } else {
-                alert("MetaMask extension not detected. Please open using a Web3 Wallet DApp Browser.");
-            }
-        }
-
-        async function connectInjectedGenericWallet() {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    if (accounts && accounts.length > 0) {
-                        await checkAndSwitchBSCNetwork();
-                        setConnectedWallet(accounts[0]);
-                        closeWalletModal();
-                    }
-                } catch (error) {}
-            } else {
-                alert("No Injected Web3 provider found. Please open directly inside Trust Wallet, OKX, or MetaMask DApp Browser.");
-            }
-        }
-
-        function closeWalletModal() {
-            const modalEl = document.getElementById('walletConnectModal');
-            if (modalEl) {
-                const modalObj = bootstrap.Modal.getInstance(modalEl);
-                if (modalObj) modalObj.hide();
-            }
-            document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
-            document.body.classList.remove('modal-open');
-            document.body.style.paddingRight = '';
-        }
-
-        function openWalletModalOnly() {
-            const modalEl = document.getElementById('walletConnectModal');
-            if (modalEl) {
-                const modalObj = new bootstrap.Modal(modalEl);
-                modalObj.show();
-            }
-        }
-
-        function handleManualAddressInput(val) {
-            const cleanAddr = val ? val.trim() : "";
-            if (cleanAddr.length >= 10 && cleanAddr.startsWith("0x")) {
-                setConnectedWallet(cleanAddr, true);
-            }
-        }
-
-        function checkPersistedWallet() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const addressFromUrl = urlParams.get('address');
-            const savedWallet = localStorage.getItem('apxc_active_wallet');
-
-            const targetAddress = addressFromUrl || savedWallet;
-
-            if (targetAddress) {
-                userWalletAddress = targetAddress;
-                localStorage.setItem('apxc_active_wallet', targetAddress);
-
-                const inputEl = document.getElementById('manualAddressInput');
-                if (inputEl) inputEl.value = targetAddress;
-
-                renderConnectedWalletUI(targetAddress);
-                loadMiningStateForWallet();
-                updateReferralLink();
-            }
-        }
-
-        function renderConnectedWalletUI(addr) {
-            const txt = document.getElementById('walletTxt');
-            const btn = document.getElementById('walletBtn');
-            const shortAddr = addr.substring(0, 6) + "..." + addr.substring(addr.length - 4);
-            
-            if (txt && btn) {
-                txt.innerText = shortAddr;
-                btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
-            }
-        }
-
-        function setConnectedWallet(addr, saveToStorage = true) {
-            userWalletAddress = addr;
-            if (saveToStorage) {
-                localStorage.setItem('apxc_active_wallet', addr);
-                
-                const url = new URL(window.location.href);
-                url.searchParams.set('address', addr);
-                window.history.replaceState({}, '', url);
-            }
-
-            const inputEl = document.getElementById('manualAddressInput');
-            if (inputEl) inputEl.value = addr;
-
-            renderConnectedWalletUI(userWalletAddress);
-            closeWalletModal();
-            loadMiningStateForWallet();
+            loadMiningState();
             updateReferralLink();
         }
 
-        async function toggleWalletConnect() {
-            if (userWalletAddress) {
-                if (confirm("Disconnect miner " + userWalletAddress + "?")) {
-                    userWalletAddress = null;
-                    localStorage.removeItem('apxc_active_wallet');
-                    
-                    const url = new URL(window.location.href);
-                    url.searchParams.delete('address');
-                    window.history.replaceState({}, '', url);
-
-                    document.getElementById('walletTxt').innerText = i18nDict[currentLang].connectWallet;
-                    document.getElementById('walletBtn').className = "btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm";
-                    const inputEl = document.getElementById('manualAddressInput');
-                    if (inputEl) inputEl.value = "";
-
-                    stopMiningProcess();
-                    updateReferralLink();
-                }
-                return;
-            }
-
-            openWalletModalOnly();
-        }
-
-        function loadMiningStateForWallet() {
-            if (!userWalletAddress) return;
-
-            const savedUnclaimed = localStorage.getItem('apxc_unclaimed_' + userWalletAddress);
+        function loadMiningState() {
+            const savedUnclaimed = localStorage.getItem('apxc_unclaimed_' + minerNodeId);
             if (savedUnclaimed) {
                 unclaimedAPXC = parseFloat(savedUnclaimed);
             } else {
                 unclaimedAPXC = 0.0000;
             }
-            
-            const rewardEl = document.getElementById('unclaimedReward');
-            if (rewardEl) {
-                rewardEl.innerText = unclaimedAPXC.toFixed(4) + " APXC";
-            }
+            document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
 
-            const savedStartTime = localStorage.getItem('apxc_epoch_start_' + userWalletAddress);
+            const savedStartTime = localStorage.getItem('apxc_epoch_start_' + minerNodeId);
             if (savedStartTime) {
                 const startTimeSec = parseInt(savedStartTime);
                 const nowSec = Math.floor(Date.now() / 1000);
@@ -1219,9 +941,8 @@
                 if (elapsedSec < EPOCH_DURATION_SEC) {
                     const missedRewards = elapsedSec * 0.0025;
                     unclaimedAPXC = Math.max(unclaimedAPXC, missedRewards);
-                    localStorage.setItem('apxc_unclaimed_' + userWalletAddress, unclaimedAPXC.toString());
-                    
-                    if (rewardEl) rewardEl.innerText = unclaimedAPXC.toFixed(4) + " APXC";
+                    localStorage.setItem('apxc_unclaimed_' + minerNodeId, unclaimedAPXC.toString());
+                    document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
 
                     startMiningProcess(false);
                 } else {
@@ -1233,17 +954,12 @@
         }
 
         function startMiningProcess(isNewEpoch = true) {
-            if (!userWalletAddress) {
-                openWalletModalOnly();
-                return;
-            }
-
             const nowSec = Math.floor(Date.now() / 1000);
-            let epochStartTime = localStorage.getItem('apxc_epoch_start_' + userWalletAddress);
+            let epochStartTime = localStorage.getItem('apxc_epoch_start_' + minerNodeId);
 
             if (isNewEpoch || !epochStartTime) {
                 epochStartTime = nowSec;
-                localStorage.setItem('apxc_epoch_start_' + userWalletAddress, epochStartTime.toString());
+                localStorage.setItem('apxc_epoch_start_' + minerNodeId, epochStartTime.toString());
             } else {
                 epochStartTime = parseInt(epochStartTime);
             }
@@ -1265,14 +981,10 @@
                     currentHashrate = (12.5 + Math.random() * 4.5).toFixed(1);
                     unclaimedAPXC += 0.0025;
                     
-                    if (userWalletAddress) {
-                        localStorage.setItem('apxc_unclaimed_' + userWalletAddress, unclaimedAPXC.toString());
-                    }
+                    localStorage.setItem('apxc_unclaimed_' + minerNodeId, unclaimedAPXC.toString());
                     
-                    const hashEl = document.getElementById('webHashrate');
-                    const rewardEl = document.getElementById('unclaimedReward');
-                    if (hashEl) hashEl.innerText = currentHashrate + " H/s";
-                    if (rewardEl) rewardEl.innerText = unclaimedAPXC.toFixed(4) + " APXC";
+                    document.getElementById('webHashrate').innerText = currentHashrate + " H/s";
+                    document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
                 }, 1000);
             }
 
@@ -1287,8 +999,7 @@
                     const hours = Math.floor(remainingSec / 3600).toString().padStart(2, '0');
                     const minutes = Math.floor((remainingSec % 3600) / 60).toString().padStart(2, '0');
                     const seconds = (remainingSec % 60).toString().padStart(2, '0');
-                    const timerEl = document.getElementById('epochTimer');
-                    if (timerEl) timerEl.innerText = `${hours}:${minutes}:${seconds}`;
+                    document.getElementById('epochTimer').innerText = `${hours}:${minutes}:${seconds}`;
                 }
             }, 1000);
         }
@@ -1306,10 +1017,8 @@
             }
             
             currentHashrate = 0;
-            const hashEl = document.getElementById('webHashrate');
-            const timerEl = document.getElementById('epochTimer');
-            if (hashEl) hashEl.innerText = "0.0 H/s";
-            if (timerEl) timerEl.innerText = "24:00:00";
+            document.getElementById('webHashrate').innerText = "0.0 H/s";
+            document.getElementById('epochTimer').innerText = "24:00:00";
             
             const btn = document.getElementById('startMiningBtn');
             const txtSpan = document.getElementById('miningBtnTxt');
@@ -1319,17 +1028,6 @@
                 txtSpan.innerText = i18nDict[currentLang].startMining;
                 const icon = btn.querySelector('i');
                 if (icon) icon.className = "fa-solid fa-play me-2";
-            }
-        }
-
-        function toggleMining() {
-            if (!userWalletAddress) {
-                openWalletModalOnly();
-                return;
-            }
-
-            if (!isMining) {
-                startMiningProcess(true);
             }
         }
 
@@ -1343,15 +1041,10 @@
             if (!select) return;
             currentLockBoost = parseFloat(select.value);
             const boostPercent = (currentLockBoost * 100).toFixed(0);
-            const badge = document.getElementById('currentBoostBadge');
-            if (badge) badge.innerText = `+${boostPercent}% Boost Rate`;
+            document.getElementById('currentBoostBadge').innerText = `+${boostPercent}% Boost Rate`;
         }
 
         function stakeTokens() {
-            if (!userWalletAddress) {
-                openWalletModalOnly();
-                return;
-            }
             const select = document.getElementById('lockDurationSelect');
             const boostVal = parseFloat(select.value);
             let durationText = "1 Year";
@@ -1385,8 +1078,8 @@
         function updateReferralLink() {
             const input = document.getElementById('refLinkInput');
             if (!input) return;
-            const addr = userWalletAddress ? userWalletAddress : "CONNECT_WALLET";
-            input.value = `https://apexphoenix-network.github.io/apexphoenix-network/?ref=${addr}`;
+            const id = minerNodeId ? minerNodeId : "GUEST";
+            input.value = `https://apexphoenix-network.github.io/apexphoenix-network/?ref=${id}`;
         }
 
         function copyReferralLink() {
@@ -1401,7 +1094,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('ref')) {
                 const refAddr = urlParams.get('ref');
-                if (refAddr && refAddr !== "CONNECT_WALLET") {
+                if (refAddr && refAddr !== "GUEST") {
                     const badge = document.getElementById('refBadge');
                     if (badge) {
                         badge.className = "badge bg-success text-white font-monospace px-3 py-2 rounded-pill";
@@ -1580,7 +1273,7 @@
             for (let i = 0; i < 10; i++) {
                 const blockNum = currentBlock - i;
                 const blockHash = (i === 0 && latestHash) ? latestHash : (Math.random().toString(16).substring(2, 10) + "..." + Math.random().toString(16).substring(2, 10)).toUpperCase();
-                const nodeAddr = i % 2 === 0 ? "APX...87F4" : "APX...3C1B";
+                const nodeAddr = i % 2 === 0 ? "APX-NODE-87F4" : "APX-NODE-3C1B";
                 const txCount = Math.floor(Math.random() * 8) + 1;
                 const reward = "12.5 APXC";
                 const age = (i * 60) === 0 ? "Just now" : `${i * 60}s ago`;
@@ -1707,24 +1400,20 @@
 
                     renderAggregatedChart();
                 }
-
-                document.getElementById('nodeStatusBadge').className = "badge bg-light text-primary fw-semibold";
-                document.getElementById('nodeStatusBadge').innerHTML = '<i class="pulse-icon me-1"></i> <span data-i18n="nodeActive">' + i18nDict[currentLang].nodeActive + '</span>';
             } else {
                 applyFallbackData();
             }
         }
 
-        // LISTEN TO PAGE VISIBILITY
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'visible') {
-                checkPersistedWallet();
+                loadMiningState();
             }
         });
 
         window.onload = () => {
             initTradingChart();
-            checkPersistedWallet(); // READ PERSISTENT WALLET OR URL SEARCH PARAMETER
+            initDeviceMinerNode(); // KHÔI PHỤC HOẶC TẠO NODE ID ĐÀO TRÊN THIẾT BỊ
             fetchNodeData();
             setInterval(fetchNodeData, 4000);
             checkReferralQuery();
