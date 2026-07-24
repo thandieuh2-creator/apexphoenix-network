@@ -1051,7 +1051,7 @@
                     });
                 } catch (error) {}
             } else {
-                toggleWalletConnect();
+                openWalletModalOnly();
             }
         }
 
@@ -1091,7 +1091,13 @@
             if(modalObj) modalObj.hide();
         }
 
-        // TỰ ĐỘNG KHÔI PHỤC KẾT NỐI VÍ NGẦM
+        function openWalletModalOnly() {
+            const modalEl = document.getElementById('walletConnectModal');
+            const modalObj = new bootstrap.Modal(modalEl);
+            modalObj.show();
+        }
+
+        // CHỈ KHÔI PHỤC VÍ VÀ TRẠNG THÁI NGẦM - TUYỆT ĐỐI KHÔNG BẬT MODAL
         function checkPersistedWallet() {
             const savedWallet = localStorage.getItem('apxc_active_wallet');
             if (savedWallet) {
@@ -1127,35 +1133,22 @@
             updateReferralLink();
         }
 
+        // BẤM NÚT CONNECT WALLET TRÊN THANH MENU MỚI BẬT MODAL CHỌN VÍ
         async function toggleWalletConnect() {
-            const txt = document.getElementById('walletTxt');
-            const btn = document.getElementById('walletBtn');
-            
             if (userWalletAddress) {
-                userWalletAddress = null;
-                localStorage.removeItem('apxc_active_wallet');
-                txt.innerText = i18nDict[currentLang].connectWallet;
-                btn.className = "btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm";
-                stopMiningProcess();
-                updateReferralLink();
+                // Đã kết nối ví -> Hỏi người dùng có muốn Ngắt kết nối không
+                if (confirm("Disconnect wallet " + userWalletAddress + "?")) {
+                    userWalletAddress = null;
+                    localStorage.removeItem('apxc_active_wallet');
+                    document.getElementById('walletTxt').innerText = i18nDict[currentLang].connectWallet;
+                    document.getElementById('walletBtn').className = "btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm";
+                    stopMiningProcess();
+                    updateReferralLink();
+                }
                 return;
             }
 
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    if (accounts && accounts.length > 0) {
-                        await checkAndSwitchBSCNetwork();
-                        setConnectedWallet(accounts[0]);
-                    }
-                } catch (error) {
-                    const walletModal = new bootstrap.Modal(document.getElementById('walletConnectModal'));
-                    walletModal.show();
-                }
-            } else {
-                const walletModal = new bootstrap.Modal(document.getElementById('walletConnectModal'));
-                walletModal.show();
-            }
+            openWalletModalOnly();
         }
 
         function loadMiningStateForWallet() {
@@ -1180,6 +1173,13 @@
                 const elapsedSec = nowSec - startTimeSec;
 
                 if (elapsedSec < EPOCH_DURATION_SEC) {
+                    // Tự động cộng bù toàn bộ coin đào ngầm trong lúc ẩn app
+                    const missedRewards = elapsedSec * 0.0025;
+                    unclaimedAPXC = Math.max(unclaimedAPXC, missedRewards);
+                    localStorage.setItem('apxc_unclaimed_' + userWalletAddress, unclaimedAPXC.toString());
+                    
+                    if (rewardEl) rewardEl.innerText = unclaimedAPXC.toFixed(4) + " APXC";
+
                     startMiningProcess(false);
                 } else {
                     stopMiningProcess();
@@ -1191,7 +1191,7 @@
 
         function startMiningProcess(isNewEpoch = true) {
             if (!userWalletAddress) {
-                toggleWalletConnect();
+                openWalletModalOnly();
                 return;
             }
 
@@ -1270,7 +1270,7 @@
 
         function toggleMining() {
             if (!userWalletAddress) {
-                toggleWalletConnect();
+                openWalletModalOnly();
                 return;
             }
 
@@ -1293,7 +1293,7 @@
 
         function stakeTokens() {
             if (!userWalletAddress) {
-                toggleWalletConnect();
+                openWalletModalOnly();
                 return;
             }
             const select = document.getElementById('lockDurationSelect');
@@ -1652,7 +1652,7 @@
             }
         }
 
-        // LẮNG NGHE SỰ KIỆN KHI THỢ ĐÀO BẤM MỞ LẠI TAB WEB DAPP
+        // TỰ ĐỘNG ĐỒNG BỘ DỮ LIỆU KHI MỞ LẠI TAB DAPP
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'visible') {
                 checkPersistedWallet();
@@ -1661,7 +1661,7 @@
 
         window.onload = () => {
             initTradingChart();
-            checkPersistedWallet(); // TỰ ĐỘNG KHÔI PHỤC VÍ VÀ ĐỒNG HỒ ĐÀO
+            checkPersistedWallet(); // KHÔI PHỤC VÍ VÀ SỐ DƯ TỰ ĐỘNG KHI LOAD TRANG
             fetchNodeData();
             setInterval(fetchNodeData, 4000);
             checkReferralQuery();
