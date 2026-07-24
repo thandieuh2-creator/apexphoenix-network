@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whitepaper | Apex Phoenix Network (APXC)</title>
+    <title>Whitepaper V24.14 | Apex Phoenix Network (APXC)</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -12,7 +12,7 @@
         :root {
             --sky-primary: #00a8ff;
             --sky-dark: #0077b6;
-            --sky-bg: #eef9ff;
+            --sky-bg: #f4f9fc;
             --card-bg: #ffffff;
             --text-main: #2c3e50;
             --codepen-bg: #111622;
@@ -23,47 +23,83 @@
             background-color: var(--sky-bg);
             color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
+            line-height: 1.8;
         }
         .navbar-sky {
             background: linear-gradient(135deg, #0077b6, #00a8ff);
             box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
         }
-        .hero-section {
+        .wp-header {
             background-color: var(--codepen-bg);
-            padding: 50px 0 40px;
-            color: #ffffff;
-            border-bottom: 3px solid #0077b6;
+            color: white;
+            padding: 60px 0 50px;
+            border-bottom: 4px solid #0077b6;
         }
         .apex-title-gold {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 5px;
             background: linear-gradient(180deg, #FFE066 0%, #FF8C00 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .paper-card {
-            background: var(--card-bg);
-            border: 1px solid #bae6fd;
+            background: white;
             border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 168, 255, 0.05);
-            padding: 35px;
-            margin-bottom: 30px;
+            border: 1px solid #bae6fd;
+            box-shadow: 0 10px 30px rgba(0,168,255,0.06);
+            padding: 40px;
+            margin-bottom: 35px;
         }
-        .section-heading {
+        .section-title {
             color: var(--sky-dark);
             font-weight: 800;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            border-bottom: 2px solid #e0f2fe;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
         }
-        .spec-box {
-            background-color: #f8fafc;
-            border-left: 4px solid var(--sky-primary);
-            padding: 15px 20px;
-            border-radius: 0 8px 8px 0;
-            margin: 15px 0;
+        .status-badge {
+            background-color: rgba(255, 200, 0, 0.15);
+            color: var(--gold-primary);
+            border: 1px solid var(--gold-primary);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        .birth-certificate-box {
+            background: linear-gradient(135deg, #111622 0%, #1e293b 100%);
+            border: 2px solid var(--gold-primary);
+            border-radius: 16px;
+            padding: 25px;
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(255, 200, 0, 0.15);
+        }
+        .timeline-box {
+            border-left: 3px solid var(--sky-primary);
+            padding-left: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .timeline-box::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--sky-primary);
+        }
+        .highlight-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--gold-primary);
+            padding: 18px 22px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -73,156 +109,196 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="./index.html">
-                <i class="fa-solid fa-fire text-warning me-2"></i>
-                <span>APEX PHOENIX</span>
+                <i class="fa-solid fa-fire-flame-curved text-warning me-2"></i>
+                <span>APEX PHOENIX NETWORK</span>
             </a>
-            <a href="./index.html" class="btn btn-light btn-sm fw-bold rounded-pill text-primary">
-                <i class="fa-solid fa-arrow-left me-1"></i> Back to DApp Dashboard
+            <a href="./index.html" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3">
+                <i class="fa-solid fa-arrow-left me-1"></i> Return to DApp Dashboard
             </a>
         </div>
     </nav>
 
-    <!-- HERO HEADER -->
-    <section class="hero-section text-center">
+    <!-- HEADER -->
+    <header class="wp-header text-center">
         <div class="container">
-            <div class="badge bg-warning text-dark fw-bold px-3 py-2 rounded-pill mb-2 font-monospace">PROTOCOL SPECIFICATION V24.14</div>
-            <h1 class="apex-title-gold mb-1">APEX PHOENIX TECHNICAL WHITEPAPER</h1>
-            <p class="text-warning font-monospace small">Lightweight Decentralized Browser Node Architecture & APXC Tokenomics</p>
-            <div class="text-muted small">Published: March 2026 | Network Standard: BEP-20 / Native Hybrid</div>
+            <span class="status-badge mb-3 d-inline-block">OFFICIAL WHITEPAPER V24.14 — UPDATED JULY 2026</span>
+            <div class="apex-title-gold">APEX PHOENIX NETWORK</div>
+            <p class="text-light lead fw-semibold mt-2">The Next-Generation Decentralized Light-Node Cloud Mining & Automated Yield Protocol</p>
         </div>
-    </section>
+    </header>
 
-    <!-- MAIN WHITEPAPER CONTENT -->
+    <!-- MAIN CONTENT -->
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-lg-10">
 
-                <!-- 1. EXECUTIVE SUMMARY -->
+                <!-- 1. EXECUTIVE SUMMARY & BRAND IDENTITY -->
                 <div class="paper-card">
-                    <h3 class="section-heading"><i class="fa-solid fa-book-open text-primary me-2"></i>1. Executive Summary</h3>
+                    <h3 class="section-title"><i class="fa-solid fa-feather-pointed text-warning me-2"></i>1. Tầm Nhìn & Triết Lý Thương Hiệu</h3>
                     <p>
-                        <strong>Apex Phoenix Network (APXC)</strong> introduces a next-generation lightweight decentralized framework designed to eliminate the barrier of energy-intensive mining hardware. By utilizing WebAssembly (WASM) and high-throughput Seed Node WebSocket consensus, APXC empowers every smartphone, tablet, and PC browser to operate as a functional <em>Light Mining Node</em>.
-                    </p>
-                    <p>
-                        The core mission of the protocol is to build a fair, energy-efficient, and censorship-resistant infrastructure capable of delivering real-time block telemetry and decentralized liquidity integration across Web3 ecosystems.
-                    </p>
-                </div>
-
-                <!-- 2. NETWORK ARCHITECTURE & CONSENSUS -->
-                <div class="paper-card">
-                    <h3 class="section-heading"><i class="fa-solid fa-network-wired text-primary me-2"></i>2. Network Architecture & Consensus</h3>
-                    <p>
-                        The protocol employs a hybrid consensus framework combining <strong>Proof-of-Capacity Light Mining (PoCLM)</strong> at the client side with dedicated <strong>VPS Seed Nodes</strong> serving as primary ledger anchors.
+                        Trong bối cảnh thị trường tiền mã hóa đang dịch chuyển mạnh mẽ từ các thuật toán khai thác tiêu tốn năng lượng (Proof-of-Work) sang các mô hình tối ưu cho người dùng cuối, <strong>Apex Phoenix Network (APXC)</strong> ra đời như một biểu tượng của sự tái sinh và bứt phá công nghệ.
                     </p>
                     
-                    <div class="spec-box font-monospace">
-                        <div><strong>Target Block Time:</strong> 60 Seconds per Block</div>
-                        <div><strong>Network Engine:</strong> Python SQLite High-Concurrency Pipeline</div>
-                        <div><strong>Data Pipeline:</strong> REST API / CORS / WebSocket Bridge</div>
-                        <div><strong>Persistence Storage:</strong> Append-Only Time-Series Candle Ledger</div>
+                    <div class="highlight-box">
+                        <h6 class="fw-bold text-dark mb-1"><i class="fa-solid fa-crown text-warning me-2"></i>Ý Nghĩa Tên Gọi: APEX PHOENIX</h6>
+                        <ul class="mb-0 small text-muted">
+                            <li><strong>APEX (Đỉnh Cao):</strong> Đại diện cho khát vọng chinh phục vị thế dẫn đầu trong hạ tầng Web3 Light-Node, mang đến hiệu năng khai thác đạt tốc độ và sự ổn định cao nhất.</li>
+                            <li><strong>PHOENIX (Chim Phượng Hoàng):</strong> Biểu tượng kinh điển của sức sống bất tận, khả năng tự tái sinh từ tro tàn và vươn mình rực rỡ. APXC mang tinh thần bứt phá mọi giới hạn rào cản tài chính truyền thống.</li>
+                        </ul>
                     </div>
 
+                    <!-- GIẤY KHAI SINH KHỐI NGUYÊN THỦY (GENESIS BLOCK BIRTH CERTIFICATE) -->
+                    <div class="birth-certificate-box my-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
+                            <h5 class="fw-bold text-warning mb-0"><i class="fa-solid fa-certificate me-2"></i>GENESIS BLOCK BIRTH CERTIFICATE</h5>
+                            <span class="badge bg-warning text-dark fw-bold">BLOCK #0</span>
+                        </div>
+                        <p class="small text-light mb-3">
+                            Giống như "giấy khai sinh" chính thức của dự án, khối nguyên thủy Genesis Block đánh dấu thời điểm mạng lưới phi tập trung được kích hoạt và cấp phát nguồn cung ban đầu theo thuật toán bất biến.
+                        </p>
+                        <div class="row g-2 font-monospace small">
+                            <div class="col-sm-4 text-warning">Official Birthday:</div>
+                            <div class="col-sm-8 text-white fw-bold">2026-07-22 00:00:00 UTC (Genesis Epoch)</div>
+                            
+                            <div class="col-sm-4 text-warning">Genesis Message:</div>
+                            <div class="col-sm-8 text-info text-break">Apex Phoenix Network - Sky Blue V24.14 Initialized</div>
+
+                            <div class="col-sm-4 text-warning">Genesis Hash:</div>
+                            <div class="col-sm-8 text-info text-break">0x1A51FAEE355DC38C8ABA6691A1C4020510982B01B87F43A6</div>
+
+                            <div class="col-sm-4 text-warning">Initial Target Speed:</div>
+                            <div class="col-sm-8 text-white">60 Seconds / Block</div>
+
+                            <div class="col-sm-4 text-warning">Genesis Seed Node:</div>
+                            <div class="col-sm-8 text-white">VPS Node Engine (42.96.5.132:9035)</div>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold text-primary mt-4 mb-3"><i class="fa-solid fa-compass-drafting me-2"></i>Biểu Tượng Logo & Ngôn Ngữ Thiết Kế</h5>
                     <p>
-                        Seed Nodes maintain time-series OHLC data accuracy, preventing chain forks and guaranteeing sub-second response times for global Light Node queries across DApp frontends.
+                        Logo Apex Phoenix được tạo hình theo chuẩn mực hình học cao cấp (Geometric Vector Art), với sự kết hợp hoàn hảo giữa 3 yếu tố cốt lõi:
                     </p>
+                    <div class="row g-3 text-center my-2">
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 border">
+                                <i class="fa-solid fa-angles-up text-warning fs-3 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Cánh Phượng Hoàng</h6>
+                                <small class="text-muted">Các góc vút nhọn đại diện cho sự tăng trưởng vượt bậc và tính phi tập trung tỏa rộng.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 border">
+                                <i class="fa-solid fa-shield-halved text-primary fs-3 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Khiên Kim Loại Sky Blue</h6>
+                                <small class="text-muted">Tượng trưng cho sự an toàn, bảo mật tuyệt đối của lớp thuật toán mã hóa.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 border">
+                                <i class="fa-solid fa-circle-nodes text-success fs-3 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Lõi Hạt Genesis Block</h6>
+                                <small class="text-muted">Tâm điểm năng lượng phát ra các khối block chuẩn xác theo nhịp thở 60 giây.</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- 3. TOKENOMICS STANDARD -->
+                <!-- 2. ARCHITECTURE & PROOF-OF-TIME -->
                 <div class="paper-card">
-                    <h3 class="section-heading"><i class="fa-solid fa-pie-chart text-primary me-2"></i>3. Tokenomics Distribution (84,000,000 APXC)</h3>
+                    <h3 class="section-title"><i class="fa-solid fa-microchip text-primary me-2"></i>2. Kiến Trúc Công Nghệ & Cơ Chế Khai Thác</h3>
                     <p>
-                        APXC maintains a fixed maximum supply cap of <strong>84,000,000 APXC</strong>, structured to enforce long-term scarcity and sustainable node rewards:
+                        Apex Phoenix Network ứng dụng cơ chế <strong>Browser Light Node Protocol</strong> kết hợp cùng <strong>Proof-of-Time & Stake Multiplier</strong>. Người dùng không cần mua sắm máy đào đắt đỏ hay chịu chi phí điện năng lớn:
                     </p>
                     
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item bg-transparent"><i class="fa-solid fa-check-circle text-success me-2"></i><strong>24-Hour Epoch Sessions:</strong> Mỗi chu kỳ khai thác kéo dài đúng 24 giờ. Hệ thống tự động tính toán sản lượng dựa trên thời gian tham gia thực tế (Proof-of-Time).</li>
+                        <li class="list-group-item bg-transparent"><i class="fa-solid fa-check-circle text-success me-2"></i><strong>VPS Cloud Database Sync:</strong> Toàn bộ dữ liệu số dư, tốc độ Hashrate và lịch sử đào được bảo lưu an toàn 100% trên cỗ máy VPS Linux/Windows Cloud Engine thông qua cơ sở dữ liệu SQLite thời gian thực.</li>
+                        <li class="list-group-item bg-transparent"><i class="fa-solid fa-check-circle text-success me-2"></i><strong>Staking Multiplier Boost:</strong> Cơ chế khóa coin linh hoạt nâng tốc độ đào từ +10% đến +150%, khuyến khích cộng đồng giữ coin lâu dài và giảm áp lực xả bán.</li>
+                    </ul>
+                </div>
+
+                <!-- 3. TOKENOMICS -->
+                <div class="paper-card">
+                    <h3 class="section-title"><i class="fa-solid fa-chart-pie text-warning me-2"></i>3. Quy Hoạch Tokenomics Chuẩn (84,000,000 APXC)</h3>
+                    <p>Tổng cung của APXC được khống chế cứng ở mức <strong>84.000.000 APXC</strong> (gấp 4 lần tổng cung Bitcoin), đảm bảo tính khan hiếm chống lạm phát tuyệt đối.</p>
+
                     <div class="table-responsive my-3">
-                        <table class="table table-bordered align-middle">
-                            <thead class="table-light font-monospace">
+                        <table class="table table-hover table-bordered align-middle text-center">
+                            <thead class="table-dark">
                                 <tr>
-                                    <th>Allocation Pool</th>
-                                    <th>Percentage</th>
-                                    <th>Total Tokens</th>
-                                    <th>Purpose & Vesting Schedule</th>
+                                    <th>Quỹ Phân Bổ</th>
+                                    <th>Tỷ Lệ</th>
+                                    <th>Số Lượng (APXC)</th>
+                                    <th>Khóa & Mở Khóa (Vesting)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="fw-bold text-primary">Browser Miner Pool</td>
-                                    <td class="fw-bold">85%</td>
-                                    <td>71,400,000 APXC</td>
-                                    <td>Distributed continuous mining emission via Browser Light Nodes.</td>
+                                    <td class="fw-bold text-primary text-start"><i class="fa-solid fa-users me-2"></i>Community Miner Pool</td>
+                                    <td class="fw-bold text-success">85%</td>
+                                    <td>71,400,000</td>
+                                    <td class="text-start">Khai thác ngầm 24H qua Light Node & Thưởng Staking Vault.</td>
                                 </tr>
                                 <tr>
-                                    <td class="fw-bold text-info">Development Fund</td>
-                                    <td class="fw-bold">10%</td>
-                                    <td>8,400,000 APXC</td>
-                                    <td>Reserved for core protocol audits, DEX liquidity pools, and DEX/CEX listings.</td>
+                                    <td class="fw-bold text-info text-start"><i class="fa-solid fa-code me-2"></i>Ecosystem & Liquidity</td>
+                                    <td class="fw-bold text-info">10%</td>
+                                    <td>8,400,000</td>
+                                    <td class="text-start">Dùng cho việc add thanh khoản DEX (PancakeSwap) & niêm yết CEX.</td>
                                 </tr>
                                 <tr>
-                                    <td class="fw-bold text-warning">Founder Reserve</td>
-                                    <td class="fw-bold">5%</td>
-                                    <td>4,200,000 APXC</td>
-                                    <td>Linear release aligned with block generation growth over 4 years.</td>
+                                    <td class="fw-bold text-warning text-start"><i class="fa-solid fa-gem me-2"></i>Founder Reserve</td>
+                                    <td class="fw-bold text-warning">5%</td>
+                                    <td>4,200,000</td>
+                                    <td class="text-start">Quỹ cố vấn & sáng lập, trả dần theo từng khối Block.</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- 4. STAKING VAULT & LOCKUP MECHANICS -->
+                <!-- 4. ROADMAP JULY 2026 UPDATE -->
                 <div class="paper-card">
-                    <h3 class="section-heading"><i class="fa-solid fa-lock text-primary me-2"></i>4. Staking Vault & Mining Boost</h3>
-                    <p>
-                        To mitigate circulating supply volatility, the protocol features an integrated <strong>APXC Lockup Engine</strong>. Participants who lock their APXC tokens receive a percentage-based boost to their web mining speed (Hashrate multiplier):
-                    </p>
-                    <ul>
-                        <li><strong>6 Months Lockup:</strong> +10% Mining Rate Boost (10% APY)</li>
-                        <li><strong>1 Year Lockup:</strong> +30% Mining Rate Boost (30% APY)</li>
-                        <li><strong>2 Years Lockup:</strong> +70% Mining Rate Boost (70% APY)</li>
-                        <li><strong>3 Years Lockup:</strong> +150% Mining Rate Boost (150% APY)</li>
-                    </ul>
-                </div>
+                    <h3 class="section-title"><i class="fa-solid fa-route text-success me-2"></i>4. Lộ Trình Phát Triển Chiến Lược (Roadmap 2026)</h3>
 
-                <!-- 5. PROTOCOL ROADMAP 2026 -->
-                <div class="paper-card">
-                    <h3 class="section-heading"><i class="fa-solid fa-route text-primary me-2"></i>5. Strategic Roadmap (2026)</h3>
-                    <div class="row g-3 my-2">
-                        <div class="col-md-6">
-                            <div class="p-3 border rounded-3 bg-light">
-                                <span class="badge bg-primary mb-2">Q1 2026</span>
-                                <h6 class="fw-bold text-dark">Genesis Seed Node</h6>
-                                <p class="small text-muted mb-0">VPS Seed Node deployment, SQLite database initiation, and DApp real-time candlestick monitoring.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3 border rounded-3 bg-light">
-                                <span class="badge bg-info text-dark mb-2">Q2 2026</span>
-                                <h6 class="fw-bold text-dark">Light Node Protocol</h6>
-                                <p class="small text-muted mb-0">Decentralized Browser Mining, Web3 PWA installation, and Staking Vault integration.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3 border rounded-3 bg-light">
-                                <span class="badge bg-warning text-dark mb-2">Q3 2026</span>
-                                <h6 class="fw-bold text-dark">Testnet to Mainnet</h6>
-                                <p class="small text-muted mb-0">DEX Liquidity Pool initialization, token contract verification, and security audits.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3 border rounded-3 bg-light">
-                                <span class="badge bg-success mb-2">Q4 2026</span>
-                                <h6 class="fw-bold text-dark">CEX Listing Ecosystem</h6>
-                                <p class="small text-muted mb-0">Centralized Exchange listings, Market Maker partnering, and cross-chain Yield Farming expansion.</p>
-                            </div>
-                        </div>
+                    <div class="timeline-box">
+                        <span class="badge bg-secondary mb-1">QUÝ 1/2026 — ĐÃ HOÀN THÀNH</span>
+                        <h6 class="fw-bold text-dark">Nghiên Cứu Thuật Toán & Thiết Kế Tokenomics</h6>
+                        <p class="text-muted small mb-0">Hoàn thiện mô hình toán học cho 24H Epoch Mining, xây dựng giao diện Sky Blue V24.14 và cấu hình hạ tầng Server.</p>
+                    </div>
+
+                    <div class="timeline-box">
+                        <span class="badge bg-secondary mb-1">QUÝ 2/2026 — ĐÃ HOÀN THÀNH</span>
+                        <h6 class="fw-bold text-dark">Nâng Cấp Flame Phoenix V24.14 & Staking Vault</h6>
+                        <p class="text-muted small mb-0">Tích hợp giao thức Light Node, tính năng cài đặt ứng dụng Web App (PWA) trên điện thoại và cơ chế khóa coin Staking Boost.</p>
+                    </div>
+
+                    <div class="timeline-box" style="border-left-color: #10b981;">
+                        <span class="badge bg-success mb-1">QUÝ 3/2026 — GIAI ĐOẠN HIỆN TẠI (THÁNG 07/2026)</span>
+                        <h6 class="fw-bold text-success">Sinh Nhật Dự Án (22/07/2026) & Đồng Bộ VPS Cloud Database</h6>
+                        <p class="text-muted small mb-0">Chính thức kích hoạt khối Genesis Block #0 vào ngày 22/07/2026 trên cỗ máy VPS Cloud Mining Engine (IP 42.96.5.132) kết hợp SQLite Database. Triển khai bảng xếp hạng Top Miners, chương trình thưởng Ref 10% và lập hồ sơ Kiểm toán Smart Contract (Audit Draft).</p>
+                    </div>
+
+                    <div class="timeline-box" style="border-left-color: #f59e0b;">
+                        <span class="badge bg-warning text-dark mb-1">QUÝ 4/2026 — KẾ HOẠCH BỨT PHÁ</span>
+                        <h6 class="fw-bold text-dark">Mainnet Token Swap, Niêm Yết CEX/DEX & Mở Rộng Hệ Sinh Thái</h6>
+                        <p class="text-muted small mb-0">Mở cổng rút coin trực tiếp về Ví Web3 (BEP-20 Smart Contract), kích hoạt bể thanh khoản trên PancakeSwap và hợp tác với Market Maker niêm yết trên các sàn CEX mục tiêu.</p>
                     </div>
                 </div>
 
-                <!-- 6. PRIVACY & DISCLAIMER -->
+                <!-- 5. SMART CONTRACT & SECURITY -->
                 <div class="paper-card">
-                    <h3 class="section-heading"><i class="fa-solid fa-user-shield text-primary me-2"></i>6. Anonymity & Protocol Security</h3>
-                    <p class="small text-muted mb-0">
-                        Apex Phoenix Network strictly adheres to decentralized privacy standards (In-DApp Protocol Communication). No private key, personal telemetry, or centralized credential harvesting is required to participate in the mining protocol. Users remain in complete ownership of their Web3 wallets and keys at all times.
-                    </p>
+                    <h3 class="section-title"><i class="fa-solid fa-shield-halved text-danger me-2"></i>5. Thông Số Smart Contract & Bảo Mật</h3>
+                    <p>Hợp đồng thông minh của APXC được triển khai trên mạng lưới Binance Smart Chain (BSC) chuẩn BEP-20, đảm bảo phí giao dịch cực thấp và tốc độ xử lý tức thì.</p>
+                    <div class="p-3 bg-light rounded-3 border font-monospace small">
+                        <div class="row g-2">
+                            <div class="col-sm-4 text-muted">Network:</div>
+                            <div class="col-sm-8 fw-bold text-dark">Binance Smart Chain (BEP-20)</div>
+                            <div class="col-sm-4 text-muted">Contract Address:</div>
+                            <div class="col-sm-8 fw-bold text-warning text-break">0x89234F2B99E23108B7F43A60355DC38C8ABA6691</div>
+                            <div class="col-sm-4 text-muted">Total Supply:</div>
+                            <div class="col-sm-8 fw-bold text-success">84,000,000 APXC</div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -230,7 +306,7 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="text-center py-4 text-muted border-top">
+    <footer class="text-center py-4 text-muted border-top bg-white">
         <small>© 2026 Apex Phoenix Network. All Protocol Rules Reserved.</small>
     </footer>
 
