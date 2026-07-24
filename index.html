@@ -161,8 +161,8 @@
             background-color: #1e293b;
             color: #94a3b8;
             border: 1px solid #334155;
-            padding: 3px 10px;
-            font-size: 0.8rem;
+            padding: 3px 8px;
+            font-size: 0.75rem;
             font-weight: 700;
             border-radius: 6px;
             transition: all 0.2s ease;
@@ -321,18 +321,22 @@
                 </div>
             </div>
 
-            <!-- LIVE CHART REALTIME WITH CONTINUOUS OHLC HISTORY -->
+            <!-- LIVE CHART REALTIME WITH TIMEFRAME SELECTION (M1 TO MN) -->
             <div class="col-12">
                 <div class="card card-custom p-3 p-md-4" style="background-color: #0c101a; border-color: #1e293b;">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-                        <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
                             <span class="fw-bold text-warning fs-5 me-2"><i class="fa-solid fa-chart-candlestick me-2"></i>APXC / USDT</span>
-                            <div class="btn-group btn-group-sm" role="group">
+                            <div class="btn-group btn-group-sm flex-wrap" role="group">
                                 <button type="button" class="tf-btn active" onclick="setChartTimeframe(60, this)">M1</button>
                                 <button type="button" class="tf-btn" onclick="setChartTimeframe(300, this)">M5</button>
                                 <button type="button" class="tf-btn" onclick="setChartTimeframe(900, this)">M15</button>
                                 <button type="button" class="tf-btn" onclick="setChartTimeframe(1800, this)">M30</button>
                                 <button type="button" class="tf-btn" onclick="setChartTimeframe(3600, this)">H1</button>
+                                <button type="button" class="tf-btn" onclick="setChartTimeframe(14400, this)">H4</button>
+                                <button type="button" class="tf-btn" onclick="setChartTimeframe(86400, this)">D1</button>
+                                <button type="button" class="tf-btn" onclick="setChartTimeframe(604800, this)">W1</button>
+                                <button type="button" class="tf-btn" onclick="setChartTimeframe(2592000, this)">MN</button>
                             </div>
                         </div>
 
@@ -673,13 +677,13 @@
     <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- REAL-TIME CLOUD NODE & SYSTEM REAL-TIME CANDLE COUNTDOWN ENGINE -->
+    <!-- REAL-TIME CLOUD NODE & DYNAMIC TIMEFRAME CANDLE COUNTDOWN ENGINE -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9035/";
         let chart = null;
         let candleSeries = null;
         
-        let currentTimeframeSec = 60;
+        let currentTimeframeSec = 60; // Default M1 Timeframe
         let m1History = [];
         let minerNodeId = null;
 
@@ -877,16 +881,35 @@
             document.getElementById('calcUsdtVal').innerText = `≈ $${estUsdt} USDT`;
         }
 
-        // SYSTEM CLOCK-BASED CANDLE COUNTDOWN ENGINE (UNINTERRUPTED)
+        // DYNAMIC TIMEFRAME CANDLE COUNTDOWN ENGINE (M1 TO MN DYNAMIC FORMAT)
         function startCandleCountdownEngine() {
             function updateClock() {
                 const nowSec = Math.floor(Date.now() / 1000);
-                const remainInCandle = 60 - (nowSec % 60);
-                const secTxt = (remainInCandle === 60 ? 0 : remainInCandle).toString().padStart(2, '0');
+                const tf = currentTimeframeSec;
+                const remainInCandle = tf - (nowSec % tf);
+                const displaySec = remainInCandle === tf ? 0 : remainInCandle;
+                
+                let timeStr = "";
+
+                if (tf <= 3600) { // M1, M5, M15, M30, H1
+                    const m = Math.floor(displaySec / 60).toString().padStart(2, '0');
+                    const s = Math.floor(displaySec % 60).toString().padStart(2, '0');
+                    timeStr = `${m}:${s}`;
+                } else if (tf <= 86400) { // H4, D1
+                    const h = Math.floor(displaySec / 3600).toString().padStart(2, '0');
+                    const m = Math.floor((displaySec % 3600) / 60).toString().padStart(2, '0');
+                    const s = Math.floor(displaySec % 60).toString().padStart(2, '0');
+                    timeStr = `${h}:${m}:${s}`;
+                } else { // W1, MN
+                    const d = Math.floor(displaySec / 86400);
+                    const h = Math.floor((displaySec % 86400) / 3600).toString().padStart(2, '0');
+                    const m = Math.floor((displaySec % 3600) / 60).toString().padStart(2, '0');
+                    timeStr = `${d}d ${h}:${m}`;
+                }
                 
                 const countdownEl = document.getElementById('candleCountdown');
                 if (countdownEl) {
-                    countdownEl.innerText = `00:${secTxt}`;
+                    countdownEl.innerText = timeStr;
                 }
             }
             
@@ -918,7 +941,7 @@
         function generateGenesisSeedHistory(baseP) {
             const genesisTime = 1774000000; // July 22, 2026
             const nowSeconds = Math.floor(Date.now() / 60000) * 60;
-            const seedCount = 2880; // 48 Hours of continuous M1 candles
+            const seedCount = 4320; // 3 Months of seed history (M1)
             let price = baseP || 0.1115;
             const history = [];
 
