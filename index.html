@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" class="notranslate" translate="no">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Phoenix Network | APXC Mining Protocol</title>
+    <title>Apex Phoenix Network | Global APXC Mining Protocol</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- TRADINGVIEW LIGHTWEIGHT CHARTS LIBRARY -->
     <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+    
+    <!-- GOOGLE TRANSLATE ENGINE FOR 200+ COUNTRIES -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <style>
         :root {
             --sky-primary: #00a8ff;
@@ -24,7 +37,33 @@
             background-color: var(--sky-bg);
             color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            top: 0 !important; /* Fix Google Translate bar displacement */
         }
+        
+        /* Hide Default Google Translate Banner */
+        .goog-te-banner-frame.skiptranslate, .goog-te-banner-frame {
+            display: none !important;
+        }
+        body {
+            top: 0px !important;
+        }
+        .goog-te-gadget-icon {
+            display: none !important;
+        }
+        .goog-te-gadget-simple {
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.5) !important;
+            padding: 4px 10px !important;
+            border-radius: 20px !important;
+            font-size: 0.85rem !important;
+            font-weight: bold !important;
+            color: #ffffff !important;
+            cursor: pointer;
+        }
+        .goog-te-gadget-simple span {
+            color: #ffffff !important;
+        }
+
         .navbar-sky {
             background: linear-gradient(135deg, #0077b6, #00a8ff);
             box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
@@ -153,6 +192,7 @@
 </head>
 <body>
 
+    <!-- NAVBAR WITH LOGO & GLOBAL LANGUAGE TRANSLATOR -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
@@ -180,15 +220,16 @@
                 </svg>
                 <span>APEX PHOENIX</span>
             </a>
+
             <div class="d-flex align-items-center gap-2">
+                <!-- NOTIFICATION BELL -->
                 <button class="btn btn-warning btn-sm rounded-circle text-dark position-relative" onclick="openUpdatesModal()" title="Network Announcements">
                     <i class="fa-solid fa-bell"></i>
                     <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
                 </button>
 
-                <button class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3" id="langBtn" onclick="toggleLanguage()">
-                    🌐 <span id="langTxt">EN</span>
-                </button>
+                <!-- GLOBAL LANGUAGE SELECTOR (200+ COUNTRIES) -->
+                <div id="google_translate_element"></div>
 
                 <span class="badge bg-success text-white fw-bold px-3 py-2 rounded-pill shadow-sm" id="minerNodeBadge">
                     <i class="fa-solid fa-server me-1"></i> <span id="nodeIdTxt">Cloud Miner</span>
@@ -197,6 +238,7 @@
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <section class="hero-codepen-section text-center">
         <div class="container">
             <div class="mb-2">
@@ -214,35 +256,12 @@
                     <circle cx="100" cy="106" r="3.5" fill="#FFFFFF"/>
                     
                     <defs>
-                        <linearGradient id="arrowHeadGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#FFFFE0"/>
-                            <stop offset="50%" stop-color="#FFDC66"/>
-                            <stop offset="100%" stop-color="#FFA800"/>
-                        </linearGradient>
-                        <linearGradient id="stemGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#FF7700"/>
-                            <stop offset="100%" stop-color="#D43800"/>
-                        </linearGradient>
-                        <linearGradient id="innerWingGradLeft" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#FFE566"/>
-                            <stop offset="50%" stop-color="#FFB300"/>
-                            <stop offset="100%" stop-color="#FF6A00"/>
-                        </linearGradient>
-                        <linearGradient id="innerWingGradRight" x1="1" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#FFE566"/>
-                            <stop offset="50%" stop-color="#FFB300"/>
-                            <stop offset="100%" stop-color="#FF6A00"/>
-                        </linearGradient>
-                        <linearGradient id="outerWingGradLeft" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#D46A00"/>
-                            <stop offset="70%" stop-color="#8C3A00"/>
-                            <stop offset="100%" stop-color="#4A1C00"/>
-                        </linearGradient>
-                        <linearGradient id="outerWingGradRight" x1="1" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#D46A00"/>
-                            <stop offset="70%" stop-color="#8C3A00"/>
-                            <stop offset="100%" stop-color="#4A1C00"/>
-                        </linearGradient>
+                        <linearGradient id="arrowHeadGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFE0"/><stop offset="50%" stop-color="#FFDC66"/><stop offset="100%" stop-color="#FFA800"/></linearGradient>
+                        <linearGradient id="stemGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF7700"/><stop offset="100%" stop-color="#D43800"/></linearGradient>
+                        <linearGradient id="innerWingGradLeft" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFE566"/><stop offset="100%" stop-color="#FF6A00"/></linearGradient>
+                        <linearGradient id="innerWingGradRight" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFE566"/><stop offset="100%" stop-color="#FF6A00"/></linearGradient>
+                        <linearGradient id="outerWingGradLeft" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D46A00"/><stop offset="100%" stop-color="#4A1C00"/></linearGradient>
+                        <linearGradient id="outerWingGradRight" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D46A00"/><stop offset="100%" stop-color="#4A1C00"/></linearGradient>
                     </defs>
                 </svg>
             </div>
@@ -253,6 +272,7 @@
                 <div class="flame-badge">FLAME PHOENIX V24.14</div>
             </div>
 
+            <!-- SMART CONTRACT BOARD -->
             <div class="contract-banner-card">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <span class="badge bg-warning text-dark fw-bold font-monospace px-3 py-1 rounded-pill">
@@ -270,33 +290,38 @@
         </div>
     </section>
 
+    <!-- LIVE MONITORING DASHBOARD -->
     <div class="container my-4">
         <div class="row g-4">
             
+            <!-- CURRENT BLOCK -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
-                    <div class="text-secondary mb-2"><i class="fa-solid fa-cube text-primary me-2"></i><span data-i18n="currentBlock">Current Block</span></div>
+                    <div class="text-secondary mb-2"><i class="fa-solid fa-cube text-primary me-2"></i><span>Current Block</span></div>
                     <div class="stat-val" id="currentBlock">#1,415,048</div>
-                    <small class="text-muted mt-2" data-i18n="blockSpeed">1 Block / 60 Seconds</small>
+                    <small class="text-muted mt-2">1 Block / 60 Seconds</small>
                 </div>
             </div>
 
+            <!-- APXC PRICE / CANDLE OHLC -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
-                    <div class="text-secondary mb-2"><i class="fa-solid fa-chart-line text-success me-2"></i><span data-i18n="apxcPrice">APXC Live Price</span></div>
+                    <div class="text-secondary mb-2"><i class="fa-solid fa-chart-line text-success me-2"></i><span>APXC Live Price</span></div>
                     <div class="stat-val text-success" id="apxcPrice">$0.1117 USDT</div>
                     <small class="text-muted mt-2" id="ohlcDetail">O: 0.1115 | H: 0.1121 | L: 0.1112 | C: 0.1117</small>
                 </div>
             </div>
 
+            <!-- FOUNDER BALANCE -->
             <div class="col-md-4">
                 <div class="card card-custom p-4 text-center h-100">
-                    <div class="text-secondary mb-2"><i class="fa-solid fa-wallet text-warning me-2"></i><span data-i18n="founderReserve">Founder Reserve (5%)</span></div>
+                    <div class="text-secondary mb-2"><i class="fa-solid fa-wallet text-warning me-2"></i><span>Founder Reserve (5%)</span></div>
                     <div class="stat-val text-warning" id="founderBalance">353,762 APXC</div>
-                    <small class="text-muted mt-2" data-i18n="tokenomicsAlloc">Targeted Tokenomics Allocation</small>
+                    <small class="text-muted mt-2">Targeted Tokenomics Allocation</small>
                 </div>
             </div>
 
+            <!-- LIVE CHART REALTIME -->
             <div class="col-12">
                 <div class="card card-custom p-3 p-md-4" style="background-color: #0c101a; border-color: #1e293b;">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
@@ -322,23 +347,24 @@
                 </div>
             </div>
 
+            <!-- REAL-TIME CLOUD MINING NODE -->
             <div class="col-12">
                 <div class="card card-custom p-4 border-warning" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-                        <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-microchip text-warning me-2"></i><span data-i18n="webMinerTitle">APXC Web Light Miner Node</span></h5>
-                        <span class="badge bg-warning text-dark font-monospace px-3 py-2 rounded-pill" id="refBadge" data-i18n="browserMining">24H Epoch Protocol</span>
+                        <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-microchip text-warning me-2"></i><span>APXC Web Light Miner Node</span></h5>
+                        <span class="badge bg-warning text-dark font-monospace px-3 py-2 rounded-pill" id="refBadge">24H Epoch Protocol</span>
                     </div>
 
                     <div class="row g-3 text-center align-items-center mb-3">
                         <div class="col-md-3">
                             <div class="p-3 bg-white rounded-3 border">
-                                <small class="text-muted d-block" data-i18n="hashrate">Node Hashrate</small>
+                                <small class="text-muted d-block">Node Hashrate</small>
                                 <span class="fw-bold text-primary fs-4" id="webHashrate">0.0 H/s</span>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="p-3 bg-white rounded-3 border">
-                                <small class="text-muted d-block" data-i18n="unclaimed">Mined APXC Balance</small>
+                                <small class="text-muted d-block">Mined APXC Balance</small>
                                 <span class="fw-bold text-success fs-4" id="unclaimedReward">0.0000 APXC</span>
                             </div>
                         </div>
@@ -348,7 +374,7 @@
                             </div>
 
                             <button class="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6" id="startMiningBtn" onclick="triggerServerStartMining()">
-                                <i class="fa-solid fa-play me-2"></i> <span id="miningBtnTxt" data-i18n="startMining">Start 24H Mining Session</span>
+                                <i class="fa-solid fa-play me-2"></i> <span id="miningBtnTxt">Start 24H Mining Session</span>
                             </button>
                         </div>
                     </div>
@@ -364,64 +390,66 @@
 
                     <div class="mt-4 pt-3 border-top">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <small class="fw-bold text-dark"><i class="fa-solid fa-user-plus text-primary me-1"></i> <span data-i18n="refTitle">Referral Affiliate Program (+10% Speed)</span></small>
-                            <span class="badge bg-info-subtle text-info rounded-pill" data-i18n="refBonus">10% Commission</span>
+                            <small class="fw-bold text-dark"><i class="fa-solid fa-user-plus text-primary me-1"></i> <span>Referral Affiliate Program (+10% Speed)</span></small>
+                            <span class="badge bg-info-subtle text-info rounded-pill">10% Commission</span>
                         </div>
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control font-monospace text-primary bg-white" id="refLinkInput" readonly value="https://apexphoenix-network.github.io/apexphoenix-network/">
                             <button class="btn btn-primary fw-bold px-3" onclick="copyReferralLink()">
-                                <i class="fa-solid fa-copy me-1"></i> <span data-i18n="copyBtn">Copy Link</span>
+                                <i class="fa-solid fa-copy me-1"></i> <span>Copy Link</span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- MINING PROFIT CALCULATOR -->
             <div class="col-md-6">
                 <div class="card card-custom p-4 h-100">
-                    <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-calculator me-2"></i><span data-i18n="calcTitle">Mining Profit Calculator</span></h5>
+                    <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-calculator me-2"></i><span>Mining Profit Calculator</span></h5>
                     <div class="mb-3">
                         <label class="form-label text-muted small fw-bold d-flex justify-content-between">
-                            <span data-i18n="miningDuration">Running Duration:</span>
+                            <span>Running Duration:</span>
                             <span class="text-primary fw-bold" id="calcHoursTxt">24 Hours (1 Day)</span>
                         </label>
                         <input type="range" class="form-range" min="1" max="720" value="24" id="calcRange" oninput="updateCalculator()">
                     </div>
                     <div class="p-3 bg-light rounded-3 border text-center">
-                        <small class="text-muted d-block" data-i18n="estReward">Estimated Mined APXC:</small>
+                        <small class="text-muted d-block">Estimated Mined APXC:</small>
                         <h3 class="fw-bold text-success mb-1" id="calcApxcVal">216.00 APXC</h3>
                         <small class="text-muted fw-bold" id="calcUsdtVal">≈ $24.12 USDT</small>
                     </div>
                 </div>
             </div>
 
+            <!-- APXC LOCKUP & STAKING VAULT -->
             <div class="col-md-6">
                 <div class="card card-custom p-4 h-100 border-info">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-lock text-info me-2"></i><span data-i18n="lockupTitle">APXC Lockup & Staking</span></h5>
+                        <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-lock text-info me-2"></i><span>APXC Lockup & Staking</span></h5>
                         <span class="badge bg-success text-white fw-bold px-3 py-1 rounded-pill" id="currentBoostBadge">+30% Boost Rate</span>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label text-muted small fw-bold" data-i18n="lockDuration">Select Lockup Duration:</label>
+                        <label class="form-label text-muted small fw-bold">Select Lockup Duration:</label>
                         <select class="form-select form-select-sm fw-bold border-info text-dark" id="lockDurationSelect" onchange="updateLockupBoostDisplay()">
-                            <option value="0.10" data-i18n="lock6M">6 Months (+10% Boost / 10% APY)</option>
-                            <option value="0.30" selected data-i18n="lock1Y">1 Year (+30% Boost / 30% APY)</option>
-                            <option value="0.70" data-i18n="lock2Y">2 Years (+70% Boost / 70% APY)</option>
-                            <option value="1.50" data-i18n="lock3Y">3 Years (+150% Boost / 150% APY)</option>
+                            <option value="0.10">6 Months (+10% Boost / 10% APY)</option>
+                            <option value="0.30" selected>1 Year (+30% Boost / 30% APY)</option>
+                            <option value="0.70">2 Years (+70% Boost / 70% APY)</option>
+                            <option value="1.50">3 Years (+150% Boost / 150% APY)</option>
                         </select>
                     </div>
 
                     <div class="row g-2 mb-3 text-center">
                         <div class="col-6">
                             <div class="p-2 bg-light rounded-3 border">
-                                <small class="text-muted d-block" style="font-size: 0.75rem;" data-i18n="stakedVal">Locked APXC</small>
+                                <small class="text-muted d-block" style="font-size: 0.75rem;">Locked APXC</small>
                                 <span class="fw-bold text-dark" id="stakedAmount">0.00 APXC</span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="p-2 bg-light rounded-3 border">
-                                <small class="text-muted d-block" style="font-size: 0.75rem;" data-i18n="earnedYield">Earned Yield</small>
+                                <small class="text-muted d-block" style="font-size: 0.75rem;">Earned Yield</small>
                                 <span class="fw-bold text-success" id="earnedYield">0.0000 APXC</span>
                             </div>
                         </div>
@@ -429,21 +457,22 @@
 
                     <div class="d-flex gap-2 mb-2">
                         <button class="btn btn-info text-white fw-bold w-50 rounded-pill" onclick="stakeTokensOnServer()">
-                            <i class="fa-solid fa-key me-1"></i> <span data-i18n="lockBtn">Lock APXC Now</span>
+                            <i class="fa-solid fa-key me-1"></i> <span>Lock APXC Now</span>
                         </button>
                         <button class="btn btn-outline-success fw-bold w-50 rounded-pill" onclick="claimYield()">
-                            <i class="fa-solid fa-gift me-1"></i> <span data-i18n="claimYieldBtn">Claim Yield</span>
+                            <i class="fa-solid fa-gift me-1"></i> <span>Claim Yield</span>
                         </button>
                     </div>
-                    <small class="text-muted text-center d-block" style="font-size: 0.73rem;" data-i18n="lockNote">Longer lockup duration = Higher mining boost reward!</small>
+                    <small class="text-muted text-center d-block" style="font-size: 0.73rem;">Longer lockup duration = Higher mining boost reward!</small>
                 </div>
             </div>
 
+            <!-- TOP MINERS LEADERBOARD -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-trophy text-warning me-2"></i><span data-i18n="leaderboardTitle">Top Miners Leaderboard</span></h5>
-                        <span class="badge bg-warning-subtle text-warning border border-warning px-3 py-1 rounded-pill" data-i18n="rankBadge">24h Network Ranking</span>
+                        <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-trophy text-warning me-2"></i><span>Top Miners Leaderboard</span></h5>
+                        <span class="badge bg-warning-subtle text-warning border border-warning px-3 py-1 rounded-pill">24h Network Ranking</span>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0" style="font-size: 0.88rem;">
@@ -492,11 +521,12 @@
                 </div>
             </div>
 
+            <!-- RECENT BLOCK EXPLORER TABLE -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-cubes me-2"></i><span data-i18n="blockExplorerTitle">Recent Block Explorer</span></h5>
-                        <span class="badge bg-info-subtle text-info px-3 py-2 rounded-pill" data-i18n="blockSpeed">1 Block / 60s</span>
+                        <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-cubes me-2"></i><span>Recent Block Explorer</span></h5>
+                        <span class="badge bg-info-subtle text-info px-3 py-2 rounded-pill">1 Block / 60s</span>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0" style="font-size: 0.88rem;">
@@ -511,12 +541,14 @@
                                 </tr>
                             </thead>
                             <tbody id="blockExplorerBody">
-                                </tbody>
+                                <!-- AUTOMATICALLY POPULATED -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
+            <!-- LATEST HASH & FOUNDER ADDRESS -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -532,6 +564,7 @@
                 </div>
             </div>
 
+            <!-- ROADMAP 2026 -->
             <div class="col-12">
                 <div class="card card-custom p-4">
                     <h5 class="fw-bold text-primary mb-4"><i class="fa-solid fa-route me-2"></i>Apex Phoenix Network Roadmap 2026</h5>
@@ -553,8 +586,8 @@
                         <div class="col-md-3">
                             <div class="p-3 border-start border-4 border-warning bg-light rounded-3 h-100">
                                 <span class="badge bg-warning text-dark mb-2">Q3 2026</span>
-                                <h6 class="fw-bold mb-1 text-dark">Testnet to Mainnet</h6>
-                                <small class="text-muted">DEX Liquidity Pool Setup, Public Node Staking & Smart Audit.</small>
+                                <h6 class="fw-bold mb-1 text-dark">Project Birthday & Sync</h6>
+                                <small class="text-muted">Genesis Block activated on July 22, 2026. VPS Cloud Engine sync & Top Miners Leaderboard.</small>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -568,6 +601,7 @@
                 </div>
             </div>
 
+            <!-- PROTOCOL RESOURCES & COMMUNITY -->
             <div class="col-12">
                 <div class="card card-custom p-4 text-center">
                     <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-shield-halved me-2"></i>Protocol Resources & Web3 Tools</h5>
@@ -594,6 +628,7 @@
         </div>
     </div>
 
+    <!-- IN-DAPP ANNOUNCEMENTS MODAL -->
     <div class="modal fade" id="updatesModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -617,23 +652,12 @@
 
                     <div class="p-3 bg-light rounded-3 border mb-3">
                         <div class="d-flex justify-content-between align-items-center mb-1">
-                            <span class="badge bg-primary">V24.14 Released</span>
-                            <small class="text-muted font-monospace"><i class="fa-regular fa-clock me-1"></i>2026-07-15</small>
+                            <span class="badge bg-warning text-dark">Genesis Birthday</span>
+                            <small class="text-muted font-monospace"><i class="fa-regular fa-clock me-1"></i>2026-07-22</small>
                         </div>
-                        <h6 class="fw-bold text-dark mb-1">Browser Light Node Protocol Upgrade & V24.14 Whitepaper</h6>
+                        <h6 class="fw-bold text-dark mb-1">Official Project Birthday & Genesis Block #0 Minted</h6>
                         <p class="small text-muted mb-0">
-                            The core system has officially deployed the Flame Phoenix V24.14 upgrade, adding Staking Vault mechanics and real-time Block Explorer data feeds.
-                        </p>
-                    </div>
-
-                    <div class="p-3 bg-light rounded-3 border">
-                        <div class="d-flex justify-content-between align-items-center mb-1">
-                            <span class="badge bg-warning text-dark">Genesis Block</span>
-                            <small class="text-muted font-monospace"><i class="fa-regular fa-clock me-1"></i>2026-07-01</small>
-                        </div>
-                        <h6 class="fw-bold text-dark mb-1">Genesis Seed Node VPS Deployment</h6>
-                        <p class="small text-muted mb-0">
-                            The primary Seed Node has minted the Genesis Block with a target block speed of 60 seconds, supplying continuous OHLC price feeds to the DApp Dashboard.
+                            Apex Phoenix Network officially launched on July 22, 2026, minting Block #0 with the message "Sky Blue V24.14 Initialized".
                         </p>
                     </div>
                 </div>
@@ -641,43 +665,15 @@
         </div>
     </div>
 
-    <div class="modal fade" id="pwaInstallModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-4 border-0 shadow-lg">
-                <div class="modal-header border-0 pb-0">
-                    <h5 class="fw-bold text-dark mb-0 d-flex align-items-center">
-                        <i class="fa-solid fa-mobile-screen-button text-warning me-2 fs-4"></i>Install Web App (PWA)
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <div class="mb-3">
-                        <h6 class="fw-bold text-primary mb-1"><i class="fa-brands fa-apple me-2"></i>Instructions for iPhone (Safari):</h6>
-                        <ol class="small text-muted mb-0 ps-3">
-                            <li>Tap the <strong>Share (<i class="fa-solid fa-arrow-up-from-bracket"></i>)</strong> icon in the Safari toolbar.</li>
-                            <li>Scroll down and select <strong>"Add to Home Screen"</strong>.</li>
-                            <li>Tap <strong>Add</strong> to pin the APXC Web App onto your device!</li>
-                        </ol>
-                    </div>
-                    <hr>
-                    <div>
-                        <h6 class="fw-bold text-success mb-1"><i class="fa-brands fa-android me-2"></i>Instructions for Android (Chrome):</h6>
-                        <ol class="small text-muted mb-0 ps-3">
-                            <li>Tap the <strong>Option Menu (<i class="fa-solid fa-ellipsis-vertical"></i>)</strong> at top right.</li>
-                            <li>Select <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- FOOTER -->
     <footer class="text-center py-4 text-muted border-top">
         <small>© 2026 Apex Phoenix Network. All Protocol Rules Reserved.</small>
     </footer>
 
+    <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- REAL-TIME CLOUD NODE INTEGRATION SCRIPT -->
     <script>
         const RAW_NODE_API = "http://42.96.5.132:9035/";
         let chart = null;
@@ -687,8 +683,6 @@
         let m1History = [];
         let minerNodeId = null;
 
-        // Local state variables for graceful fallback
-        let localMiningActive = false;
         let localMiningStart = 0;
         let localUnclaimed = 0.0;
         let localStaked = 0.0;
@@ -700,7 +694,7 @@
         }
 
         function triggerPwaInstall() {
-            new bootstrap.Modal(document.getElementById('pwaInstallModal')).show();
+            alert("To install as Web App: Tap Share button on Safari/Chrome -> Add to Home Screen!");
         }
 
         function initDeviceMinerNode() {
@@ -712,7 +706,6 @@
             minerNodeId = savedId;
             document.getElementById('nodeIdTxt').innerText = minerNodeId;
 
-            // Load local state cache
             localMiningStart = parseInt(localStorage.getItem('apxc_local_start') || '0');
             localUnclaimed = parseFloat(localStorage.getItem('apxc_local_balance') || '0.0');
             localStaked = parseFloat(localStorage.getItem('apxc_local_staked') || '0.0');
@@ -743,7 +736,6 @@
                 fetchedSuccess = false;
             }
 
-            // Fallback mode if network connection is blocked or unavailable
             if (!fetchedSuccess) {
                 const nowSec = Math.floor(Date.now() / 1000);
                 if (localMiningStart > 0) {
@@ -776,7 +768,7 @@
             if (isActive) {
                 document.getElementById('webHashrate').innerText = hashrate + " H/s";
                 btn.className = "btn btn-success fw-bold px-4 py-2 rounded-pill shadow-sm fs-6 disabled";
-                txtSpan.innerText = i18nDict[currentLang].miningActive;
+                txtSpan.innerText = "Mining Session Active";
 
                 const hours = Math.floor(remainingSec / 3600).toString().padStart(2, '0');
                 const minutes = Math.floor((remainingSec % 3600) / 60).toString().padStart(2, '0');
@@ -786,7 +778,7 @@
                 document.getElementById('webHashrate').innerText = "0.0 H/s";
                 document.getElementById('epochTimer').innerText = "24:00:00";
                 btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6";
-                txtSpan.innerText = i18nDict[currentLang].startMining;
+                txtSpan.innerText = "Start 24H Mining Session";
             }
         }
 
@@ -794,7 +786,6 @@
             if (!minerNodeId) return;
             const refBy = new URLSearchParams(window.location.search).get('ref') || '';
             
-            // Try VPS endpoint
             try {
                 await fetch(RAW_NODE_API + "api/start_mining", {
                     method: 'POST',
@@ -803,7 +794,6 @@
                 });
             } catch (e) {}
 
-            // Activate local timer immediately
             localMiningStart = Math.floor(Date.now() / 1000);
             localStorage.setItem('apxc_local_start', localMiningStart.toString());
             fetchServerUserStatus();
@@ -836,89 +826,6 @@
 
         function claimYield() {
             alert("Staking Yield automatically added to your Balance!");
-        }
-
-        let currentLang = 'EN';
-        const i18nDict = {
-            EN: {
-                currentBlock: "Current Block",
-                blockSpeed: "1 Block / 60 Seconds",
-                apxcPrice: "APXC Live Price",
-                founderReserve: "Founder Reserve (5%)",
-                tokenomicsAlloc: "Targeted Tokenomics Allocation",
-                webMinerTitle: "APXC Web Light Miner Node",
-                browserMining: "24H Epoch Protocol",
-                hashrate: "Node Hashrate",
-                unclaimed: "Mined APXC Balance",
-                startMining: "Start 24H Mining Session",
-                miningActive: "Mining Session Active",
-                refTitle: "Referral Affiliate Program (+10% Speed)",
-                refBonus: "10% Commission",
-                copyBtn: "Copy Link",
-                calcTitle: "Mining Profit Calculator",
-                miningDuration: "Running Duration:",
-                estReward: "Estimated Mined APXC:",
-                lockupTitle: "APXC Lockup & Staking",
-                lockDuration: "Select Lockup Duration:",
-                lock6M: "6 Months (+10% Boost / 10% APY)",
-                lock1Y: "1 Year (+30% Boost / 30% APY)",
-                lock2Y: "2 Years (+70% Boost / 70% APY)",
-                lock3Y: "3 Years (+150% Boost / 150% APY)",
-                stakedVal: "Locked APXC",
-                earnedYield: "Earned Yield",
-                lockBtn: "Lock APXC Now",
-                claimYieldBtn: "Claim Yield",
-                lockNote: "Longer lockup duration = Higher mining boost reward!",
-                leaderboardTitle: "Top Miners Leaderboard",
-                rankBadge: "24h Network Ranking",
-                blockExplorerTitle: "Recent Block Explorer"
-            },
-            VI: {
-                currentBlock: "Khối Hiện Tại",
-                blockSpeed: "1 Khối / 60 Giây",
-                apxcPrice: "Giá APXC Thời Gian Thực",
-                founderReserve: "Quỹ Sáng Lập (5%)",
-                tokenomicsAlloc: "Phân Bổ Tokenomics Chuẩn",
-                webMinerTitle: "Máy Đào Trình Duyệt Web APXC",
-                browserMining: "Giao Thức Chu Kỳ 24H",
-                hashrate: "Tốc Độ Đào (Hashrate)",
-                unclaimed: "Số Dư APXC Đào Được",
-                startMining: "Bắt Đầu Chu Kỳ Đào 24H",
-                miningActive: "Đang Đào Ngầm 24H",
-                refTitle: "Chương Trình Giới Thiệu (+10% Tốc Độ)",
-                refBonus: "Hoa Hồng 10%",
-                copyBtn: "Sao Chép Link",
-                calcTitle: "Bảng Tính Lợi Nhuận Khai Thác",
-                miningDuration: "Thời Gian Treo Máy:",
-                estReward: "Ước Tính APXC Đào Được:",
-                lockupTitle: "Khóa Coin & Staking APXC",
-                lockDuration: "Chọn Thời Gian Khóa Coin:",
-                lock6M: "6 Tháng (+10% Tốc Độ / 10% APY)",
-                lock1Y: "1 Năm (+30% Tốc Độ / 30% APY)",
-                lock2Y: "2 Năm (+70% Tốc Độ / 70% APY)",
-                lock3Y: "3 Năm (+150% Tốc Độ / 150% APY)",
-                stakedVal: "Số APXC Đã Khóa",
-                earnedYield: "Tiền Lãi Tích Lũy",
-                lockBtn: "Khóa Coin Ngay",
-                claimYieldBtn: "Rút Tiền Lãi",
-                lockNote: "Khóa thời gian càng lâu = Phần thưởng tốc độ đào càng cao!",
-                leaderboardTitle: "Bảng Xếp Hạng Thợ Đào Top 5",
-                rankBadge: "Xếp Hạng Mạng Lưới 24h",
-                blockExplorerTitle: "Trình Tra Cứu Khối Gần Nhất"
-            }
-        };
-
-        function toggleLanguage() {
-            currentLang = currentLang === 'EN' ? 'VI' : 'EN';
-            document.getElementById('langTxt').innerText = currentLang;
-
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (i18nDict[currentLang][key]) {
-                    el.innerText = i18nDict[currentLang][key];
-                }
-            });
-            updateLockupBoostDisplay();
         }
 
         function copyTokenContractAddress() {
@@ -1080,7 +987,6 @@
                     }
                 }
             } catch (e) {
-                // Keep local UI animated smoothly
                 let nowSec = Math.floor(Date.now() / 1000);
                 let currentBlk = 1415000 + Math.floor((nowSec - 1700000000) / 60);
                 document.getElementById('currentBlock').innerText = "#" + currentBlk.toLocaleString();
