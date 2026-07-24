@@ -32,11 +32,16 @@
         .wp-header {
             background-color: var(--codepen-bg);
             color: white;
-            padding: 60px 0 50px;
+            padding: 50px 0 45px;
             border-bottom: 4px solid #0077b6;
         }
+        .apex-logo-wp {
+            width: 130px;
+            height: 130px;
+            filter: drop-shadow(0px 8px 25px rgba(255, 140, 0, 0.35));
+        }
         .apex-title-gold {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 900;
             letter-spacing: 5px;
             background: linear-gradient(180deg, #FFE066 0%, #FF8C00 100%);
@@ -105,11 +110,32 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR WITH MATCHING LOGO -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-sky sticky-top py-2">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="./index.html">
-                <i class="fa-solid fa-fire-flame-curved text-warning me-2"></i>
+                <svg width="34" height="34" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                    <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
+                    <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
+                    <polygon points="28,75 50,53 72,100 50,122" fill="url(#navOuterWingL)"/>
+                    <polygon points="172,75 150,53 128,100 150,122" fill="url(#navOuterWingR)"/>
+                    <polygon points="42,87 64,65 86,112 64,134" fill="url(#navInnerWingL)"/>
+                    <polygon points="158,87 136,65 114,112 136,134" fill="url(#navInnerWingR)"/>
+                    <polygon points="91,92 109,92 115,136 85,136" fill="url(#navStem)"/>
+                    <polygon points="100,32 125,72 100,92 75,72" fill="url(#navHead)"/>
+                    <polygon points="100,35 104,108 96,108" fill="#FFFFFF" opacity="0.35"/>
+                    <circle cx="100" cy="122" r="11" fill="#FF8C00" opacity="0.45"/>
+                    <circle cx="100" cy="106" r="3.5" fill="#FFFFFF"/>
+                    
+                    <defs>
+                        <linearGradient id="navHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFE0"/><stop offset="100%" stop-color="#FFA800"/></linearGradient>
+                        <linearGradient id="navStem" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF7700"/><stop offset="100%" stop-color="#D43800"/></linearGradient>
+                        <linearGradient id="navInnerWingL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFE566"/><stop offset="100%" stop-color="#FF6A00"/></linearGradient>
+                        <linearGradient id="navInnerWingR" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFE566"/><stop offset="100%" stop-color="#FF6A00"/></linearGradient>
+                        <linearGradient id="navOuterWingL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D46A00"/><stop offset="100%" stop-color="#4A1C00"/></linearGradient>
+                        <linearGradient id="navOuterWingR" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D46A00"/><stop offset="100%" stop-color="#4A1C00"/></linearGradient>
+                    </defs>
+                </svg>
                 <span>APEX PHOENIX NETWORK</span>
             </a>
             <a href="./index.html" class="btn btn-outline-light btn-sm fw-bold rounded-pill px-3">
@@ -118,9 +144,33 @@
         </div>
     </nav>
 
-    <!-- HEADER -->
+    <!-- HEADER WITH HERO VECTOR LOGO -->
     <header class="wp-header text-center">
         <div class="container">
+            <div class="mb-3">
+                <svg class="apex-logo-wp" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="86" fill="none" stroke="#6E5A27" stroke-width="2" stroke-dasharray="5 5"/>
+                    <circle cx="100" cy="100" r="76" fill="#111622" stroke="#A08035" stroke-width="2"/>
+                    <polygon points="28,75 50,53 72,100 50,122" fill="url(#wpOuterWingL)"/>
+                    <polygon points="172,75 150,53 128,100 150,122" fill="url(#wpOuterWingR)"/>
+                    <polygon points="42,87 64,65 86,112 64,134" fill="url(#wpInnerWingL)"/>
+                    <polygon points="158,87 136,65 114,112 136,134" fill="url(#wpInnerWingR)"/>
+                    <polygon points="91,92 109,92 115,136 85,136" fill="url(#wpStem)"/>
+                    <polygon points="100,32 125,72 100,92 75,72" fill="url(#wpHead)"/>
+                    <polygon points="100,35 104,108 96,108" fill="#FFFFFF" opacity="0.35"/>
+                    <circle cx="100" cy="122" r="11" fill="#FF8C00" opacity="0.45"/>
+                    <circle cx="100" cy="106" r="3.5" fill="#FFFFFF"/>
+                    
+                    <defs>
+                        <linearGradient id="wpHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFE0"/><stop offset="100%" stop-color="#FFA800"/></linearGradient>
+                        <linearGradient id="wpStem" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF7700"/><stop offset="100%" stop-color="#D43800"/></linearGradient>
+                        <linearGradient id="wpInnerWingL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFE566"/><stop offset="100%" stop-color="#FF6A00"/></linearGradient>
+                        <linearGradient id="wpInnerWingR" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFE566"/><stop offset="100%" stop-color="#FF6A00"/></linearGradient>
+                        <linearGradient id="wpOuterWingL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D46A00"/><stop offset="100%" stop-color="#4A1C00"/></linearGradient>
+                        <linearGradient id="wpOuterWingR" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D46A00"/><stop offset="100%" stop-color="#4A1C00"/></linearGradient>
+                    </defs>
+                </svg>
+            </div>
             <span class="status-badge mb-3 d-inline-block">OFFICIAL WHITEPAPER V24.14 — UPDATED JULY 2026</span>
             <div class="apex-title-gold">APEX PHOENIX NETWORK</div>
             <p class="text-light lead fw-semibold mt-2">The Next-Generation Decentralized Light-Node Cloud Mining & Automated Yield Protocol</p>
@@ -147,7 +197,7 @@
                         </ul>
                     </div>
 
-                    <!-- GIẤY KHAI SINH KHỐI NGUYÊN THỦY (GENESIS BLOCK BIRTH CERTIFICATE) -->
+                    <!-- GIẤY KHAI SINH KHỐI NGUYÊN THỦY -->
                     <div class="birth-certificate-box my-4">
                         <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
                             <h5 class="fw-bold text-warning mb-0"><i class="fa-solid fa-certificate me-2"></i>GENESIS BLOCK BIRTH CERTIFICATE</h5>
@@ -176,28 +226,28 @@
 
                     <h5 class="fw-bold text-primary mt-4 mb-3"><i class="fa-solid fa-compass-drafting me-2"></i>Biểu Tượng Logo & Ngôn Ngữ Thiết Kế</h5>
                     <p>
-                        Logo Apex Phoenix được tạo hình theo chuẩn mực hình học cao cấp (Geometric Vector Art), với sự kết hợp hoàn hảo giữa 3 yếu tố cốt lõi:
+                        Logo Apex Phoenix được tạo hình theo chuẩn mực nghệ thuật hình học đối xứng (Geometric Vector Art), ẩn chứa 3 thông điệp thiết kế cốt lõi:
                     </p>
                     <div class="row g-3 text-center my-2">
                         <div class="col-md-4">
-                            <div class="p-3 bg-light rounded-3 border">
+                            <div class="p-3 bg-light rounded-3 border h-100">
                                 <i class="fa-solid fa-angles-up text-warning fs-3 mb-2"></i>
-                                <h6 class="fw-bold mb-1">Cánh Phượng Hoàng</h6>
-                                <small class="text-muted">Các góc vút nhọn đại diện cho sự tăng trưởng vượt bậc và tính phi tập trung tỏa rộng.</small>
+                                <h6 class="fw-bold mb-1">Đôi Cánh Phượng Hoàng</h6>
+                                <small class="text-muted">Bộ cánh Vàng Kim xếp lớp đối xứng đại diện cho sự tăng trưởng bứt phá và cấu trúc Node phi tập trung.</small>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="p-3 bg-light rounded-3 border">
-                                <i class="fa-solid fa-shield-halved text-primary fs-3 mb-2"></i>
-                                <h6 class="fw-bold mb-1">Khiên Kim Loại Sky Blue</h6>
-                                <small class="text-muted">Tượng trưng cho sự an toàn, bảo mật tuyệt đối của lớp thuật toán mã hóa.</small>
+                            <div class="p-3 bg-light rounded-3 border h-100">
+                                <i class="fa-solid fa-location-arrow text-primary fs-3 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Mũi Tên Vươn Đỉnh (Apex)</h6>
+                                <small class="text-muted">Phần đỉnh nhọn chính giữa vút cao tượng trưng cho mục tiêu chinh phục vị thế dẫn đầu thị trường Web3.</small>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="p-3 bg-light rounded-3 border">
-                                <i class="fa-solid fa-circle-nodes text-success fs-3 mb-2"></i>
-                                <h6 class="fw-bold mb-1">Lõi Hạt Genesis Block</h6>
-                                <small class="text-muted">Tâm điểm năng lượng phát ra các khối block chuẩn xác theo nhịp thở 60 giây.</small>
+                            <div class="p-3 bg-light rounded-3 border h-100">
+                                <i class="fa-solid fa-circle-notch text-success fs-3 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Viền Tròn Tinh Thể</h6>
+                                <small class="text-muted">Dải viền đứt đoạn bao bọc thể hiện tính liên tục của chu kỳ 24H Epoch Mining & sự bảo mật khép kín.</small>
                             </div>
                         </div>
                     </div>
@@ -256,7 +306,7 @@
                     </div>
                 </div>
 
-                <!-- 4. ROADMAP JULY 2026 UPDATE -->
+                <!-- 4. ROADMAP -->
                 <div class="paper-card">
                     <h3 class="section-title"><i class="fa-solid fa-route text-success me-2"></i>4. Lộ Trình Phát Triển Chiến Lược (Roadmap 2026)</h3>
 
