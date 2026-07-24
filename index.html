@@ -644,14 +644,14 @@
     </div>
 
     <!-- WEB3 WALLET SELECTION MODAL (MULTI-WALLET UNIVERSAL DEEP LINKS) -->
-    <div class="modal fade" id="walletConnectModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="walletConnectModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg" style="background: #ffffff;">
                 <div class="modal-header border-0 pb-0">
                     <h5 class="modal-fw-bold text-dark mb-0 d-flex align-items-center">
                         <i class="fa-solid fa-wallet text-primary me-2"></i>Select Web3 Wallet (BEP-20 Auto-Switch)
                     </h5>
-                    <button type="button" class="btn-close" onclick="closeWalletModal()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <p class="text-muted small mb-3">Choose your Web3 wallet application. System automatically aligns to BNB Smart Chain:</p>
@@ -1051,7 +1051,7 @@
                     });
                 } catch (error) {}
             } else {
-                openWalletModalExplicit();
+                openWalletModalOnly();
             }
         }
 
@@ -1096,9 +1096,13 @@
             document.body.style.paddingRight = '';
         }
 
-        // BẮT BUỘC CHỈ MỞ MODAL KHI CÓ THAO TÁC BẤM CHỦ ĐỘNG
-        function openWalletModalExplicit() {
-            closeWalletModal();
+        function openWalletModalOnly() {
+            const savedWallet = localStorage.getItem('apxc_active_wallet');
+            if (savedWallet || userWalletAddress) {
+                closeWalletModal();
+                return;
+            }
+
             const modalEl = document.getElementById('walletConnectModal');
             if (modalEl) {
                 const modalObj = new bootstrap.Modal(modalEl);
@@ -1106,27 +1110,26 @@
             }
         }
 
-        // TỰ ĐỘNG LẤY VÍ TỪ LOCALSTORAGE MÀ TUYỆT ĐỐI KHÔNG BẬT MODAL
+        // ABSOLUTE PERSISTENCE & HARD-LOCK ENGINE
         function checkPersistedWallet() {
-            closeWalletModal(); // Ép ẩn tất cả Modal ngầm
             const savedWallet = localStorage.getItem('apxc_active_wallet');
-            if (savedWallet && savedWallet.startsWith('0x')) {
+            if (savedWallet) {
                 userWalletAddress = savedWallet;
-                
-                const txt = document.getElementById('walletTxt');
-                const btn = document.getElementById('walletBtn');
-                const shortAddr = userWalletAddress.substring(0, 6) + "..." + userWalletAddress.substring(userWalletAddress.length - 4);
-                
-                if (txt && btn) {
-                    txt.innerText = shortAddr;
-                    btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
-                }
-                
+                renderConnectedWalletUI(userWalletAddress);
+                closeWalletModal();
                 loadMiningStateForWallet();
                 updateReferralLink();
-            } else {
-                // Chưa từng kết nối ví -> Giữ nguyên nút Connect Wallet, KHÔNG TỰ BẬT MODAL
-                stopMiningProcess();
+            }
+        }
+
+        function renderConnectedWalletUI(addr) {
+            const txt = document.getElementById('walletTxt');
+            const btn = document.getElementById('walletBtn');
+            const shortAddr = addr.substring(0, 6) + "..." + addr.substring(addr.length - 4);
+            
+            if (txt && btn) {
+                txt.innerText = shortAddr;
+                btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
             }
         }
 
@@ -1136,18 +1139,12 @@
                 localStorage.setItem('apxc_active_wallet', addr);
             }
 
-            const txt = document.getElementById('walletTxt');
-            const btn = document.getElementById('walletBtn');
-            const shortAddr = userWalletAddress.substring(0, 6) + "..." + userWalletAddress.substring(userWalletAddress.length - 4);
-            txt.innerText = shortAddr;
-            btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
-            
+            renderConnectedWalletUI(userWalletAddress);
             closeWalletModal();
             loadMiningStateForWallet();
             updateReferralLink();
         }
 
-        // BẤM VÀO NÚT TRÊN BAR MỚI MỞ MODAL HOẶC HỎI DISCONNECT
         async function toggleWalletConnect() {
             if (userWalletAddress) {
                 if (confirm("Disconnect wallet " + userWalletAddress + "?")) {
@@ -1161,7 +1158,7 @@
                 return;
             }
 
-            openWalletModalExplicit();
+            openWalletModalOnly();
         }
 
         function loadMiningStateForWallet() {
@@ -1186,6 +1183,7 @@
                 const elapsedSec = nowSec - startTimeSec;
 
                 if (elapsedSec < EPOCH_DURATION_SEC) {
+                    // CALCULATE MISSED BACKGROUND REWARDS ACCURATELY
                     const missedRewards = elapsedSec * 0.0025;
                     unclaimedAPXC = Math.max(unclaimedAPXC, missedRewards);
                     localStorage.setItem('apxc_unclaimed_' + userWalletAddress, unclaimedAPXC.toString());
@@ -1203,7 +1201,7 @@
 
         function startMiningProcess(isNewEpoch = true) {
             if (!userWalletAddress) {
-                openWalletModalExplicit();
+                openWalletModalOnly();
                 return;
             }
 
@@ -1222,9 +1220,12 @@
             const btn = document.getElementById('startMiningBtn');
             const txtSpan = document.getElementById('miningBtnTxt');
             
-            btn.className = "btn btn-success fw-bold px-4 py-2 rounded-pill shadow-sm fs-6 disabled";
-            txtSpan.innerText = i18nDict[currentLang].miningActive;
-            btn.querySelector('i').className = "fa-solid fa-spinner fa-spin me-2";
+            if (btn && txtSpan) {
+                btn.className = "btn btn-success fw-bold px-4 py-2 rounded-pill shadow-sm fs-6 disabled";
+                txtSpan.innerText = i18nDict[currentLang].miningActive;
+                const icon = btn.querySelector('i');
+                if (icon) icon.className = "fa-solid fa-spinner fa-spin me-2";
+            }
             
             if (!miningInterval) {
                 miningInterval = setInterval(() => {
@@ -1235,8 +1236,10 @@
                         localStorage.setItem('apxc_unclaimed_' + userWalletAddress, unclaimedAPXC.toString());
                     }
                     
-                    document.getElementById('webHashrate').innerText = currentHashrate + " H/s";
-                    document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
+                    const hashEl = document.getElementById('webHashrate');
+                    const rewardEl = document.getElementById('unclaimedReward');
+                    if (hashEl) hashEl.innerText = currentHashrate + " H/s";
+                    if (rewardEl) rewardEl.innerText = unclaimedAPXC.toFixed(4) + " APXC";
                 }, 1000);
             }
 
@@ -1251,7 +1254,8 @@
                     const hours = Math.floor(remainingSec / 3600).toString().padStart(2, '0');
                     const minutes = Math.floor((remainingSec % 3600) / 60).toString().padStart(2, '0');
                     const seconds = (remainingSec % 60).toString().padStart(2, '0');
-                    document.getElementById('epochTimer').innerText = `${hours}:${minutes}:${seconds}`;
+                    const timerEl = document.getElementById('epochTimer');
+                    if (timerEl) timerEl.innerText = `${hours}:${minutes}:${seconds}`;
                 }
             }, 1000);
         }
@@ -1269,20 +1273,25 @@
             }
             
             currentHashrate = 0;
-            document.getElementById('webHashrate').innerText = "0.0 H/s";
-            document.getElementById('epochTimer').innerText = "24:00:00";
+            const hashEl = document.getElementById('webHashrate');
+            const timerEl = document.getElementById('epochTimer');
+            if (hashEl) hashEl.innerText = "0.0 H/s";
+            if (timerEl) timerEl.innerText = "24:00:00";
             
             const btn = document.getElementById('startMiningBtn');
             const txtSpan = document.getElementById('miningBtnTxt');
             
-            btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6";
-            txtSpan.innerText = i18nDict[currentLang].startMining;
-            btn.querySelector('i').className = "fa-solid fa-play me-2";
+            if (btn && txtSpan) {
+                btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6";
+                txtSpan.innerText = i18nDict[currentLang].startMining;
+                const icon = btn.querySelector('i');
+                if (icon) icon.className = "fa-solid fa-play me-2";
+            }
         }
 
         function toggleMining() {
             if (!userWalletAddress) {
-                openWalletModalExplicit();
+                openWalletModalOnly();
                 return;
             }
 
@@ -1298,14 +1307,16 @@
 
         function updateLockupBoostDisplay() {
             const select = document.getElementById('lockDurationSelect');
+            if (!select) return;
             currentLockBoost = parseFloat(select.value);
             const boostPercent = (currentLockBoost * 100).toFixed(0);
-            document.getElementById('currentBoostBadge').innerText = `+${boostPercent}% Boost Rate`;
+            const badge = document.getElementById('currentBoostBadge');
+            if (badge) badge.innerText = `+${boostPercent}% Boost Rate`;
         }
 
         function stakeTokens() {
             if (!userWalletAddress) {
-                openWalletModalExplicit();
+                openWalletModalOnly();
                 return;
             }
             const select = document.getElementById('lockDurationSelect');
@@ -1340,14 +1351,17 @@
 
         function updateReferralLink() {
             const input = document.getElementById('refLinkInput');
+            if (!input) return;
             const addr = userWalletAddress ? userWalletAddress : "CONNECT_WALLET";
             input.value = `https://apexphoenix-network.github.io/apexphoenix-network/?ref=${addr}`;
         }
 
         function copyReferralLink() {
             const input = document.getElementById('refLinkInput');
-            input.select();
-            document.execCommand('copy');
+            if (input) {
+                input.select();
+                document.execCommand('copy');
+            }
         }
 
         function checkReferralQuery() {
@@ -1356,14 +1370,18 @@
                 const refAddr = urlParams.get('ref');
                 if (refAddr && refAddr !== "CONNECT_WALLET") {
                     const badge = document.getElementById('refBadge');
-                    badge.className = "badge bg-success text-white font-monospace px-3 py-2 rounded-pill";
-                    badge.innerText = "⚡ +10% Ref Hashrate Active!";
+                    if (badge) {
+                        badge.className = "badge bg-success text-white font-monospace px-3 py-2 rounded-pill";
+                        badge.innerText = "⚡ +10% Ref Hashrate Active!";
+                    }
                 }
             }
         }
 
         function updateCalculator() {
-            const hours = parseInt(document.getElementById('calcRange').value);
+            const rangeEl = document.getElementById('calcRange');
+            if (!rangeEl) return;
+            const hours = parseInt(rangeEl.value);
             let durationText = hours + " Hours";
             if (hours >= 24) {
                 const days = (hours / 24).toFixed(1);
@@ -1664,7 +1682,7 @@
             }
         }
 
-        // TỰ ĐỘNG ĐỒNG BỘ DỮ LIỆU KHI MỞ LẠI TAB DAPP - ĐẢM BẢO XOÁ MODAL ĐEN
+        // LISTEN TO PAGE VISIBILITY FOR IMMEDIATE INSTANT RESTORATION
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'visible') {
                 checkPersistedWallet();
@@ -1673,7 +1691,7 @@
 
         window.onload = () => {
             initTradingChart();
-            checkPersistedWallet(); // TỰ ĐỘNG LẤY LẠI VÍ NGẦM VÀ TẮT MODAL BỊ BẬT TRỐN
+            checkPersistedWallet(); // INSTANTLY RESTORE WALLET AND MINING SESSION STATE
             fetchNodeData();
             setInterval(fetchNodeData, 4000);
             checkReferralQuery();
