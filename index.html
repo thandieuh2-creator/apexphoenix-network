@@ -371,13 +371,23 @@
                 </div>
             </div>
 
-            <!-- WEB LIGHT MINER NODE WITH 24H COUNTDOWN TIMER -->
+            <!-- WEB LIGHT MINER NODE WITH FAST ADDRESS LOOKUP & PERSISTENT READ-ONLY UI -->
             <div class="col-12">
                 <div class="card card-custom p-4 border-warning" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
                         <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-microchip text-warning me-2"></i><span data-i18n="webMinerTitle">APXC Web Light Miner Node</span></h5>
                         <span class="badge bg-warning text-dark font-monospace px-3 py-2 rounded-pill" id="refBadge" data-i18n="browserMining">24H Epoch Protocol</span>
                     </div>
+
+                    <!-- ADDRESS LOOKUP & ACTIVE MINER BAR -->
+                    <div class="mb-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-white fw-bold text-primary border-end-0"><i class="fa-solid fa-magnifying-glass me-1"></i> Miner:</span>
+                            <input type="text" class="form-control font-monospace border-start-0" id="manualAddressInput" placeholder="Paste BSC Wallet Address (0x...)" onchange="handleManualAddressInput(this.value)">
+                            <button class="btn btn-outline-primary fw-bold" onclick="handleManualAddressInput(document.getElementById('manualAddressInput').value)">Load Miner</button>
+                        </div>
+                    </div>
+
                     <div class="row g-3 text-center align-items-center">
                         <div class="col-md-3">
                             <div class="p-3 bg-white rounded-3 border">
@@ -1097,12 +1107,6 @@
         }
 
         function openWalletModalOnly() {
-            const savedWallet = localStorage.getItem('apxc_active_wallet');
-            if (savedWallet || userWalletAddress) {
-                closeWalletModal();
-                return;
-            }
-
             const modalEl = document.getElementById('walletConnectModal');
             if (modalEl) {
                 const modalObj = new bootstrap.Modal(modalEl);
@@ -1110,13 +1114,28 @@
             }
         }
 
-        // ABSOLUTE PERSISTENCE & HARD-LOCK ENGINE
+        function handleManualAddressInput(val) {
+            const cleanAddr = val ? val.trim() : "";
+            if (cleanAddr.length >= 10 && cleanAddr.startsWith("0x")) {
+                setConnectedWallet(cleanAddr, true);
+            }
+        }
+
         function checkPersistedWallet() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const addressFromUrl = urlParams.get('address');
             const savedWallet = localStorage.getItem('apxc_active_wallet');
-            if (savedWallet) {
-                userWalletAddress = savedWallet;
-                renderConnectedWalletUI(userWalletAddress);
-                closeWalletModal();
+
+            const targetAddress = addressFromUrl || savedWallet;
+
+            if (targetAddress) {
+                userWalletAddress = targetAddress;
+                localStorage.setItem('apxc_active_wallet', targetAddress);
+
+                const inputEl = document.getElementById('manualAddressInput');
+                if (inputEl) inputEl.value = targetAddress;
+
+                renderConnectedWalletUI(targetAddress);
                 loadMiningStateForWallet();
                 updateReferralLink();
             }
@@ -1137,7 +1156,14 @@
             userWalletAddress = addr;
             if (saveToStorage) {
                 localStorage.setItem('apxc_active_wallet', addr);
+                
+                const url = new URL(window.location.href);
+                url.searchParams.set('address', addr);
+                window.history.replaceState({}, '', url);
             }
+
+            const inputEl = document.getElementById('manualAddressInput');
+            if (inputEl) inputEl.value = addr;
 
             renderConnectedWalletUI(userWalletAddress);
             closeWalletModal();
@@ -1147,11 +1173,19 @@
 
         async function toggleWalletConnect() {
             if (userWalletAddress) {
-                if (confirm("Disconnect wallet " + userWalletAddress + "?")) {
+                if (confirm("Disconnect miner " + userWalletAddress + "?")) {
                     userWalletAddress = null;
                     localStorage.removeItem('apxc_active_wallet');
+                    
+                    const url = new URL(window.location.href);
+                    url.searchParams.delete('address');
+                    window.history.replaceState({}, '', url);
+
                     document.getElementById('walletTxt').innerText = i18nDict[currentLang].connectWallet;
                     document.getElementById('walletBtn').className = "btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm";
+                    const inputEl = document.getElementById('manualAddressInput');
+                    if (inputEl) inputEl.value = "";
+
                     stopMiningProcess();
                     updateReferralLink();
                 }
@@ -1163,7 +1197,7 @@
 
         function loadMiningStateForWallet() {
             if (!userWalletAddress) return;
-            
+
             const savedUnclaimed = localStorage.getItem('apxc_unclaimed_' + userWalletAddress);
             if (savedUnclaimed) {
                 unclaimedAPXC = parseFloat(savedUnclaimed);
@@ -1183,7 +1217,6 @@
                 const elapsedSec = nowSec - startTimeSec;
 
                 if (elapsedSec < EPOCH_DURATION_SEC) {
-                    // CALCULATE MISSED BACKGROUND REWARDS ACCURATELY
                     const missedRewards = elapsedSec * 0.0025;
                     unclaimedAPXC = Math.max(unclaimedAPXC, missedRewards);
                     localStorage.setItem('apxc_unclaimed_' + userWalletAddress, unclaimedAPXC.toString());
@@ -1682,7 +1715,7 @@
             }
         }
 
-        // LISTEN TO PAGE VISIBILITY FOR IMMEDIATE INSTANT RESTORATION
+        // LISTEN TO PAGE VISIBILITY
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'visible') {
                 checkPersistedWallet();
@@ -1691,7 +1724,7 @@
 
         window.onload = () => {
             initTradingChart();
-            checkPersistedWallet(); // INSTANTLY RESTORE WALLET AND MINING SESSION STATE
+            checkPersistedWallet(); // READ PERSISTENT WALLET OR URL SEARCH PARAMETER
             fetchNodeData();
             setInterval(fetchNodeData, 4000);
             checkReferralQuery();
