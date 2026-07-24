@@ -1091,11 +1091,23 @@
             if(modalObj) modalObj.hide();
         }
 
-        // TỰ ĐỘNG GHI NHỚ VÀ DỰ DÙNG LẠI ĐỊA CHỈ VÍ LẦN DÙNG TRƯỚC
+        // TỰ ĐỘNG KHÔI PHỤC KẾT NỐI VÍ NGẦM
         function checkPersistedWallet() {
             const savedWallet = localStorage.getItem('apxc_active_wallet');
             if (savedWallet) {
-                setConnectedWallet(savedWallet, false);
+                userWalletAddress = savedWallet;
+                
+                const txt = document.getElementById('walletTxt');
+                const btn = document.getElementById('walletBtn');
+                const shortAddr = userWalletAddress.substring(0, 6) + "..." + userWalletAddress.substring(userWalletAddress.length - 4);
+                
+                if (txt && btn) {
+                    txt.innerText = shortAddr;
+                    btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
+                }
+                
+                loadMiningStateForWallet();
+                updateReferralLink();
             }
         }
 
@@ -1155,9 +1167,12 @@
             } else {
                 unclaimedAPXC = 0.0000;
             }
-            document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
+            
+            const rewardEl = document.getElementById('unclaimedReward');
+            if (rewardEl) {
+                rewardEl.innerText = unclaimedAPXC.toFixed(4) + " APXC";
+            }
 
-            // KIỂM TRA PHIÊN ĐÀO 24H LẦN TRƯỚC
             const savedStartTime = localStorage.getItem('apxc_epoch_start_' + userWalletAddress);
             if (savedStartTime) {
                 const startTimeSec = parseInt(savedStartTime);
@@ -1165,9 +1180,9 @@
                 const elapsedSec = nowSec - startTimeSec;
 
                 if (elapsedSec < EPOCH_DURATION_SEC) {
-                    startMiningProcess(false); // Tiếp tục chạy đếm ngược phiên đào hiện tại
+                    startMiningProcess(false);
                 } else {
-                    stopMiningProcess(); // Đã hết 24h -> Chờ người dùng bấm khởi động lại
+                    stopMiningProcess();
                 }
             } else {
                 stopMiningProcess();
@@ -1213,7 +1228,6 @@
                 }, 1000);
             }
 
-            // CHẠY ĐỒNG HỒ ĐẾM NGƯỢC 24H
             if (epochTimerInterval) clearInterval(epochTimerInterval);
             epochTimerInterval = setInterval(() => {
                 const currentNow = Math.floor(Date.now() / 1000);
@@ -1638,9 +1652,16 @@
             }
         }
 
+        // LẮNG NGHE SỰ KIỆN KHI THỢ ĐÀO BẤM MỞ LẠI TAB WEB DAPP
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                checkPersistedWallet();
+            }
+        });
+
         window.onload = () => {
             initTradingChart();
-            checkPersistedWallet(); // TỰ ĐỘNG TẢI LẠI VÍ VÀ CHU KỲ ĐÀO CỦA THỢ ĐÀO
+            checkPersistedWallet(); // TỰ ĐỘNG KHÔI PHỤC VÍ VÀ ĐỒNG HỒ ĐÀO
             fetchNodeData();
             setInterval(fetchNodeData, 4000);
             checkReferralQuery();
