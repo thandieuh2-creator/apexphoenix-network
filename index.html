@@ -172,6 +172,18 @@
             border-color: #0284c7;
             color: #0369a1;
         }
+
+        .epoch-timer-badge {
+            background-color: #0f172a;
+            color: #00f2fe;
+            border: 1px solid #00a8ff;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 8px 18px;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 168, 255, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -359,12 +371,12 @@
                 </div>
             </div>
 
-            <!-- WEB LIGHT MINER + REFERRAL LINK -->
+            <!-- WEB LIGHT MINER NODE WITH 24H COUNTDOWN TIMER -->
             <div class="col-12">
                 <div class="card card-custom p-4 border-warning" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
                         <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-microchip text-warning me-2"></i><span data-i18n="webMinerTitle">APXC Web Light Miner Node</span></h5>
-                        <span class="badge bg-warning text-dark font-monospace px-3 py-2 rounded-pill" id="refBadge" data-i18n="browserMining">Browser Mining Protocol</span>
+                        <span class="badge bg-warning text-dark font-monospace px-3 py-2 rounded-pill" id="refBadge" data-i18n="browserMining">24H Epoch Protocol</span>
                     </div>
                     <div class="row g-3 text-center align-items-center">
                         <div class="col-md-3">
@@ -375,16 +387,18 @@
                         </div>
                         <div class="col-md-3">
                             <div class="p-3 bg-white rounded-3 border">
-                                <small class="text-muted d-block" data-i18n="unclaimed">Unclaimed APXC</small>
+                                <small class="text-muted d-block" data-i18n="unclaimed">Mined APXC Balance</small>
                                 <span class="fw-bold text-success fs-4" id="unclaimedReward">0.0000 APXC</span>
                             </div>
                         </div>
-                        <div class="col-md-6 d-flex flex-wrap justify-content-center gap-2">
-                            <button class="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm" id="startMiningBtn" onclick="toggleMining()">
-                                <i class="fa-solid fa-play me-2"></i> <span id="miningBtnTxt" data-i18n="startMining">Start Web Mining</span>
-                            </button>
-                            <button class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm" onclick="claimMinedTokens()">
-                                <i class="fa-solid fa-hand-holding-dollar me-2"></i> <span data-i18n="claimBtn">Claim APXC</span>
+                        <div class="col-md-6 d-flex flex-wrap justify-content-center align-items-center gap-3">
+                            <!-- 24H COUNTDOWN DISPLAY -->
+                            <div class="epoch-timer-badge" id="epochTimerBox">
+                                <i class="fa-regular fa-hourglass-half text-warning me-1"></i> <span id="epochTimer">24:00:00</span>
+                            </div>
+
+                            <button class="btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6" id="startMiningBtn" onclick="toggleMining()">
+                                <i class="fa-solid fa-play me-2"></i> <span id="miningBtnTxt" data-i18n="startMining">Start 24H Mining Session</span>
                             </button>
                         </div>
                     </div>
@@ -814,10 +828,13 @@
         
         let isMining = false;
         let miningInterval = null;
+        let epochTimerInterval = null;
         let currentHashrate = 0;
         let unclaimedAPXC = 0.0000;
         let userWalletAddress = null;
         let deferredPrompt = null;
+
+        const EPOCH_DURATION_SEC = 24 * 3600; // 24 Hours Epoch
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
@@ -852,12 +869,12 @@
                 founderReserve: "Founder Reserve (5%)",
                 tokenomicsAlloc: "Targeted Tokenomics Allocation",
                 webMinerTitle: "APXC Web Light Miner Node",
-                browserMining: "Browser Mining Protocol",
+                browserMining: "24H Epoch Protocol",
                 hashrate: "Node Hashrate",
-                unclaimed: "Unclaimed APXC",
-                startMining: "Start Web Mining",
-                stopMining: "Stop Web Mining",
-                claimBtn: "Claim APXC",
+                unclaimed: "Mined APXC Balance",
+                startMining: "Start 24H Mining Session",
+                miningActive: "Mining Session Active",
+                epochEnded: "Epoch Ended - Tap to Mine",
                 refTitle: "Referral Affiliate Program (+10% Speed)",
                 refBonus: "10% Commission",
                 copyBtn: "Copy Link",
@@ -889,12 +906,12 @@
                 founderReserve: "Quỹ Sáng Lập (5%)",
                 tokenomicsAlloc: "Phân Bổ Tokenomics Chuẩn",
                 webMinerTitle: "Máy Đào Trình Duyệt Web APXC",
-                browserMining: "Giao Thức Đào Trình Duyệt",
+                browserMining: "Giao Thức Chu Kỳ 24H",
                 hashrate: "Tốc Độ Đào (Hashrate)",
-                unclaimed: "APXC Chờ Rút",
-                startMining: "Bắt Đầu Đào Web",
-                stopMining: "Dừng Đào Web",
-                claimBtn: "Nhận APXC Về Ví",
+                unclaimed: "Số Dư APXC Đào Được",
+                startMining: "Bắt Đầu Chu Kỳ Đào 24H",
+                miningActive: "Đang Đào Ngầm 24H",
+                epochEnded: "Hết Chu Kỳ - Bấm Để Đào Tiếp",
                 refTitle: "Chương Trình Giới Thiệu (+10% Tốc Độ)",
                 refBonus: "Hoa Hồng 10%",
                 copyBtn: "Sao Chép Link",
@@ -973,18 +990,15 @@
             }
         }
 
-        // TỰ ĐỘNG KIỂM TRA VÀ CHUYỂN SANG MẠNG BNB SMART CHAIN (BEP-20 / CHAIN ID 56)
         async function checkAndSwitchBSCNetwork() {
             if (typeof window.ethereum !== 'undefined') {
                 try {
-                    // Yêu cầu đổi sang Chain ID 0x38 (BNB Smart Chain Mainnet)
                     await window.ethereum.request({
                         method: 'wallet_switchEthereumChain',
                         params: [{ chainId: '0x38' }],
                     });
                     return true;
                 } catch (switchError) {
-                    // Lỗi 4902: Mạng chưa được khai báo trên ví -> Tự động thêm mới mạng BSC
                     if (switchError.code === 4902) {
                         try {
                             await window.ethereum.request({
@@ -1077,8 +1091,20 @@
             if(modalObj) modalObj.hide();
         }
 
-        function setConnectedWallet(addr) {
+        // TỰ ĐỘNG GHI NHỚ VÀ DỰ DÙNG LẠI ĐỊA CHỈ VÍ LẦN DÙNG TRƯỚC
+        function checkPersistedWallet() {
+            const savedWallet = localStorage.getItem('apxc_active_wallet');
+            if (savedWallet) {
+                setConnectedWallet(savedWallet, false);
+            }
+        }
+
+        function setConnectedWallet(addr, saveToStorage = true) {
             userWalletAddress = addr;
+            if (saveToStorage) {
+                localStorage.setItem('apxc_active_wallet', addr);
+            }
+
             const txt = document.getElementById('walletTxt');
             const btn = document.getElementById('walletBtn');
             const shortAddr = userWalletAddress.substring(0, 6) + "..." + userWalletAddress.substring(userWalletAddress.length - 4);
@@ -1095,6 +1121,7 @@
             
             if (userWalletAddress) {
                 userWalletAddress = null;
+                localStorage.removeItem('apxc_active_wallet');
                 txt.innerText = i18nDict[currentLang].connectWallet;
                 btn.className = "btn btn-light btn-sm text-primary fw-bold rounded-pill shadow-sm";
                 stopMiningProcess();
@@ -1122,9 +1149,7 @@
         function loadMiningStateForWallet() {
             if (!userWalletAddress) return;
             
-            const savedMining = localStorage.getItem('apxc_isMining_' + userWalletAddress);
             const savedUnclaimed = localStorage.getItem('apxc_unclaimed_' + userWalletAddress);
-            
             if (savedUnclaimed) {
                 unclaimedAPXC = parseFloat(savedUnclaimed);
             } else {
@@ -1132,26 +1157,47 @@
             }
             document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
 
-            if (savedMining === 'true') {
-                startMiningProcess();
+            // KIỂM TRA PHIÊN ĐÀO 24H LẦN TRƯỚC
+            const savedStartTime = localStorage.getItem('apxc_epoch_start_' + userWalletAddress);
+            if (savedStartTime) {
+                const startTimeSec = parseInt(savedStartTime);
+                const nowSec = Math.floor(Date.now() / 1000);
+                const elapsedSec = nowSec - startTimeSec;
+
+                if (elapsedSec < EPOCH_DURATION_SEC) {
+                    startMiningProcess(false); // Tiếp tục chạy đếm ngược phiên đào hiện tại
+                } else {
+                    stopMiningProcess(); // Đã hết 24h -> Chờ người dùng bấm khởi động lại
+                }
+            } else {
+                stopMiningProcess();
             }
         }
 
-        function startMiningProcess() {
+        function startMiningProcess(isNewEpoch = true) {
             if (!userWalletAddress) {
                 toggleWalletConnect();
                 return;
             }
 
+            const nowSec = Math.floor(Date.now() / 1000);
+            let epochStartTime = localStorage.getItem('apxc_epoch_start_' + userWalletAddress);
+
+            if (isNewEpoch || !epochStartTime) {
+                epochStartTime = nowSec;
+                localStorage.setItem('apxc_epoch_start_' + userWalletAddress, epochStartTime.toString());
+            } else {
+                epochStartTime = parseInt(epochStartTime);
+            }
+
             isMining = true;
-            localStorage.setItem('apxc_isMining_' + userWalletAddress, 'true');
             
             const btn = document.getElementById('startMiningBtn');
             const txtSpan = document.getElementById('miningBtnTxt');
             
-            btn.className = "btn btn-danger fw-bold px-4 py-2 rounded-pill shadow-sm";
-            txtSpan.innerText = i18nDict[currentLang].stopMining;
-            btn.querySelector('i').className = "fa-solid fa-stop me-2";
+            btn.className = "btn btn-success fw-bold px-4 py-2 rounded-pill shadow-sm fs-6 disabled";
+            txtSpan.innerText = i18nDict[currentLang].miningActive;
+            btn.querySelector('i').className = "fa-solid fa-spinner fa-spin me-2";
             
             if (!miningInterval) {
                 miningInterval = setInterval(() => {
@@ -1166,26 +1212,44 @@
                     document.getElementById('unclaimedReward').innerText = unclaimedAPXC.toFixed(4) + " APXC";
                 }, 1000);
             }
+
+            // CHẠY ĐỒNG HỒ ĐẾM NGƯỢC 24H
+            if (epochTimerInterval) clearInterval(epochTimerInterval);
+            epochTimerInterval = setInterval(() => {
+                const currentNow = Math.floor(Date.now() / 1000);
+                const remainingSec = EPOCH_DURATION_SEC - (currentNow - epochStartTime);
+
+                if (remainingSec <= 0) {
+                    stopMiningProcess();
+                } else {
+                    const hours = Math.floor(remainingSec / 3600).toString().padStart(2, '0');
+                    const minutes = Math.floor((remainingSec % 3600) / 60).toString().padStart(2, '0');
+                    const seconds = (remainingSec % 60).toString().padStart(2, '0');
+                    document.getElementById('epochTimer').innerText = `${hours}:${minutes}:${seconds}`;
+                }
+            }, 1000);
         }
 
         function stopMiningProcess() {
             isMining = false;
-            if (userWalletAddress) {
-                localStorage.setItem('apxc_isMining_' + userWalletAddress, 'false');
-            }
             
             if (miningInterval) {
                 clearInterval(miningInterval);
                 miningInterval = null;
             }
+            if (epochTimerInterval) {
+                clearInterval(epochTimerInterval);
+                epochTimerInterval = null;
+            }
             
             currentHashrate = 0;
             document.getElementById('webHashrate').innerText = "0.0 H/s";
+            document.getElementById('epochTimer').innerText = "24:00:00";
             
             const btn = document.getElementById('startMiningBtn');
             const txtSpan = document.getElementById('miningBtnTxt');
             
-            btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm";
+            btn.className = "btn btn-primary fw-bold px-4 py-2 rounded-pill shadow-sm fs-6";
             txtSpan.innerText = i18nDict[currentLang].startMining;
             btn.querySelector('i').className = "fa-solid fa-play me-2";
         }
@@ -1197,28 +1261,8 @@
             }
 
             if (!isMining) {
-                startMiningProcess();
-            } else {
-                stopMiningProcess();
+                startMiningProcess(true);
             }
-        }
-
-        async function claimMinedTokens() {
-            if (unclaimedAPXC <= 0) return;
-            if (!userWalletAddress) {
-                toggleWalletConnect();
-                return;
-            }
-
-            await checkAndSwitchBSCNetwork();
-
-            alert(`Requesting On-Chain Minting & Transfer of ${unclaimedAPXC.toFixed(4)} APXC to ${userWalletAddress}...\nContract: 0x8923...6691\nNetwork: BNB Smart Chain (BEP-20)`);
-            
-            unclaimedAPXC = 0.0000;
-            if (userWalletAddress) {
-                localStorage.setItem('apxc_unclaimed_' + userWalletAddress, '0.0000');
-            }
-            document.getElementById('unclaimedReward').innerText = "0.0000 APXC";
         }
 
         let stakedAPXC = 0.00;
@@ -1596,6 +1640,7 @@
 
         window.onload = () => {
             initTradingChart();
+            checkPersistedWallet(); // TỰ ĐỘNG TẢI LẠI VÍ VÀ CHU KỲ ĐÀO CỦA THỢ ĐÀO
             fetchNodeData();
             setInterval(fetchNodeData, 4000);
             checkReferralQuery();
