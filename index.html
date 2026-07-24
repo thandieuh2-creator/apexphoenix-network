@@ -1087,17 +1087,32 @@
 
         function closeWalletModal() {
             const modalEl = document.getElementById('walletConnectModal');
-            const modalObj = bootstrap.Modal.getInstance(modalEl);
-            if(modalObj) modalObj.hide();
+            if (modalEl) {
+                const modalObj = bootstrap.Modal.getInstance(modalEl);
+                if (modalObj) modalObj.hide();
+            }
+            // Xóa triệt để các backdrop đen phủ màn hình nếu có
+            document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+            document.body.classList.remove('modal-open');
+            document.body.style.paddingRight = '';
         }
 
         function openWalletModalOnly() {
+            // KHÓA BẢO VỆ: Nếu đã có ví thì CẤM tuyệt đối không được mở Modal
+            const savedWallet = localStorage.getItem('apxc_active_wallet');
+            if (savedWallet || userWalletAddress) {
+                closeWalletModal();
+                return;
+            }
+
             const modalEl = document.getElementById('walletConnectModal');
-            const modalObj = new bootstrap.Modal(modalEl);
-            modalObj.show();
+            if (modalEl) {
+                const modalObj = new bootstrap.Modal(modalEl);
+                modalObj.show();
+            }
         }
 
-        // CHỈ KHÔI PHỤC VÍ VÀ TRẠNG THÁI NGẦM - TUYỆT ĐỐI KHÔNG BẬT MODAL
+        // TỰ ĐỘNG KHÔI PHỤC VÍ NGẦM TỪ BỘ NHỚ LỚN (LOCALSTORAGE)
         function checkPersistedWallet() {
             const savedWallet = localStorage.getItem('apxc_active_wallet');
             if (savedWallet) {
@@ -1112,6 +1127,9 @@
                     btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
                 }
                 
+                // Đảm bảo Modal bị ẩn đi nếu bị bật nhầm
+                closeWalletModal();
+
                 loadMiningStateForWallet();
                 updateReferralLink();
             }
@@ -1129,14 +1147,13 @@
             txt.innerText = shortAddr;
             btn.className = "btn btn-success btn-sm text-white fw-bold rounded-pill shadow-sm";
             
+            closeWalletModal();
             loadMiningStateForWallet();
             updateReferralLink();
         }
 
-        // BẤM NÚT CONNECT WALLET TRÊN THANH MENU MỚI BẬT MODAL CHỌN VÍ
         async function toggleWalletConnect() {
             if (userWalletAddress) {
-                // Đã kết nối ví -> Hỏi người dùng có muốn Ngắt kết nối không
                 if (confirm("Disconnect wallet " + userWalletAddress + "?")) {
                     userWalletAddress = null;
                     localStorage.removeItem('apxc_active_wallet');
@@ -1173,7 +1190,6 @@
                 const elapsedSec = nowSec - startTimeSec;
 
                 if (elapsedSec < EPOCH_DURATION_SEC) {
-                    // Tự động cộng bù toàn bộ coin đào ngầm trong lúc ẩn app
                     const missedRewards = elapsedSec * 0.0025;
                     unclaimedAPXC = Math.max(unclaimedAPXC, missedRewards);
                     localStorage.setItem('apxc_unclaimed_' + userWalletAddress, unclaimedAPXC.toString());
@@ -1661,7 +1677,7 @@
 
         window.onload = () => {
             initTradingChart();
-            checkPersistedWallet(); // KHÔI PHỤC VÍ VÀ SỐ DƯ TỰ ĐỘNG KHI LOAD TRANG
+            checkPersistedWallet(); // KHÔI PHỤC NGẦM VÍ & TRẠNG THÁI ĐÀO
             fetchNodeData();
             setInterval(fetchNodeData, 4000);
             checkReferralQuery();
